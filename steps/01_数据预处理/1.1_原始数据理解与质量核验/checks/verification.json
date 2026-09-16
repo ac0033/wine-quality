@@ -1,0 +1,573 @@
+{
+  "generated_at_utc": "2026-09-14T10:23:42.535111+00:00",
+  "method": "Raw bytes, splitlines and semicolon split; independent from csv.reader and Decimal primary code",
+  "passed": true,
+  "passed_checks": 49,
+  "total_checks": 49,
+  "checks": [
+    {
+      "check": "winequality-red.csv: path",
+      "pass": true,
+      "actual": "data\\winequality-red.csv",
+      "expected": "data\\winequality-red.csv"
+    },
+    {
+      "check": "winequality-red.csv: bytes",
+      "pass": true,
+      "actual": 84199,
+      "expected": 84199
+    },
+    {
+      "check": "winequality-red.csv: SHA256",
+      "pass": true,
+      "actual": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e",
+      "expected": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e"
+    },
+    {
+      "check": "winequality-red.csv: unchanged after primary run",
+      "pass": true,
+      "actual": {
+        "path": "data\\winequality-red.csv",
+        "bytes": 84199,
+        "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e"
+      },
+      "expected": {
+        "path": "data\\winequality-red.csv",
+        "bytes": 84199,
+        "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e"
+      }
+    },
+    {
+      "check": "winequality-white.csv: path",
+      "pass": true,
+      "actual": "data\\winequality-white.csv",
+      "expected": "data\\winequality-white.csv"
+    },
+    {
+      "check": "winequality-white.csv: bytes",
+      "pass": true,
+      "actual": 264426,
+      "expected": 264426
+    },
+    {
+      "check": "winequality-white.csv: SHA256",
+      "pass": true,
+      "actual": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836",
+      "expected": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836"
+    },
+    {
+      "check": "winequality-white.csv: unchanged after primary run",
+      "pass": true,
+      "actual": {
+        "path": "data\\winequality-white.csv",
+        "bytes": 264426,
+        "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836"
+      },
+      "expected": {
+        "path": "data\\winequality-white.csv",
+        "bytes": 264426,
+        "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836"
+      }
+    },
+    {
+      "check": "winequality.names: path",
+      "pass": true,
+      "actual": "data\\winequality.names",
+      "expected": "data\\winequality.names"
+    },
+    {
+      "check": "winequality.names: bytes",
+      "pass": true,
+      "actual": 3305,
+      "expected": 3305
+    },
+    {
+      "check": "winequality.names: SHA256",
+      "pass": true,
+      "actual": "15d215e73b39105952380fd487e4ce1bf5a6b83a425abb285c2ec55193d3ca92",
+      "expected": "15d215e73b39105952380fd487e4ce1bf5a6b83a425abb285c2ec55193d3ca92"
+    },
+    {
+      "check": "winequality.names: unchanged after primary run",
+      "pass": true,
+      "actual": {
+        "path": "data\\winequality.names",
+        "bytes": 3305,
+        "sha256": "15d215e73b39105952380fd487e4ce1bf5a6b83a425abb285c2ec55193d3ca92"
+      },
+      "expected": {
+        "path": "data\\winequality.names",
+        "bytes": 3305,
+        "sha256": "15d215e73b39105952380fd487e4ce1bf5a6b83a425abb285c2ec55193d3ca92"
+      }
+    },
+    {
+      "check": "red: header",
+      "pass": true,
+      "actual": [
+        "fixed acidity",
+        "volatile acidity",
+        "citric acid",
+        "residual sugar",
+        "chlorides",
+        "free sulfur dioxide",
+        "total sulfur dioxide",
+        "density",
+        "pH",
+        "sulphates",
+        "alcohol",
+        "quality"
+      ],
+      "expected": [
+        "fixed acidity",
+        "volatile acidity",
+        "citric acid",
+        "residual sugar",
+        "chlorides",
+        "free sulfur dioxide",
+        "total sulfur dioxide",
+        "density",
+        "pH",
+        "sulphates",
+        "alcohol",
+        "quality"
+      ]
+    },
+    {
+      "check": "red: rows",
+      "pass": true,
+      "actual": 1599,
+      "expected": 1599
+    },
+    {
+      "check": "red: row widths",
+      "pass": true,
+      "actual": {
+        "12": 1599
+      },
+      "expected": {
+        "12": 1599
+      }
+    },
+    {
+      "check": "red: empty by field",
+      "pass": true,
+      "actual": {
+        "fixed acidity": 0,
+        "volatile acidity": 0,
+        "citric acid": 0,
+        "residual sugar": 0,
+        "chlorides": 0,
+        "free sulfur dioxide": 0,
+        "total sulfur dioxide": 0,
+        "density": 0,
+        "pH": 0,
+        "sulphates": 0,
+        "alcohol": 0,
+        "quality": 0
+      },
+      "expected": {
+        "fixed acidity": 0,
+        "volatile acidity": 0,
+        "citric acid": 0,
+        "residual sugar": 0,
+        "chlorides": 0,
+        "free sulfur dioxide": 0,
+        "total sulfur dioxide": 0,
+        "density": 0,
+        "pH": 0,
+        "sulphates": 0,
+        "alcohol": 0,
+        "quality": 0
+      }
+    },
+    {
+      "check": "red: invalid numeric by field",
+      "pass": true,
+      "actual": {
+        "fixed acidity": 0,
+        "volatile acidity": 0,
+        "citric acid": 0,
+        "residual sugar": 0,
+        "chlorides": 0,
+        "free sulfur dioxide": 0,
+        "total sulfur dioxide": 0,
+        "density": 0,
+        "pH": 0,
+        "sulphates": 0,
+        "alcohol": 0,
+        "quality": 0
+      },
+      "expected": {
+        "fixed acidity": 0,
+        "volatile acidity": 0,
+        "citric acid": 0,
+        "residual sugar": 0,
+        "chlorides": 0,
+        "free sulfur dioxide": 0,
+        "total sulfur dioxide": 0,
+        "density": 0,
+        "pH": 0,
+        "sulphates": 0,
+        "alcohol": 0,
+        "quality": 0
+      }
+    },
+    {
+      "check": "red: nonfinite by field",
+      "pass": true,
+      "actual": {
+        "fixed acidity": 0,
+        "volatile acidity": 0,
+        "citric acid": 0,
+        "residual sugar": 0,
+        "chlorides": 0,
+        "free sulfur dioxide": 0,
+        "total sulfur dioxide": 0,
+        "density": 0,
+        "pH": 0,
+        "sulphates": 0,
+        "alcohol": 0,
+        "quality": 0
+      },
+      "expected": {
+        "fixed acidity": 0,
+        "volatile acidity": 0,
+        "citric acid": 0,
+        "residual sugar": 0,
+        "chlorides": 0,
+        "free sulfur dioxide": 0,
+        "total sulfur dioxide": 0,
+        "density": 0,
+        "pH": 0,
+        "sulphates": 0,
+        "alcohol": 0,
+        "quality": 0
+      }
+    },
+    {
+      "check": "red: invalid quality",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "check": "red: quality frequencies",
+      "pass": true,
+      "actual": {
+        "5": 681,
+        "6": 638,
+        "7": 199,
+        "4": 53,
+        "8": 18,
+        "3": 10
+      },
+      "expected": {
+        "3": 10,
+        "4": 53,
+        "5": 681,
+        "6": 638,
+        "7": 199,
+        "8": 18
+      }
+    },
+    {
+      "check": "red: quality frequency sum",
+      "pass": true,
+      "actual": 1599,
+      "expected": 1599
+    },
+    {
+      "check": "red: complete quality distribution",
+      "pass": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "check": "red: duplicate rows",
+      "pass": true,
+      "actual": 240,
+      "expected": 240
+    },
+    {
+      "check": "red: distinct rows",
+      "pass": true,
+      "actual": 1359,
+      "expected": 1359
+    },
+    {
+      "check": "red: quality 5 share",
+      "pass": true,
+      "actual": 0.425891181988743,
+      "expected": 0.425891181988743
+    },
+    {
+      "check": "red: quality 6 share",
+      "pass": true,
+      "actual": 0.3989993746091307,
+      "expected": 0.3989993746091307
+    },
+    {
+      "check": "red: quality 7 share",
+      "pass": true,
+      "actual": 0.12445278298936835,
+      "expected": 0.12445278298936835
+    },
+    {
+      "check": "red: quality 4 share",
+      "pass": true,
+      "actual": 0.03314571607254534,
+      "expected": 0.03314571607254534
+    },
+    {
+      "check": "red: quality 8 share",
+      "pass": true,
+      "actual": 0.01125703564727955,
+      "expected": 0.01125703564727955
+    },
+    {
+      "check": "red: quality 3 share",
+      "pass": true,
+      "actual": 0.006253908692933083,
+      "expected": 0.006253908692933083
+    },
+    {
+      "check": "white: header",
+      "pass": true,
+      "actual": [
+        "fixed acidity",
+        "volatile acidity",
+        "citric acid",
+        "residual sugar",
+        "chlorides",
+        "free sulfur dioxide",
+        "total sulfur dioxide",
+        "density",
+        "pH",
+        "sulphates",
+        "alcohol",
+        "quality"
+      ],
+      "expected": [
+        "fixed acidity",
+        "volatile acidity",
+        "citric acid",
+        "residual sugar",
+        "chlorides",
+        "free sulfur dioxide",
+        "total sulfur dioxide",
+        "density",
+        "pH",
+        "sulphates",
+        "alcohol",
+        "quality"
+      ]
+    },
+    {
+      "check": "white: rows",
+      "pass": true,
+      "actual": 4898,
+      "expected": 4898
+    },
+    {
+      "check": "white: row widths",
+      "pass": true,
+      "actual": {
+        "12": 4898
+      },
+      "expected": {
+        "12": 4898
+      }
+    },
+    {
+      "check": "white: empty by field",
+      "pass": true,
+      "actual": {
+        "fixed acidity": 0,
+        "volatile acidity": 0,
+        "citric acid": 0,
+        "residual sugar": 0,
+        "chlorides": 0,
+        "free sulfur dioxide": 0,
+        "total sulfur dioxide": 0,
+        "density": 0,
+        "pH": 0,
+        "sulphates": 0,
+        "alcohol": 0,
+        "quality": 0
+      },
+      "expected": {
+        "fixed acidity": 0,
+        "volatile acidity": 0,
+        "citric acid": 0,
+        "residual sugar": 0,
+        "chlorides": 0,
+        "free sulfur dioxide": 0,
+        "total sulfur dioxide": 0,
+        "density": 0,
+        "pH": 0,
+        "sulphates": 0,
+        "alcohol": 0,
+        "quality": 0
+      }
+    },
+    {
+      "check": "white: invalid numeric by field",
+      "pass": true,
+      "actual": {
+        "fixed acidity": 0,
+        "volatile acidity": 0,
+        "citric acid": 0,
+        "residual sugar": 0,
+        "chlorides": 0,
+        "free sulfur dioxide": 0,
+        "total sulfur dioxide": 0,
+        "density": 0,
+        "pH": 0,
+        "sulphates": 0,
+        "alcohol": 0,
+        "quality": 0
+      },
+      "expected": {
+        "fixed acidity": 0,
+        "volatile acidity": 0,
+        "citric acid": 0,
+        "residual sugar": 0,
+        "chlorides": 0,
+        "free sulfur dioxide": 0,
+        "total sulfur dioxide": 0,
+        "density": 0,
+        "pH": 0,
+        "sulphates": 0,
+        "alcohol": 0,
+        "quality": 0
+      }
+    },
+    {
+      "check": "white: nonfinite by field",
+      "pass": true,
+      "actual": {
+        "fixed acidity": 0,
+        "volatile acidity": 0,
+        "citric acid": 0,
+        "residual sugar": 0,
+        "chlorides": 0,
+        "free sulfur dioxide": 0,
+        "total sulfur dioxide": 0,
+        "density": 0,
+        "pH": 0,
+        "sulphates": 0,
+        "alcohol": 0,
+        "quality": 0
+      },
+      "expected": {
+        "fixed acidity": 0,
+        "volatile acidity": 0,
+        "citric acid": 0,
+        "residual sugar": 0,
+        "chlorides": 0,
+        "free sulfur dioxide": 0,
+        "total sulfur dioxide": 0,
+        "density": 0,
+        "pH": 0,
+        "sulphates": 0,
+        "alcohol": 0,
+        "quality": 0
+      }
+    },
+    {
+      "check": "white: invalid quality",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "check": "white: quality frequencies",
+      "pass": true,
+      "actual": {
+        "6": 2198,
+        "5": 1457,
+        "7": 880,
+        "8": 175,
+        "4": 163,
+        "3": 20,
+        "9": 5
+      },
+      "expected": {
+        "3": 20,
+        "4": 163,
+        "5": 1457,
+        "6": 2198,
+        "7": 880,
+        "8": 175,
+        "9": 5
+      }
+    },
+    {
+      "check": "white: quality frequency sum",
+      "pass": true,
+      "actual": 4898,
+      "expected": 4898
+    },
+    {
+      "check": "white: complete quality distribution",
+      "pass": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "check": "white: duplicate rows",
+      "pass": true,
+      "actual": 937,
+      "expected": 937
+    },
+    {
+      "check": "white: distinct rows",
+      "pass": true,
+      "actual": 3961,
+      "expected": 3961
+    },
+    {
+      "check": "white: quality 6 share",
+      "pass": true,
+      "actual": 0.44875459371171905,
+      "expected": 0.44875459371171905
+    },
+    {
+      "check": "white: quality 5 share",
+      "pass": true,
+      "actual": 0.2974683544303797,
+      "expected": 0.2974683544303797
+    },
+    {
+      "check": "white: quality 7 share",
+      "pass": true,
+      "actual": 0.17966516945692118,
+      "expected": 0.17966516945692118
+    },
+    {
+      "check": "white: quality 8 share",
+      "pass": true,
+      "actual": 0.03572886892609228,
+      "expected": 0.03572886892609228
+    },
+    {
+      "check": "white: quality 4 share",
+      "pass": true,
+      "actual": 0.03327888934258881,
+      "expected": 0.03327888934258881
+    },
+    {
+      "check": "white: quality 3 share",
+      "pass": true,
+      "actual": 0.004083299305839118,
+      "expected": 0.004083299305839118
+    },
+    {
+      "check": "white: quality 9 share",
+      "pass": true,
+      "actual": 0.0010208248264597796,
+      "expected": 0.0010208248264597796
+    }
+  ]
+}

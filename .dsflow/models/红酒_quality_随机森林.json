@@ -1,0 +1,31 @@
+{
+ "name": "红酒_quality_随机森林",
+ "description": "红酒的 quality 估计模型：11 个理化指标 → 连续 quality；随机森林，只用训练行拟合；最终评估 MAE 0.4963（基线 0.6855）",
+ "versions": [
+  {
+   "name": "红酒_quality_随机森林",
+   "version": "8314f626bc19",
+   "sha256": "8314f626bc1974b4e3100e44cba4650ab788a0ed6c3c758444458e1e4654a8cc",
+   "path": "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_随机森林.joblib",
+   "size_bytes": 3826289,
+   "mtime_ns": 1789547932909632700,
+   "run_id": "20260916-165326-66d5",
+   "step": "11.1",
+   "description": "红酒的 quality 估计模型：11 个理化指标 → 连续 quality；随机森林，只用训练行拟合；最终评估 MAE 0.4963（基线 0.6855）",
+   "status": "candidate",
+   "history": [
+    {
+     "status": "candidate",
+     "at": "2026-09-16T16:52:04",
+     "note": "登记为候选"
+    },
+    {
+     "status": "candidate",
+     "at": "2026-09-16T16:53:32",
+     "note": "运行 20260916-165326-66d5 重新产出了同样内容的文件，关联改为这次运行"
+    }
+   ],
+   "registered_at": "2026-09-16T16:52:04"
+  }
+ ]
+}

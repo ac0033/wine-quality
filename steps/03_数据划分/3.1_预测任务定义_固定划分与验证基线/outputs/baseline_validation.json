@@ -1,0 +1,24 @@
+{
+  "generated_at_utc": "2026-09-14T15:24:38.333242+00:00",
+  "scope": "training fit and validation evaluation only; no final-evaluation prediction or metric",
+  "primary_metric": "MAE",
+  "auxiliary_metric": "RMSE",
+  "files": {
+    "red": {
+      "training_rows": 950,
+      "validation_rows": 331,
+      "training_quality_median_prediction": 6.0,
+      "validation_mae": 0.6435045317220544,
+      "validation_rmse": 0.8777201998613869,
+      "unit": "quality score points"
+    },
+    "white": {
+      "training_rows": 2921,
+      "validation_rows": 983,
+      "training_quality_median_prediction": 6.0,
+      "validation_mae": 0.6368260427263479,
+      "validation_rmse": 0.9032551059187324,
+      "unit": "quality score points"
+    }
+  }
+}

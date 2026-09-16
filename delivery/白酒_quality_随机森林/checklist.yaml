@@ -1,0 +1,81 @@
+# 交付清单（DSFlow）。model / version / reproduce / data / metrics 的数值由平台按模型登记与运行记录生成，
+# `dsflow delivery init` 会刷新这些部分；其余由执行 agent 或负责人填写，刷新时保留。写着「待填」的地方都要填完。
+model: 白酒_quality_随机森林
+version: 32bfb8ca1cde
+summary: 交付白酒的 quality 估计模型（随机森林，11 个理化指标 → 连续 quality），用来回答「拿到一份白酒的化验值，它的专家评分大概是几分」；研究性交付，没有生产场景
+reproduce:
+- git checkout 010c2f9342ffe1c671c67dfd9b3bdb66a1eba00b
+- 'uv sync    # 按 uv.lock 还原依赖（锁文件指纹 95b678c1adfa）'
+- uv run dsflow data verify . "data/winequality-red.csv" 4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e
+- uv run dsflow data verify . "data/winequality-white.csv" 76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836
+- uv run dsflow data verify . "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/split_assignments.csv" 42e939976f221cf5ea3b0ebaa4469633cd2d6e2360199f261efbcab5331e596c
+- uv run dsflow run 11.1 -- python -X utf8 -m dsflow.tracking.notebook steps/11_部署与交付/11.1_模型登记与交付清单/nb_11.1.ipynb
+- 'uv run dsflow data verify . "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_随机森林.joblib" 32bfb8ca1cdebb606f0f97cdd21cf69074e795928528f9f98f9ba53125f47cff    # 核对模型文件'
+usage:
+- uv run python steps/11_部署与交付/11.1_模型登记与交付清单/src/predict.py white <输入 CSV（11 个理化指标列）> <输出 CSV>
+- 示例：outputs/scoring_example.csv 是用最终评估集每类酒前 10 行跑出来的（步骤 11.1）
+data:
+- name: 红酒
+  version: 4a402cf041b0
+  path: data/winequality-red.csv
+  sha256: 4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e
+  rows: null
+  columns: null
+- name: 白酒
+  version: 76c3f809815c
+  path: data/winequality-white.csv
+  sha256: 76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836
+  rows: null
+  columns: null
+- name: 划分表
+  version: 42e939976f22
+  path: steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/split_assignments.csv
+  sha256: 42e939976f221cf5ea3b0ebaa4469633cd2d6e2360199f261efbcab5331e596c
+  rows: null
+  columns: null
+metrics:
+- name: 红酒_MAE_最终评估
+  value: 0.4963438798140795
+  baseline: 同一批行上的基线 0.6855
+  scope: 这是红酒模型的指标，和本清单的白酒模型登记在同一次运行里；红酒最终评估集 318 行
+- name: 白酒_MAE_最终评估
+  value: 0.575229986626415
+  baseline: 同一批行上的训练集中位数基线 0.6469，低 11.1%
+  scope: 白酒最终评估集 994 行，每行 |quality − 估计| 取平均；模型只用训练集 2,921 行拟合，最终评估只评这一次（9.1）
+- name: 红酒_基线_MAE_最终评估
+  value: 0.6855345911949685
+  baseline: 红酒的对照本身
+  scope: 红酒最终评估集 318 行，与本清单的模型无关
+- name: 白酒_基线_MAE_最终评估
+  value: 0.6468812877263581
+  baseline: 这就是对照本身：不看理化指标、一律猜训练集 quality 的中位数 6.0
+  scope: 白酒最终评估集 994 行
+- name: 示例打分行数
+  value: 20.0
+  baseline: 不是评估指标
+  scope: 11.1 用最终评估集每类酒前 10 行、共 20 行跑打分入口的示例，只证明入口能用
+applicability:
+  scope:
+  - 葡萄牙 Vinho Verde 白酒；输入是 11 个理化指标（列名与原始数据一致），输出连续的 quality 估计，适合做批量的评分粗筛或排序
+  not_for:
+  - 红酒或其他产区、其他品类的酒（红酒用 红酒_quality_随机森林）
+  - 缺任何一个理化指标的记录
+  - 把估计值当作专家评分本身：两端分值（3～4 分、8～9 分）的误差在 1.2～2.9 分，quality 恰好 6 分的酒上不如一律猜 6 分
+  data_period: 原始数据没有采集时间与年份；白酒 4,898 行，模型用其中训练集 2,921 行拟合
+  known_weaknesses:
+  - 模型主要靠 alcohol（10.1）：alcohol 测不准时最容易错
+  - 最终评估行在 2.1 的全量探索里被看过，不是外部数据；对未来样本的效果没有验证
+  - 没有样本 ID、采集时间，按特征组合分组只能防止完全相同的输入跨集合
+monitoring:
+- metric: 新记录拿到专家评分后，估计值与 quality 的 MAE（只算白酒）
+  threshold: 高于 0.69（最终评估 MAE 0.5752 的 1.2 倍）
+  frequency: 每积累 300 条有专家评分的新记录核对一次
+  action: 回到 7.1 用新数据重新比较候选，登记为新版本，交付清单重新核对
+deployment: 待定
+artifacts:
+- path: steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_随机森林.joblib
+  purpose: 模型文件
+  kind: model
+open_items:
+- 没有实际生产场景与业务成本依据：「优于基线」不等于「值得使用」，用途由负责人决定
+- 白酒 Ridge 在最终评估集上没站住，本次每类酒只交付随机森林；Ridge 文件保留在 7.1 未登记

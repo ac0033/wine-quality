@@ -1,0 +1,1468 @@
+{
+  "generated_at_utc": "2026-09-14T10:55:56.077329+00:00",
+  "definitions": {
+    "main_rows": "all original rows",
+    "q1_q3": "linear interpolation at positions (n-1)*p",
+    "median": "middle pair averaged when n even",
+    "spearman_ties": "average ranks",
+    "duplicate_rows": "all 12 field values equal; first row retained only for sensitivity"
+  },
+  "inputs_before": {
+    "data\\winequality-red.csv": {
+      "path": "data\\winequality-red.csv",
+      "bytes": 84199,
+      "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e"
+    },
+    "data\\winequality-white.csv": {
+      "path": "data\\winequality-white.csv",
+      "bytes": 264426,
+      "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836"
+    },
+    "data\\winequality.names": {
+      "path": "data\\winequality.names",
+      "bytes": 3305,
+      "sha256": "15d215e73b39105952380fd487e4ce1bf5a6b83a425abb285c2ec55193d3ca92"
+    },
+    "steps\\01_data_understanding\\outputs\\data_profile.json": {
+      "path": "steps\\01_data_understanding\\outputs\\data_profile.json",
+      "bytes": 9049,
+      "sha256": "e4d8add790888d0fcc13317d2dcf6de2559ad6bef9a053b10a2844ee7178c0ed"
+    },
+    "steps\\01_data_understanding\\acceptance.md": {
+      "path": "steps\\01_data_understanding\\acceptance.md",
+      "bytes": 1785,
+      "sha256": "5e6409ba25f62aebb263b4e2f2a61aeca3016e408fea456888d76ebfaef76cca"
+    }
+  },
+  "inputs_after": {
+    "data\\winequality-red.csv": {
+      "path": "data\\winequality-red.csv",
+      "bytes": 84199,
+      "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e"
+    },
+    "data\\winequality-white.csv": {
+      "path": "data\\winequality-white.csv",
+      "bytes": 264426,
+      "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836"
+    },
+    "data\\winequality.names": {
+      "path": "data\\winequality.names",
+      "bytes": 3305,
+      "sha256": "15d215e73b39105952380fd487e4ce1bf5a6b83a425abb285c2ec55193d3ca92"
+    },
+    "steps\\01_data_understanding\\outputs\\data_profile.json": {
+      "path": "steps\\01_data_understanding\\outputs\\data_profile.json",
+      "bytes": 9049,
+      "sha256": "e4d8add790888d0fcc13317d2dcf6de2559ad6bef9a053b10a2844ee7178c0ed"
+    },
+    "steps\\01_data_understanding\\acceptance.md": {
+      "path": "steps\\01_data_understanding\\acceptance.md",
+      "bytes": 1785,
+      "sha256": "5e6409ba25f62aebb263b4e2f2a61aeca3016e408fea456888d76ebfaef76cca"
+    }
+  },
+  "inputs_unchanged": true,
+  "files": {
+    "red": {
+      "path": "data\\winequality-red.csv",
+      "rows": 1599,
+      "header": [
+        "fixed acidity",
+        "volatile acidity",
+        "citric acid",
+        "residual sugar",
+        "chlorides",
+        "free sulfur dioxide",
+        "total sulfur dioxide",
+        "density",
+        "pH",
+        "sulphates",
+        "alcohol",
+        "quality"
+      ],
+      "quality_counts": {
+        "3": 10,
+        "4": 53,
+        "5": 681,
+        "6": 638,
+        "7": 199,
+        "8": 18
+      },
+      "indicators": {
+        "fixed acidity": {
+          "distribution": {
+            "valid_rows": 1599,
+            "min": 4.6,
+            "q1": 7.1,
+            "median": 7.9,
+            "q3": 9.2,
+            "max": 15.9,
+            "mean": 8.31963727329581
+          },
+          "pearson_quality": 0.12405164911322425,
+          "spearman_quality": 0.11408367358880324,
+          "by_quality": {
+            "3": {
+              "rows": 10,
+              "median": 7.5
+            },
+            "4": {
+              "rows": 53,
+              "median": 7.5
+            },
+            "5": {
+              "rows": 681,
+              "median": 7.8
+            },
+            "6": {
+              "rows": 638,
+              "median": 7.9
+            },
+            "7": {
+              "rows": 199,
+              "median": 8.8
+            },
+            "8": {
+              "rows": 18,
+              "median": 8.25
+            }
+          }
+        },
+        "volatile acidity": {
+          "distribution": {
+            "valid_rows": 1599,
+            "min": 0.12,
+            "q1": 0.39,
+            "median": 0.52,
+            "q3": 0.64,
+            "max": 1.58,
+            "mean": 0.5278205128205128
+          },
+          "pearson_quality": -0.390557780264007,
+          "spearman_quality": -0.3806465104253755,
+          "by_quality": {
+            "3": {
+              "rows": 10,
+              "median": 0.845
+            },
+            "4": {
+              "rows": 53,
+              "median": 0.67
+            },
+            "5": {
+              "rows": 681,
+              "median": 0.58
+            },
+            "6": {
+              "rows": 638,
+              "median": 0.49
+            },
+            "7": {
+              "rows": 199,
+              "median": 0.37
+            },
+            "8": {
+              "rows": 18,
+              "median": 0.37
+            }
+          }
+        },
+        "citric acid": {
+          "distribution": {
+            "valid_rows": 1599,
+            "min": 0.0,
+            "q1": 0.09,
+            "median": 0.26,
+            "q3": 0.42,
+            "max": 1.0,
+            "mean": 0.2709756097560976
+          },
+          "pearson_quality": 0.22637251431804117,
+          "spearman_quality": 0.2134809144221363,
+          "by_quality": {
+            "3": {
+              "rows": 10,
+              "median": 0.035
+            },
+            "4": {
+              "rows": 53,
+              "median": 0.09
+            },
+            "5": {
+              "rows": 681,
+              "median": 0.23
+            },
+            "6": {
+              "rows": 638,
+              "median": 0.26
+            },
+            "7": {
+              "rows": 199,
+              "median": 0.4
+            },
+            "8": {
+              "rows": 18,
+              "median": 0.42000000000000004
+            }
+          }
+        },
+        "residual sugar": {
+          "distribution": {
+            "valid_rows": 1599,
+            "min": 0.9,
+            "q1": 1.9,
+            "median": 2.2,
+            "q3": 2.6,
+            "max": 15.5,
+            "mean": 2.53880550343965
+          },
+          "pearson_quality": 0.013731637340066292,
+          "spearman_quality": 0.032048167529057335,
+          "by_quality": {
+            "3": {
+              "rows": 10,
+              "median": 2.1
+            },
+            "4": {
+              "rows": 53,
+              "median": 2.1
+            },
+            "5": {
+              "rows": 681,
+              "median": 2.2
+            },
+            "6": {
+              "rows": 638,
+              "median": 2.2
+            },
+            "7": {
+              "rows": 199,
+              "median": 2.3
+            },
+            "8": {
+              "rows": 18,
+              "median": 2.1
+            }
+          }
+        },
+        "chlorides": {
+          "distribution": {
+            "valid_rows": 1599,
+            "min": 0.012,
+            "q1": 0.07,
+            "median": 0.079,
+            "q3": 0.09,
+            "max": 0.611,
+            "mean": 0.08746654158849279
+          },
+          "pearson_quality": -0.12890655993005262,
+          "spearman_quality": -0.1899223356173072,
+          "by_quality": {
+            "3": {
+              "rows": 10,
+              "median": 0.0905
+            },
+            "4": {
+              "rows": 53,
+              "median": 0.08
+            },
+            "5": {
+              "rows": 681,
+              "median": 0.081
+            },
+            "6": {
+              "rows": 638,
+              "median": 0.078
+            },
+            "7": {
+              "rows": 199,
+              "median": 0.073
+            },
+            "8": {
+              "rows": 18,
+              "median": 0.07050000000000001
+            }
+          }
+        },
+        "free sulfur dioxide": {
+          "distribution": {
+            "valid_rows": 1599,
+            "min": 1.0,
+            "q1": 7.0,
+            "median": 14.0,
+            "q3": 21.0,
+            "max": 72.0,
+            "mean": 15.874921826141339
+          },
+          "pearson_quality": -0.05065605724427624,
+          "spearman_quality": -0.0569006455015393,
+          "by_quality": {
+            "3": {
+              "rows": 10,
+              "median": 6.0
+            },
+            "4": {
+              "rows": 53,
+              "median": 11.0
+            },
+            "5": {
+              "rows": 681,
+              "median": 15.0
+            },
+            "6": {
+              "rows": 638,
+              "median": 14.0
+            },
+            "7": {
+              "rows": 199,
+              "median": 11.0
+            },
+            "8": {
+              "rows": 18,
+              "median": 7.5
+            }
+          }
+        },
+        "total sulfur dioxide": {
+          "distribution": {
+            "valid_rows": 1599,
+            "min": 6.0,
+            "q1": 22.0,
+            "median": 38.0,
+            "q3": 62.0,
+            "max": 289.0,
+            "mean": 46.46779237023139
+          },
+          "pearson_quality": -0.18510028892653765,
+          "spearman_quality": -0.1967350754412208,
+          "by_quality": {
+            "3": {
+              "rows": 10,
+              "median": 15.0
+            },
+            "4": {
+              "rows": 53,
+              "median": 26.0
+            },
+            "5": {
+              "rows": 681,
+              "median": 47.0
+            },
+            "6": {
+              "rows": 638,
+              "median": 35.0
+            },
+            "7": {
+              "rows": 199,
+              "median": 27.0
+            },
+            "8": {
+              "rows": 18,
+              "median": 21.5
+            }
+          }
+        },
+        "density": {
+          "distribution": {
+            "valid_rows": 1599,
+            "min": 0.99007,
+            "q1": 0.9956,
+            "median": 0.99675,
+            "q3": 0.997835,
+            "max": 1.00369,
+            "mean": 0.9967466791744841
+          },
+          "pearson_quality": -0.17491922778334867,
+          "spearman_quality": -0.17707406597199962,
+          "by_quality": {
+            "3": {
+              "rows": 10,
+              "median": 0.997565
+            },
+            "4": {
+              "rows": 53,
+              "median": 0.9965
+            },
+            "5": {
+              "rows": 681,
+              "median": 0.997
+            },
+            "6": {
+              "rows": 638,
+              "median": 0.99656
+            },
+            "7": {
+              "rows": 199,
+              "median": 0.99577
+            },
+            "8": {
+              "rows": 18,
+              "median": 0.99494
+            }
+          }
+        },
+        "pH": {
+          "distribution": {
+            "valid_rows": 1599,
+            "min": 2.74,
+            "q1": 3.21,
+            "median": 3.31,
+            "q3": 3.4,
+            "max": 4.01,
+            "mean": 3.3111131957473416
+          },
+          "pearson_quality": -0.05773139120538214,
+          "spearman_quality": -0.043671934788928383,
+          "by_quality": {
+            "3": {
+              "rows": 10,
+              "median": 3.3899999999999997
+            },
+            "4": {
+              "rows": 53,
+              "median": 3.37
+            },
+            "5": {
+              "rows": 681,
+              "median": 3.3
+            },
+            "6": {
+              "rows": 638,
+              "median": 3.32
+            },
+            "7": {
+              "rows": 199,
+              "median": 3.28
+            },
+            "8": {
+              "rows": 18,
+              "median": 3.23
+            }
+          }
+        },
+        "sulphates": {
+          "distribution": {
+            "valid_rows": 1599,
+            "min": 0.33,
+            "q1": 0.55,
+            "median": 0.62,
+            "q3": 0.73,
+            "max": 2.0,
+            "mean": 0.6581488430268917
+          },
+          "pearson_quality": 0.25139707906926123,
+          "spearman_quality": 0.37706019910212196,
+          "by_quality": {
+            "3": {
+              "rows": 10,
+              "median": 0.545
+            },
+            "4": {
+              "rows": 53,
+              "median": 0.56
+            },
+            "5": {
+              "rows": 681,
+              "median": 0.58
+            },
+            "6": {
+              "rows": 638,
+              "median": 0.64
+            },
+            "7": {
+              "rows": 199,
+              "median": 0.74
+            },
+            "8": {
+              "rows": 18,
+              "median": 0.74
+            }
+          }
+        },
+        "alcohol": {
+          "distribution": {
+            "valid_rows": 1599,
+            "min": 8.4,
+            "q1": 9.5,
+            "median": 10.2,
+            "q3": 11.1,
+            "max": 14.9,
+            "mean": 10.422983114446529
+          },
+          "pearson_quality": 0.4761663240011355,
+          "spearman_quality": 0.4785316874702435,
+          "by_quality": {
+            "3": {
+              "rows": 10,
+              "median": 9.925
+            },
+            "4": {
+              "rows": 53,
+              "median": 10.0
+            },
+            "5": {
+              "rows": 681,
+              "median": 9.7
+            },
+            "6": {
+              "rows": 638,
+              "median": 10.5
+            },
+            "7": {
+              "rows": 199,
+              "median": 11.5
+            },
+            "8": {
+              "rows": 18,
+              "median": 12.15
+            }
+          }
+        }
+      },
+      "inter_indicator_spearman": {
+        "fixed acidity": {
+          "fixed acidity": 0.9999999999999999,
+          "volatile acidity": -0.27828221530496167,
+          "citric acid": 0.6617084166678848,
+          "residual sugar": 0.22070086437480058,
+          "chlorides": 0.2509041064251027,
+          "free sulfur dioxide": -0.17513656130049585,
+          "total sulfur dioxide": -0.08841740827654444,
+          "density": 0.6230707573728462,
+          "pH": -0.7066735947251236,
+          "sulphates": 0.21265375058500388,
+          "alcohol": -0.06657565834054312
+        },
+        "volatile acidity": {
+          "fixed acidity": -0.2782822153049616,
+          "volatile acidity": 1.0,
+          "citric acid": -0.6102594672899105,
+          "residual sugar": 0.03238560260008179,
+          "chlorides": 0.15877025478849963,
+          "free sulfur dioxide": 0.021162641389858777,
+          "total sulfur dioxide": 0.09411013757895594,
+          "density": 0.025014115531625677,
+          "pH": 0.23357151874409107,
+          "sulphates": -0.32558398183690535,
+          "alcohol": -0.22493167559221625
+        },
+        "citric acid": {
+          "fixed acidity": 0.6617084166678848,
+          "volatile acidity": -0.6102594672899107,
+          "citric acid": 1.0,
+          "residual sugar": 0.1764173055062221,
+          "chlorides": 0.11257650769888616,
+          "free sulfur dioxide": -0.07645157533933161,
+          "total sulfur dioxide": 0.009399602361305333,
+          "density": 0.3522852613491623,
+          "pH": -0.5480262762680951,
+          "sulphates": 0.3310744040048275,
+          "alcohol": 0.0964555444607986
+        },
+        "residual sugar": {
+          "fixed acidity": 0.22070086437480058,
+          "volatile acidity": 0.03238560260008179,
+          "citric acid": 0.1764173055062221,
+          "residual sugar": 0.9999999999999999,
+          "chlorides": 0.21295924194551,
+          "free sulfur dioxide": 0.0746178639614848,
+          "total sulfur dioxide": 0.14537505840853648,
+          "density": 0.42226586308169317,
+          "pH": -0.08997095399986102,
+          "sulphates": 0.03833200020573463,
+          "alcohol": 0.11654813117003865
+        },
+        "chlorides": {
+          "fixed acidity": 0.2509041064251027,
+          "volatile acidity": 0.1587702547884996,
+          "citric acid": 0.11257650769888616,
+          "residual sugar": 0.21295924194551,
+          "chlorides": 0.9999999999999999,
+          "free sulfur dioxide": 0.0008051686407192978,
+          "total sulfur dioxide": 0.13003334180682014,
+          "density": 0.4113896971682909,
+          "pH": -0.23436127355289177,
+          "sulphates": 0.020825479176879692,
+          "alcohol": -0.2845039421802988
+        },
+        "free sulfur dioxide": {
+          "fixed acidity": -0.17513656130049585,
+          "volatile acidity": 0.021162641389858777,
+          "citric acid": -0.0764515753393316,
+          "residual sugar": 0.0746178639614848,
+          "chlorides": 0.0008051686407192979,
+          "free sulfur dioxide": 1.0,
+          "total sulfur dioxide": 0.7896978766514561,
+          "density": -0.04117767995273562,
+          "pH": 0.11567917785621817,
+          "sulphates": 0.04586235004505542,
+          "alcohol": -0.0813673062507086
+        },
+        "total sulfur dioxide": {
+          "fixed acidity": -0.08841740827654446,
+          "volatile acidity": 0.09411013757895592,
+          "citric acid": 0.009399602361305333,
+          "residual sugar": 0.14537505840853648,
+          "chlorides": 0.13003334180682014,
+          "free sulfur dioxide": 0.789697876651456,
+          "total sulfur dioxide": 0.9999999999999999,
+          "density": 0.12933210180456456,
+          "pH": -0.009841438153158228,
+          "sulphates": -0.0005038194198738102,
+          "alcohol": -0.25780602508762224
+        },
+        "density": {
+          "fixed acidity": 0.6230707573728462,
+          "volatile acidity": 0.02501411553162568,
+          "citric acid": 0.3522852613491623,
+          "residual sugar": 0.42226586308169317,
+          "chlorides": 0.4113896971682908,
+          "free sulfur dioxide": -0.04117767995273563,
+          "total sulfur dioxide": 0.12933210180456456,
+          "density": 1.0,
+          "pH": -0.31205507820838724,
+          "sulphates": 0.16147823441295164,
+          "alcohol": -0.46244457892711605
+        },
+        "pH": {
+          "fixed acidity": -0.7066735947251235,
+          "volatile acidity": 0.2335715187440911,
+          "citric acid": -0.5480262762680951,
+          "residual sugar": -0.08997095399986102,
+          "chlorides": -0.23436127355289177,
+          "free sulfur dioxide": 0.11567917785621816,
+          "total sulfur dioxide": -0.009841438153158228,
+          "density": -0.31205507820838724,
+          "pH": 1.0,
+          "sulphates": -0.08030603798903785,
+          "alcohol": 0.17993242683879995
+        },
+        "sulphates": {
+          "fixed acidity": 0.21265375058500388,
+          "volatile acidity": -0.32558398183690535,
+          "citric acid": 0.3310744040048275,
+          "residual sugar": 0.03833200020573463,
+          "chlorides": 0.020825479176879692,
+          "free sulfur dioxide": 0.04586235004505542,
+          "total sulfur dioxide": -0.0005038194198738102,
+          "density": 0.16147823441295164,
+          "pH": -0.08030603798903783,
+          "sulphates": 1.0,
+          "alcohol": 0.20732955351683052
+        },
+        "alcohol": {
+          "fixed acidity": -0.06657565834054312,
+          "volatile acidity": -0.22493167559221625,
+          "citric acid": 0.09645554446079858,
+          "residual sugar": 0.11654813117003865,
+          "chlorides": -0.2845039421802988,
+          "free sulfur dioxide": -0.0813673062507086,
+          "total sulfur dioxide": -0.25780602508762224,
+          "density": -0.46244457892711605,
+          "pH": 0.17993242683879995,
+          "sulphates": 0.20732955351683052,
+          "alcohol": 1.0
+        }
+      },
+      "sensitivity": {
+        "all_rows": 1599,
+        "unique_rows": 1359,
+        "duplicate_rows_beyond_first": 240,
+        "by_indicator": {
+          "fixed acidity": {
+            "spearman_quality_unique_rows": 0.1116928490150509,
+            "difference_unique_minus_all": -0.002390824573752337,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "volatile acidity": {
+            "spearman_quality_unique_rows": -0.3874495381208037,
+            "difference_unique_minus_all": -0.0068030276954281765,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "citric acid": {
+            "spearman_quality_unique_rows": 0.21942683761311943,
+            "difference_unique_minus_all": 0.005945923190983138,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "residual sugar": {
+            "spearman_quality_unique_rows": 0.025749202162012062,
+            "difference_unique_minus_all": -0.006298965367045273,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "chlorides": {
+            "spearman_quality_unique_rows": -0.20435971685416507,
+            "difference_unique_minus_all": -0.014437381236857866,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "free sulfur dioxide": {
+            "spearman_quality_unique_rows": -0.05874631065387107,
+            "difference_unique_minus_all": -0.0018456651523317685,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "total sulfur dioxide": {
+            "spearman_quality_unique_rows": -0.19661967026228572,
+            "difference_unique_minus_all": 0.00011540517893507407,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "density": {
+            "spearman_quality_unique_rows": -0.18430213585164776,
+            "difference_unique_minus_all": -0.007228069879648136,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "pH": {
+            "spearman_quality_unique_rows": -0.04273807262261888,
+            "difference_unique_minus_all": 0.0009338621663095015,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "sulphates": {
+            "spearman_quality_unique_rows": 0.3805814248370784,
+            "difference_unique_minus_all": 0.0035212257349564458,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "alcohol": {
+            "spearman_quality_unique_rows": 0.4879646054459786,
+            "difference_unique_minus_all": 0.009432917975735089,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          }
+        },
+        "flagged_indicators": []
+      }
+    },
+    "white": {
+      "path": "data\\winequality-white.csv",
+      "rows": 4898,
+      "header": [
+        "fixed acidity",
+        "volatile acidity",
+        "citric acid",
+        "residual sugar",
+        "chlorides",
+        "free sulfur dioxide",
+        "total sulfur dioxide",
+        "density",
+        "pH",
+        "sulphates",
+        "alcohol",
+        "quality"
+      ],
+      "quality_counts": {
+        "3": 20,
+        "4": 163,
+        "5": 1457,
+        "6": 2198,
+        "7": 880,
+        "8": 175,
+        "9": 5
+      },
+      "indicators": {
+        "fixed acidity": {
+          "distribution": {
+            "valid_rows": 4898,
+            "min": 3.8,
+            "q1": 6.3,
+            "median": 6.8,
+            "q3": 7.3,
+            "max": 14.2,
+            "mean": 6.854787668436097
+          },
+          "pearson_quality": -0.11366283071301773,
+          "spearman_quality": -0.08448544853281695,
+          "by_quality": {
+            "3": {
+              "rows": 20,
+              "median": 7.3
+            },
+            "4": {
+              "rows": 163,
+              "median": 6.9
+            },
+            "5": {
+              "rows": 1457,
+              "median": 6.8
+            },
+            "6": {
+              "rows": 2198,
+              "median": 6.8
+            },
+            "7": {
+              "rows": 880,
+              "median": 6.7
+            },
+            "8": {
+              "rows": 175,
+              "median": 6.8
+            },
+            "9": {
+              "rows": 5,
+              "median": 7.1
+            }
+          }
+        },
+        "volatile acidity": {
+          "distribution": {
+            "valid_rows": 4898,
+            "min": 0.08,
+            "q1": 0.21,
+            "median": 0.26,
+            "q3": 0.32,
+            "max": 1.1,
+            "mean": 0.27824111882400976
+          },
+          "pearson_quality": -0.19472296892113403,
+          "spearman_quality": -0.1965616829526432,
+          "by_quality": {
+            "3": {
+              "rows": 20,
+              "median": 0.26
+            },
+            "4": {
+              "rows": 163,
+              "median": 0.32
+            },
+            "5": {
+              "rows": 1457,
+              "median": 0.28
+            },
+            "6": {
+              "rows": 2198,
+              "median": 0.25
+            },
+            "7": {
+              "rows": 880,
+              "median": 0.25
+            },
+            "8": {
+              "rows": 175,
+              "median": 0.26
+            },
+            "9": {
+              "rows": 5,
+              "median": 0.27
+            }
+          }
+        },
+        "citric acid": {
+          "distribution": {
+            "valid_rows": 4898,
+            "min": 0.0,
+            "q1": 0.27,
+            "median": 0.32,
+            "q3": 0.39,
+            "max": 1.66,
+            "mean": 0.33419150673744386
+          },
+          "pearson_quality": -0.009209090883975401,
+          "spearman_quality": 0.018332725649382695,
+          "by_quality": {
+            "3": {
+              "rows": 20,
+              "median": 0.345
+            },
+            "4": {
+              "rows": 163,
+              "median": 0.29
+            },
+            "5": {
+              "rows": 1457,
+              "median": 0.32
+            },
+            "6": {
+              "rows": 2198,
+              "median": 0.32
+            },
+            "7": {
+              "rows": 880,
+              "median": 0.31
+            },
+            "8": {
+              "rows": 175,
+              "median": 0.32
+            },
+            "9": {
+              "rows": 5,
+              "median": 0.36
+            }
+          }
+        },
+        "residual sugar": {
+          "distribution": {
+            "valid_rows": 4898,
+            "min": 0.6,
+            "q1": 1.7,
+            "median": 5.2,
+            "q3": 9.9,
+            "max": 65.8,
+            "mean": 6.391414863209474
+          },
+          "pearson_quality": -0.09757682889469298,
+          "spearman_quality": -0.08206978991126886,
+          "by_quality": {
+            "3": {
+              "rows": 20,
+              "median": 4.6
+            },
+            "4": {
+              "rows": 163,
+              "median": 2.5
+            },
+            "5": {
+              "rows": 1457,
+              "median": 7.0
+            },
+            "6": {
+              "rows": 2198,
+              "median": 5.3
+            },
+            "7": {
+              "rows": 880,
+              "median": 3.6500000000000004
+            },
+            "8": {
+              "rows": 175,
+              "median": 4.3
+            },
+            "9": {
+              "rows": 5,
+              "median": 2.2
+            }
+          }
+        },
+        "chlorides": {
+          "distribution": {
+            "valid_rows": 4898,
+            "min": 0.009,
+            "q1": 0.036,
+            "median": 0.043,
+            "q3": 0.05,
+            "max": 0.346,
+            "mean": 0.04577235606369946
+          },
+          "pearson_quality": -0.20993441094676007,
+          "spearman_quality": -0.31448847828244203,
+          "by_quality": {
+            "3": {
+              "rows": 20,
+              "median": 0.041
+            },
+            "4": {
+              "rows": 163,
+              "median": 0.046
+            },
+            "5": {
+              "rows": 1457,
+              "median": 0.047
+            },
+            "6": {
+              "rows": 2198,
+              "median": 0.043
+            },
+            "7": {
+              "rows": 880,
+              "median": 0.037
+            },
+            "8": {
+              "rows": 175,
+              "median": 0.036
+            },
+            "9": {
+              "rows": 5,
+              "median": 0.031
+            }
+          }
+        },
+        "free sulfur dioxide": {
+          "distribution": {
+            "valid_rows": 4898,
+            "min": 2.0,
+            "q1": 23.0,
+            "median": 34.0,
+            "q3": 46.0,
+            "max": 289.0,
+            "mean": 35.30808493262556
+          },
+          "pearson_quality": 0.008158067123436055,
+          "spearman_quality": 0.023713375736277593,
+          "by_quality": {
+            "3": {
+              "rows": 20,
+              "median": 33.5
+            },
+            "4": {
+              "rows": 163,
+              "median": 18.0
+            },
+            "5": {
+              "rows": 1457,
+              "median": 35.0
+            },
+            "6": {
+              "rows": 2198,
+              "median": 34.0
+            },
+            "7": {
+              "rows": 880,
+              "median": 33.0
+            },
+            "8": {
+              "rows": 175,
+              "median": 35.0
+            },
+            "9": {
+              "rows": 5,
+              "median": 28.0
+            }
+          }
+        },
+        "total sulfur dioxide": {
+          "distribution": {
+            "valid_rows": 4898,
+            "min": 9.0,
+            "q1": 108.0,
+            "median": 134.0,
+            "q3": 167.0,
+            "max": 440.0,
+            "mean": 138.36065741118824
+          },
+          "pearson_quality": -0.17473721759706257,
+          "spearman_quality": -0.19668028952372787,
+          "by_quality": {
+            "3": {
+              "rows": 20,
+              "median": 159.5
+            },
+            "4": {
+              "rows": 163,
+              "median": 117.0
+            },
+            "5": {
+              "rows": 1457,
+              "median": 151.0
+            },
+            "6": {
+              "rows": 2198,
+              "median": 132.0
+            },
+            "7": {
+              "rows": 880,
+              "median": 122.0
+            },
+            "8": {
+              "rows": 175,
+              "median": 122.0
+            },
+            "9": {
+              "rows": 5,
+              "median": 119.0
+            }
+          }
+        },
+        "density": {
+          "distribution": {
+            "valid_rows": 4898,
+            "min": 0.98711,
+            "q1": 0.9917225000000001,
+            "median": 0.99374,
+            "q3": 0.9961,
+            "max": 1.03898,
+            "mean": 0.9940273764801959
+          },
+          "pearson_quality": -0.3071233127347301,
+          "spearman_quality": -0.34835102264412215,
+          "by_quality": {
+            "3": {
+              "rows": 20,
+              "median": 0.994425
+            },
+            "4": {
+              "rows": 163,
+              "median": 0.9941
+            },
+            "5": {
+              "rows": 1457,
+              "median": 0.9953
+            },
+            "6": {
+              "rows": 2198,
+              "median": 0.99366
+            },
+            "7": {
+              "rows": 880,
+              "median": 0.99176
+            },
+            "8": {
+              "rows": 175,
+              "median": 0.99164
+            },
+            "9": {
+              "rows": 5,
+              "median": 0.9903
+            }
+          }
+        },
+        "pH": {
+          "distribution": {
+            "valid_rows": 4898,
+            "min": 2.72,
+            "q1": 3.09,
+            "median": 3.18,
+            "q3": 3.28,
+            "max": 3.82,
+            "mean": 3.1882666394446715
+          },
+          "pearson_quality": 0.09942724573666417,
+          "spearman_quality": 0.10936207744663339,
+          "by_quality": {
+            "3": {
+              "rows": 20,
+              "median": 3.215
+            },
+            "4": {
+              "rows": 163,
+              "median": 3.16
+            },
+            "5": {
+              "rows": 1457,
+              "median": 3.16
+            },
+            "6": {
+              "rows": 2198,
+              "median": 3.18
+            },
+            "7": {
+              "rows": 880,
+              "median": 3.2
+            },
+            "8": {
+              "rows": 175,
+              "median": 3.23
+            },
+            "9": {
+              "rows": 5,
+              "median": 3.28
+            }
+          }
+        },
+        "sulphates": {
+          "distribution": {
+            "valid_rows": 4898,
+            "min": 0.22,
+            "q1": 0.41,
+            "median": 0.47,
+            "q3": 0.55,
+            "max": 1.08,
+            "mean": 0.48984687627603113
+          },
+          "pearson_quality": 0.053677877132791985,
+          "spearman_quality": 0.03331896941807418,
+          "by_quality": {
+            "3": {
+              "rows": 20,
+              "median": 0.44
+            },
+            "4": {
+              "rows": 163,
+              "median": 0.47
+            },
+            "5": {
+              "rows": 1457,
+              "median": 0.47
+            },
+            "6": {
+              "rows": 2198,
+              "median": 0.48
+            },
+            "7": {
+              "rows": 880,
+              "median": 0.48
+            },
+            "8": {
+              "rows": 175,
+              "median": 0.46
+            },
+            "9": {
+              "rows": 5,
+              "median": 0.46
+            }
+          }
+        },
+        "alcohol": {
+          "distribution": {
+            "valid_rows": 4898,
+            "min": 8.0,
+            "q1": 9.5,
+            "median": 10.4,
+            "q3": 11.4,
+            "max": 14.2,
+            "mean": 10.514267047774602
+          },
+          "pearson_quality": 0.4355747154613725,
+          "spearman_quality": 0.440369181624683,
+          "by_quality": {
+            "3": {
+              "rows": 20,
+              "median": 10.45
+            },
+            "4": {
+              "rows": 163,
+              "median": 10.1
+            },
+            "5": {
+              "rows": 1457,
+              "median": 9.5
+            },
+            "6": {
+              "rows": 2198,
+              "median": 10.5
+            },
+            "7": {
+              "rows": 880,
+              "median": 11.4
+            },
+            "8": {
+              "rows": 175,
+              "median": 12.0
+            },
+            "9": {
+              "rows": 5,
+              "median": 12.5
+            }
+          }
+        }
+      },
+      "inter_indicator_spearman": {
+        "fixed acidity": {
+          "fixed acidity": 1.0,
+          "volatile acidity": -0.0428652279430201,
+          "citric acid": 0.29787793049527433,
+          "residual sugar": 0.1067249381926073,
+          "chlorides": 0.09469117569716909,
+          "free sulfur dioxide": -0.024542229594291403,
+          "total sulfur dioxide": 0.11264866165536404,
+          "density": 0.27003091421958564,
+          "pH": -0.4183411578292912,
+          "sulphates": -0.013237813183569522,
+          "alcohol": -0.10682740160241681
+        },
+        "volatile acidity": {
+          "fixed acidity": -0.0428652279430201,
+          "volatile acidity": 0.9999999999999999,
+          "citric acid": -0.1504099808235828,
+          "residual sugar": 0.10862744057886908,
+          "chlorides": -0.004934156367378388,
+          "free sulfur dioxide": -0.08121290303701761,
+          "total sulfur dioxide": 0.1176139590808801,
+          "density": 0.01012434055830917,
+          "pH": -0.04520356910654741,
+          "sulphates": -0.01690230282768245,
+          "alcohol": 0.033966554227526806
+        },
+        "citric acid": {
+          "fixed acidity": 0.29787793049527433,
+          "volatile acidity": -0.15040998082358278,
+          "citric acid": 1.0,
+          "residual sugar": 0.024620981879463762,
+          "chlorides": 0.032659495041208624,
+          "free sulfur dioxide": 0.08831405580938147,
+          "total sulfur dioxide": 0.09321867311750295,
+          "density": 0.09142519022518641,
+          "pH": -0.14619267453776993,
+          "sulphates": 0.07976628344876163,
+          "alcohol": -0.0291699575548103
+        },
+        "residual sugar": {
+          "fixed acidity": 0.1067249381926073,
+          "volatile acidity": 0.1086274405788691,
+          "citric acid": 0.02462098187946376,
+          "residual sugar": 1.0,
+          "chlorides": 0.22784390383090644,
+          "free sulfur dioxide": 0.34610673695883126,
+          "total sulfur dioxide": 0.43125248421595436,
+          "density": 0.7803648454400167,
+          "pH": -0.18002822336471813,
+          "sulphates": -0.003843979878922126,
+          "alcohol": -0.44525743310672344
+        },
+        "chlorides": {
+          "fixed acidity": 0.0946911756971691,
+          "volatile acidity": -0.004934156367378388,
+          "citric acid": 0.032659495041208624,
+          "residual sugar": 0.2278439038309064,
+          "chlorides": 0.9999999999999999,
+          "free sulfur dioxide": 0.16704550491668674,
+          "total sulfur dioxide": 0.3752436657716385,
+          "density": 0.5083017652202878,
+          "pH": -0.05400646660044566,
+          "sulphates": 0.09393069587410116,
+          "alcohol": -0.5708064071153713
+        },
+        "free sulfur dioxide": {
+          "fixed acidity": -0.0245422295942914,
+          "volatile acidity": -0.08121290303701761,
+          "citric acid": 0.08831405580938147,
+          "residual sugar": 0.34610673695883126,
+          "chlorides": 0.16704550491668674,
+          "free sulfur dioxide": 1.0,
+          "total sulfur dioxide": 0.6186163388331407,
+          "density": 0.3278217981072282,
+          "pH": -0.006273577856455677,
+          "sulphates": 0.052251683489656184,
+          "alcohol": -0.27256933756159435
+        },
+        "total sulfur dioxide": {
+          "fixed acidity": 0.11264866165536404,
+          "volatile acidity": 0.1176139590808801,
+          "citric acid": 0.09321867311750295,
+          "residual sugar": 0.43125248421595436,
+          "chlorides": 0.37524366577163853,
+          "free sulfur dioxide": 0.6186163388331407,
+          "total sulfur dioxide": 1.0,
+          "density": 0.5638240915817069,
+          "pH": -0.011828717565377907,
+          "sulphates": 0.15782479528317256,
+          "alcohol": -0.47661933336683043
+        },
+        "density": {
+          "fixed acidity": 0.27003091421958564,
+          "volatile acidity": 0.01012434055830917,
+          "citric acid": 0.0914251902251864,
+          "residual sugar": 0.7803648454400168,
+          "chlorides": 0.5083017652202878,
+          "free sulfur dioxide": 0.3278217981072282,
+          "total sulfur dioxide": 0.563824091581707,
+          "density": 1.0,
+          "pH": -0.11006085193246219,
+          "sulphates": 0.09507866873153582,
+          "alcohol": -0.821855081526531
+        },
+        "pH": {
+          "fixed acidity": -0.41834115782929115,
+          "volatile acidity": -0.04520356910654741,
+          "citric acid": -0.14619267453776993,
+          "residual sugar": -0.18002822336471813,
+          "chlorides": -0.05400646660044566,
+          "free sulfur dioxide": -0.006273577856455677,
+          "total sulfur dioxide": -0.011828717565377907,
+          "density": -0.11006085193246218,
+          "pH": 1.0,
+          "sulphates": 0.14024330529830115,
+          "alcohol": 0.14885724896146915
+        },
+        "sulphates": {
+          "fixed acidity": -0.013237813183569522,
+          "volatile acidity": -0.01690230282768245,
+          "citric acid": 0.07976628344876163,
+          "residual sugar": -0.003843979878922126,
+          "chlorides": 0.09393069587410116,
+          "free sulfur dioxide": 0.05225168348965618,
+          "total sulfur dioxide": 0.15782479528317256,
+          "density": 0.09507866873153581,
+          "pH": 0.14024330529830112,
+          "sulphates": 1.0,
+          "alcohol": -0.04486799171715492
+        },
+        "alcohol": {
+          "fixed acidity": -0.10682740160241683,
+          "volatile acidity": 0.033966554227526806,
+          "citric acid": -0.0291699575548103,
+          "residual sugar": -0.44525743310672344,
+          "chlorides": -0.5708064071153713,
+          "free sulfur dioxide": -0.27256933756159435,
+          "total sulfur dioxide": -0.47661933336683043,
+          "density": -0.8218550815265311,
+          "pH": 0.14885724896146915,
+          "sulphates": -0.04486799171715492,
+          "alcohol": 0.9999999999999999
+        }
+      },
+      "sensitivity": {
+        "all_rows": 4898,
+        "unique_rows": 3961,
+        "duplicate_rows_beyond_first": 937,
+        "by_indicator": {
+          "fixed acidity": {
+            "spearman_quality_unique_rows": -0.09423639517947384,
+            "difference_unique_minus_all": -0.009750946646656891,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "volatile acidity": {
+            "spearman_quality_unique_rows": -0.1853852554829275,
+            "difference_unique_minus_all": 0.0111764274697157,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "citric acid": {
+            "spearman_quality_unique_rows": 0.030293297569459136,
+            "difference_unique_minus_all": 0.011960571920076442,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "residual sugar": {
+            "spearman_quality_unique_rows": -0.09246194455353852,
+            "difference_unique_minus_all": -0.010392154642269669,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "chlorides": {
+            "spearman_quality_unique_rows": -0.3330891111292409,
+            "difference_unique_minus_all": -0.01860063284679886,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "free sulfur dioxide": {
+            "spearman_quality_unique_rows": 0.03255533775798148,
+            "difference_unique_minus_all": 0.008841962021703887,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "total sulfur dioxide": {
+            "spearman_quality_unique_rows": -0.2025757023813639,
+            "difference_unique_minus_all": -0.005895412857636034,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "density": {
+            "spearman_quality_unique_rows": -0.3829001336009681,
+            "difference_unique_minus_all": -0.03454911095684593,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "pH": {
+            "spearman_quality_unique_rows": 0.13618957081992467,
+            "difference_unique_minus_all": 0.02682749337329128,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "sulphates": {
+            "spearman_quality_unique_rows": 0.0355924496089113,
+            "difference_unique_minus_all": 0.0022734801908371183,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          },
+          "alcohol": {
+            "spearman_quality_unique_rows": 0.47571293521892255,
+            "difference_unique_minus_all": 0.035343753594239524,
+            "direction_changed": false,
+            "absolute_difference_at_least_0_10": false
+          }
+        },
+        "flagged_indicators": []
+      }
+    }
+  },
+  "figures": [
+    "figures/quality_distribution.svg",
+    "figures/spearman_quality.svg"
+  ]
+}

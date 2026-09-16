@@ -1,0 +1,18 @@
+[project]
+name = "wine-quality"
+version = "0.1.0"
+description = "葡萄酒 quality 预测：Vinho Verde 红酒与白酒的 11 个理化指标能否优于简单基线（DSFlow 被管项目）"
+requires-python = ">=3.13"
+dependencies = [
+    "dsflow",
+    "numpy>=2",
+    "pandas>=2.2",
+    "pyarrow>=17",
+    "scikit-learn>=1.5",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+dsflow = { path = "../../datascience_workflow", editable = true }

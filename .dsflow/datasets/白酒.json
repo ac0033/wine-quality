@@ -1,0 +1,35 @@
+{
+ "name": "白酒",
+ "description": "白酒原始记录，一行 = 一份白酒样本的 11 个理化指标 + quality；分号分隔",
+ "versions": [
+  {
+   "name": "白酒",
+   "version": "76c3f809815c",
+   "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836",
+   "path": "data/winequality-white.csv",
+   "format": "csv",
+   "size_bytes": 264426,
+   "rows": null,
+   "columns": null,
+   "stage": "raw",
+   "produced_by": null,
+   "parents": [],
+   "replaces": [],
+   "registered_at": "2026-09-16T16:34:31"
+  }
+ ],
+ "used_by": [
+  {
+   "step": "1.1",
+   "role": "核对"
+  },
+  {
+   "step": "2.1",
+   "role": "核对"
+  },
+  {
+   "step": "3.1",
+   "role": "读取"
+  }
+ ]
+}

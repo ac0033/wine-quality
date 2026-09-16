@@ -1,0 +1,104 @@
+{
+  "title": "葡萄酒 quality 预测（Vinho Verde 红酒与白酒）",
+  "stages": [
+    {"id": 1, "name": "① 数据预处理", "dir": "steps/01_数据预处理", "color": "#3b82f6"},
+    {"id": 2, "name": "② 探索性数据分析", "dir": "steps/02_EDA", "color": "#10b981"},
+    {"id": 3, "name": "③ 数据划分", "dir": "steps/03_数据划分", "color": "#eab308"},
+    {"id": 4, "name": "④ 特征工程", "dir": "steps/04_特征工程", "color": "#ec4899"},
+    {"id": 5, "name": "⑤ 特征选择", "dir": "steps/05_特征选择", "color": "#8b5cf6"},
+    {"id": 6, "name": "⑥ 基线模型", "dir": "steps/06_基线模型", "color": "#64748b"},
+    {"id": 7, "name": "⑦ 模型选择与训练", "dir": "steps/07_模型选择与训练", "color": "#0ea5e9"},
+    {"id": 8, "name": "⑧ 超参数调优", "dir": "steps/08_超参数调优", "color": "#f97316"},
+    {"id": 9, "name": "⑨ 评估与诊断", "dir": "steps/09_评估与诊断", "color": "#14b8a6"},
+    {"id": 10, "name": "⑩ 可解释性", "dir": "steps/10_可解释性", "color": "#d946ef"},
+    {"id": 11, "name": "⑪ 部署与交付", "dir": "steps/11_部署与交付", "color": "#84cc16"}
+  ],
+  "steps": [
+    {
+      "id": "1.1", "stage": 1, "order": 1, "title": "原始数据理解与质量核验",
+      "dir": "steps/01_数据预处理/1.1_原始数据理解与质量核验",
+      "status": "done",
+      "op": "核对两份原始 CSV 每行、每列代表什么，逐项计数质量问题，确定后续分析的起点",
+      "finding": "红酒 1,599 行、白酒 4,898 行，都是 12 列；没有空值、无效数值或无效 quality；同值行红酒 240、白酒 937，只计数不删",
+      "decision": "全部原始行进入探索分析；不删同值行，因为没有样本 ID",
+      "execution_scripts": ["steps/01_数据预处理/1.1_原始数据理解与质量核验/src/profile.py"],
+      "acceptance_report": "steps/01_数据预处理/1.1_原始数据理解与质量核验/acceptance.md",
+      "current_revision": "r01", "revisions": []
+    },
+    {
+      "id": "2.1", "stage": 2, "order": 2, "title": "理化指标与 quality 的探索分析",
+      "dir": "steps/02_EDA/2.1_理化指标与quality的探索分析",
+      "status": "done",
+      "op": "分红酒、白酒描述 11 个理化指标的分布，以及每个指标与 quality 的关系；检查同值行会不会改变结论",
+      "finding": "alcohol 与 quality 在两类酒里都是正向（Spearman 红酒 +0.4785、白酒 +0.4404）；sulphates 只在红酒里明显；去掉同值行不改变任何系数的方向",
+      "decision": "进入预测任务定义与固定划分；不按相关系数挑选指标，11 个指标全部保留",
+      "execution_scripts": ["steps/02_EDA/2.1_理化指标与quality的探索分析/src/analyze.py"],
+      "acceptance_report": "steps/02_EDA/2.1_理化指标与quality的探索分析/acceptance.md",
+      "current_revision": "r01", "revisions": []
+    },
+    {
+      "id": "3.1", "stage": 3, "order": 3, "title": "预测任务定义、固定划分与验证基线",
+      "dir": "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线",
+      "status": "done",
+      "op": "把任务定成研究性回归；按特征组合分层，用固定种子把每类酒划成训练、验证、最终评估三份；只在验证集算训练集中位数基线",
+      "finding": "红酒训练 / 验证 / 最终评估 950 / 331 / 318 行，白酒 2,921 / 983 / 994 行；相同特征组合零跨集合；基线验证 MAE 红酒 0.6435、白酒 0.6368",
+      "decision": "候选模型一律在同一验证集、同一 MAE / RMSE 口径下和基线比；最终评估集留到最后只评一次",
+      "execution_scripts": ["steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/src/prepare.py"],
+      "acceptance_report": "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/acceptance.md",
+      "current_revision": "r01", "revisions": []
+    },
+    {
+      "id": "7.1", "stage": 7, "order": 4, "title": "候选模型比较",
+      "dir": "steps/07_模型选择与训练/7.1_候选模型比较",
+      "status": "awaiting_acceptance",
+      "op": "在固定验证集上比较 Ridge 与随机森林两个预定候选和基线：MAE 改善多少、RMSE 有没有恶化、重抽样区间是否整体在 0 以下",
+      "finding": "四个候选都比基线准且区间上界小于 0：红酒随机森林验证 MAE 0.5051（基线 0.6435）、白酒随机森林 0.5474（基线 0.6368）；Ridge 略差但同样满足门槛",
+      "decision": "四个候选都登记进入最终评估；随机森林与 Ridge 的区间重叠，不在两者之间取舍",
+      "execution_notebooks": ["steps/07_模型选择与训练/7.1_候选模型比较/nb_7.1.ipynb"],
+      "current_revision": "r01", "revisions": []
+    },
+    {
+      "id": "9.1", "stage": 9, "order": 5, "title": "最终评估",
+      "dir": "steps/09_评估与诊断/9.1_最终评估",
+      "status": "awaiting_acceptance",
+      "op": "对 7.1 登记的候选，在封存的最终评估集上只评估一次，和同集合上的基线比；按 quality 分值看误差",
+      "finding": "红酒两个候选和白酒随机森林仍优于基线：红酒随机森林最终评估 MAE 0.4963（基线 0.6855）、白酒随机森林 0.5752（基线 0.6469）；白酒 Ridge 的区间跨过 0，没站住",
+      "decision": "每类酒以随机森林进入登记与交付；不回头改 7.1",
+      "execution_notebooks": ["steps/09_评估与诊断/9.1_最终评估/nb_9.1.ipynb"],
+      "current_revision": "r01", "revisions": []
+    },
+    {
+      "id": "10.1", "stage": 10, "order": 6, "title": "指标贡献",
+      "dir": "steps/10_可解释性/10.1_指标贡献",
+      "status": "awaiting_acceptance",
+      "op": "在验证集上打乱每个理化指标看候选模型的 MAE 变差多少，说明模型主要靠哪些指标；和 2.1 的相关关系对照",
+      "finding": "四个候选里三个最依赖 alcohol（红酒随机森林打乱后 MAE 增加 0.1161，白酒 0.1872）；白酒 Ridge 最依赖 density、residual sugar，它们与 alcohol 高度相关",
+      "decision": "「主要靠 alcohol」写进交付清单的适用边界；不据此选特征或重训",
+      "execution_notebooks": ["steps/10_可解释性/10.1_指标贡献/nb_10.1.ipynb"],
+      "current_revision": "r01", "revisions": []
+    },
+    {
+      "id": "11.1", "stage": 11, "order": 7, "title": "模型登记与交付清单",
+      "dir": "steps/11_部署与交付/11.1_模型登记与交付清单",
+      "status": "awaiting_acceptance",
+      "op": "把通过最终评估的模型文件登记为候选版本，写交付清单（复现入口、适用边界、监控方案），给出一个给新记录打分的入口",
+      "finding": "登记 红酒_quality_随机森林 8314f626bc19、白酒_quality_随机森林 32bfb8ca1cde 为候选；两份交付清单通过核对；打分入口对 20 条示例跑通",
+      "decision": "模型状态停在候选，验收与交付由用户在平台上决定；部署方式待定",
+      "execution_notebooks": ["steps/11_部署与交付/11.1_模型登记与交付清单/nb_11.1.ipynb"],
+      "current_revision": "r01", "revisions": []
+    }
+  ],
+  "dependencies": [
+    {"from": "1.1", "to": "2.1", "label": "数据概况：行数、字段、同值行计数"},
+    {"from": "2.1", "to": "3.1", "label": "探索结果：值得验证的关系；11 个指标全部保留"},
+    {"from": "3.1", "to": "7.1", "label": "固定划分表与验证基线"},
+    {"from": "7.1", "to": "9.1", "label": "登记的候选模型与验证结果"},
+    {"from": "7.1", "to": "10.1", "label": "候选模型"},
+    {"from": "9.1", "to": "11.1", "label": "最终评估结果"},
+    {"from": "10.1", "to": "11.1", "label": "指标贡献说明，写进交付清单的适用边界"}
+  ],
+  "back_edges": [],
+  "revision_loops": [],
+  "groups": {},
+  "notes": "1.1～3.1 由此前的执行 agent 完成并经主 agent 验收（历史产物原样保留，只搬了目录、改了相对链接）；7.1 起在 DSFlow 平台上执行。④ 特征工程、⑤ 特征选择没有步骤：计划规定 11 个理化指标原样使用、不挑选；⑥ 基线模型并在 3.1 里（训练集中位数）；⑧ 超参数调优没有步骤：两个候选参数固定，不调参。"
+}

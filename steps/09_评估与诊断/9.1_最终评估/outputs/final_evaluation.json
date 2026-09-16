@@ -1,0 +1,294 @@
+{
+ "note": "每个候选在最终评估集上只评了这一次；最终评估行没有参与过任何拟合、预测或筛选，但在 2.1 的全量探索里被看过分布与相关",
+ "features": [
+  "fixed acidity",
+  "volatile acidity",
+  "citric acid",
+  "residual sugar",
+  "chlorides",
+  "free sulfur dioxide",
+  "total sulfur dioxide",
+  "density",
+  "pH",
+  "sulphates",
+  "alcohol"
+ ],
+ "inputs_before": {
+  "data/winequality-red.csv": {
+   "bytes": 84199,
+   "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e"
+  },
+  "data/winequality-white.csv": {
+   "bytes": 264426,
+   "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836"
+  },
+  "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/split_assignments.csv": {
+   "bytes": 566494,
+   "sha256": "42e939976f221cf5ea3b0ebaa4469633cd2d6e2360199f261efbcab5331e596c"
+  },
+  "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/baseline_validation.json": {
+   "bytes": 768,
+   "sha256": "b963fd936d3179d86818b08e20e2c555157b91b18c922d5fe6404c65ebee0f82"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/model_comparison.json": {
+   "bytes": 8374,
+   "sha256": "cc8ad476b29d03a5d603c3e90a8ab2d663c073922f64dfffadde7321cf5ea185"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_Ridge.joblib": {
+   "bytes": 1137,
+   "sha256": "ba27a8ea2677788b6c938ba82dd1953bb7f20bbc35e5c501581a7f06861ebd86"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_随机森林.joblib": {
+   "bytes": 3826289,
+   "sha256": "8314f626bc1974b4e3100e44cba4650ab788a0ed6c3c758444458e1e4654a8cc"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_Ridge.joblib": {
+   "bytes": 1137,
+   "sha256": "551b9437c2d661e1aa7e28b5cc26492bf88425b66027d0d70c0f2c42ae2f8094"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_随机森林.joblib": {
+   "bytes": 12026369,
+   "sha256": "32bfb8ca1cdebb606f0f97cdd21cf69074e795928528f9f98f9ba53125f47cff"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/scaler_red.json": {
+   "bytes": 803,
+   "sha256": "bc91ce657b717667981ed1b350dffd8fdcdb0a9426f36b8f97ed88b8db7a991a"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/scaler_white.json": {
+   "bytes": 820,
+   "sha256": "1db3bf8ddaec37201ec8166aa2a90bb06f82d0c5cb88675fbce2df7d9cfc8f7a"
+  }
+ },
+ "inputs_after": {
+  "data/winequality-red.csv": {
+   "bytes": 84199,
+   "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e"
+  },
+  "data/winequality-white.csv": {
+   "bytes": 264426,
+   "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836"
+  },
+  "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/split_assignments.csv": {
+   "bytes": 566494,
+   "sha256": "42e939976f221cf5ea3b0ebaa4469633cd2d6e2360199f261efbcab5331e596c"
+  },
+  "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/baseline_validation.json": {
+   "bytes": 768,
+   "sha256": "b963fd936d3179d86818b08e20e2c555157b91b18c922d5fe6404c65ebee0f82"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/model_comparison.json": {
+   "bytes": 8374,
+   "sha256": "cc8ad476b29d03a5d603c3e90a8ab2d663c073922f64dfffadde7321cf5ea185"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_Ridge.joblib": {
+   "bytes": 1137,
+   "sha256": "ba27a8ea2677788b6c938ba82dd1953bb7f20bbc35e5c501581a7f06861ebd86"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_随机森林.joblib": {
+   "bytes": 3826289,
+   "sha256": "8314f626bc1974b4e3100e44cba4650ab788a0ed6c3c758444458e1e4654a8cc"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_Ridge.joblib": {
+   "bytes": 1137,
+   "sha256": "551b9437c2d661e1aa7e28b5cc26492bf88425b66027d0d70c0f2c42ae2f8094"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_随机森林.joblib": {
+   "bytes": 12026369,
+   "sha256": "32bfb8ca1cdebb606f0f97cdd21cf69074e795928528f9f98f9ba53125f47cff"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/scaler_red.json": {
+   "bytes": 803,
+   "sha256": "bc91ce657b717667981ed1b350dffd8fdcdb0a9426f36b8f97ed88b8db7a991a"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/scaler_white.json": {
+   "bytes": 820,
+   "sha256": "1db3bf8ddaec37201ec8166aa2a90bb06f82d0c5cb88675fbce2df7d9cfc8f7a"
+  }
+ },
+ "inputs_unchanged": true,
+ "files": {
+  "red": {
+   "name": "红酒",
+   "final_rows": 318,
+   "final_feature_groups": 274,
+   "training_rows_untouched": 950,
+   "validation_rows_untouched": 331,
+   "baseline": {
+    "prediction": 6.0,
+    "mae": 0.6855345911949685,
+    "rmse": 0.9042179288717305
+   },
+   "candidates": {
+    "Ridge": {
+     "mae": 0.5089800694771089,
+     "rmse": 0.6547724633956599,
+     "mae_minus_baseline": -0.17655452171785957,
+     "rmse_minus_baseline": -0.2494454654760706,
+     "validation_mae_from_7_1": 0.5193847341111762,
+     "validation_mae_minus_baseline_from_7_1": -0.1241197976108781,
+     "mae_difference_interval": {
+      "lower_2_5": -0.24895149852507933,
+      "upper_97_5": -0.1007890609156439,
+      "draws": 2000
+     },
+     "still_better_than_baseline": true,
+     "final_minus_validation_mae": -0.010404664634067307
+    },
+    "随机森林": {
+     "mae": 0.4963438798140795,
+     "rmse": 0.6549180278874187,
+     "mae_minus_baseline": -0.189190711380889,
+     "rmse_minus_baseline": -0.24929990098431176,
+     "validation_mae_from_7_1": 0.5051176403035529,
+     "validation_mae_minus_baseline_from_7_1": -0.13838689141850147,
+     "mae_difference_interval": {
+      "lower_2_5": -0.26419461817343254,
+      "upper_97_5": -0.11452692279714709,
+      "draws": 2000
+     },
+     "still_better_than_baseline": true,
+     "final_minus_validation_mae": -0.00877376048947337
+    }
+   },
+   "by_quality": {
+    "3": {
+     "rows": 2,
+     "feature_groups": 2,
+     "baseline_mae": 3.0,
+     "Ridge_mae": 1.978983143680026,
+     "随机森林_mae": 2.2147937014181185
+    },
+    "4": {
+     "rows": 11,
+     "feature_groups": 11,
+     "baseline_mae": 2.0,
+     "Ridge_mae": 1.4683879740002064,
+     "随机森林_mae": 1.392556452448481
+    },
+    "5": {
+     "rows": 141,
+     "feature_groups": 116,
+     "baseline_mae": 1.0,
+     "Ridge_mae": 0.32676777288699865,
+     "随机森林_mae": 0.3261611573306512
+    },
+    "6": {
+     "rows": 119,
+     "feature_groups": 107,
+     "baseline_mae": 0.0,
+     "Ridge_mae": 0.464793495904858,
+     "随机森林_mae": 0.46131281675024166
+    },
+    "7": {
+     "rows": 41,
+     "feature_groups": 34,
+     "baseline_mae": 1.0,
+     "Ridge_mae": 0.8237241997097562,
+     "随机森林_mae": 0.7886801399511915
+    },
+    "8": {
+     "rows": 4,
+     "feature_groups": 4,
+     "baseline_mae": 2.0,
+     "Ridge_mae": 1.6470134786283472,
+     "随机森林_mae": 1.2172028215520856
+    }
+   }
+  },
+  "white": {
+   "name": "白酒",
+   "final_rows": 994,
+   "final_feature_groups": 794,
+   "training_rows_untouched": 2921,
+   "validation_rows_untouched": 983,
+   "baseline": {
+    "prediction": 6.0,
+    "mae": 0.6468812877263581,
+    "rmse": 0.9121359283079806
+   },
+   "candidates": {
+    "Ridge": {
+     "mae": 0.6193830014264483,
+     "rmse": 0.789924362792527,
+     "mae_minus_baseline": -0.027498286299909802,
+     "rmse_minus_baseline": -0.12221156551545365,
+     "validation_mae_from_7_1": 0.5813621222774177,
+     "validation_mae_minus_baseline_from_7_1": -0.055463920448930226,
+     "mae_difference_interval": {
+      "lower_2_5": -0.06373791576737299,
+      "upper_97_5": 0.010720017542224639,
+      "draws": 2000
+     },
+     "still_better_than_baseline": false,
+     "final_minus_validation_mae": 0.03802087914903063
+    },
+    "随机森林": {
+     "mae": 0.575229986626415,
+     "rmse": 0.7277877938290098,
+     "mae_minus_baseline": -0.07165130109994311,
+     "rmse_minus_baseline": -0.1843481344789708,
+     "validation_mae_from_7_1": 0.5473766949168377,
+     "validation_mae_minus_baseline_from_7_1": -0.0894493478095102,
+     "mae_difference_interval": {
+      "lower_2_5": -0.11200611278450644,
+      "upper_97_5": -0.03132177267739763,
+      "draws": 2000
+     },
+     "still_better_than_baseline": true,
+     "final_minus_validation_mae": 0.027853291709577288
+    }
+   },
+   "by_quality": {
+    "3": {
+     "rows": 4,
+     "feature_groups": 4,
+     "baseline_mae": 3.0,
+     "Ridge_mae": 2.869861473751331,
+     "随机森林_mae": 2.2731518996234708
+    },
+    "4": {
+     "rows": 33,
+     "feature_groups": 31,
+     "baseline_mae": 2.0,
+     "Ridge_mae": 1.376409647165047,
+     "随机森林_mae": 1.2488763013615853
+    },
+    "5": {
+     "rows": 293,
+     "feature_groups": 235,
+     "baseline_mae": 1.0,
+     "Ridge_mae": 0.611393161786447,
+     "随机森林_mae": 0.5438291803513624
+    },
+    "6": {
+     "rows": 438,
+     "feature_groups": 358,
+     "baseline_mae": 0.0,
+     "Ridge_mae": 0.36568297169484015,
+     "随机森林_mae": 0.3919861985343503
+    },
+    "7": {
+     "rows": 181,
+     "feature_groups": 138,
+     "baseline_mae": 1.0,
+     "Ridge_mae": 0.760765870174979,
+     "随机森林_mae": 0.656438918671718
+    },
+    "8": {
+     "rows": 44,
+     "feature_groups": 27,
+     "baseline_mae": 2.0,
+     "Ridge_mae": 1.802590847819661,
+     "随机森林_mae": 1.5728622722761252
+    },
+    "9": {
+     "rows": 1,
+     "feature_groups": 1,
+     "baseline_mae": 3.0,
+     "Ridge_mae": 2.4457813549325254,
+     "随机森林_mae": 2.4197921025053404
+    }
+   }
+  }
+ }
+}

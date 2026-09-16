@@ -1,0 +1,51 @@
+step: "2.1"
+revision: r01
+headline: alcohol 与 quality 在红酒、白酒里都是正向关系；其余指标两类酒不一样；去掉同值行不改变任何结论。可以进入预测任务定义
+can_continue: true
+core_numbers:
+  - label: 红酒 alcohol 与 quality 的 Spearman
+    after: 0.4785
+    scope: 红酒全部 1,599 行，并列值取平均秩
+    source: "outputs/eda.json#/files/red/indicators/alcohol/spearman_quality"
+  - label: 白酒 alcohol 与 quality 的 Spearman
+    after: 0.4404
+    scope: 白酒全部 4,898 行
+    source: "outputs/eda.json#/files/white/indicators/alcohol/spearman_quality"
+  - label: 红酒 sulphates 与 quality 的 Spearman
+    after: 0.3771
+    scope: 红酒全部行；白酒同一指标只有 0.0333，两类酒不一样
+    source: "outputs/eda.json#/files/red/indicators/sulphates/spearman_quality"
+  - label: 白酒 density 与 alcohol 的 Spearman
+    after: -0.8219
+    scope: 白酒全部行；两个指标高度相关，建模时要留意它们说的是同一件事
+    source: "outputs/eda.json#/files/white/inter_indicator_spearman/density/alcohol"
+operation: 分酒类算每个理化指标的分位数、和 quality 的 Pearson / Spearman、按 quality 分组的中位数、指标两两之间的 Spearman；再把同值行每组只留首行重算一遍看结论变不变。
+exceptions:
+  - 相关系数没有控制其他指标，也没做显著性检验，只是探索
+  - 白酒 residual sugar 最大 65.8，远离中间一半记录（1.7～9.9）；没有据此删行
+artifacts:
+  - {path: outputs/eda.json, purpose: 全部 11 个指标的分布、两种相关系数、分组中位数、指标间相关、同值行敏感性, kind: table}
+  - {path: figures/spearman_quality.svg, purpose: 11 个指标与 quality 的 Spearman 系数图, kind: figure}
+  - {path: figures/quality_distribution.svg, purpose: 两类酒 quality 各分值的行数与比例, kind: figure}
+  - {path: report.md, purpose: 给用户看的报告, kind: report}
+  - {path: acceptance.md, purpose: 主 agent 的验收结论, kind: report}
+why: 先看清哪些指标和 quality 有关系、红白酒是否一样，才知道预测任务值不值得做、要提防什么。
+invariants:
+  - 原始行一行不删；三份原始文件与 1.1 的两份输入指纹前后一致
+  - 每个 quality 分组的行数加起来等于该文件行数
+evidence:
+  - {path: checks/verification.json, purpose: 独立复核 980/980 项通过, kind: table}
+can_say:
+  - 两类酒里 alcohol 越高、quality 中位数越高（红酒 5 分组 9.7、7 分组 11.5）
+  - 同值行留不留，11 个指标的 Spearman 都不变号，最大差 0.0353
+cannot_say:
+  - 不能说改变某份酒的 alcohol 会改变评分
+  - 不能说这些关系能预测未见过的酒
+next: 3.1 定义预测任务、固定划分、建立基线；11 个指标全部保留，不按相关系数挑。
+examples:
+  - title: 红酒 5 分组和 7 分组的 alcohol 中位数
+    input: 红酒 quality=5 的 681 行、quality=7 的 199 行
+    rule: 各组 alcohol 取中位数
+    output: 9.7 与 11.5
+    artifact: outputs/eda.json
+    real: true

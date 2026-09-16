@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="535" viewBox="0 0 1000 535">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,sans-serif;fill:#1f2937}.title{font-size:20px;font-weight:bold}.label{font-size:13px}.small{font-size:11px}</style>
+<text x="22" y="31" class="title">Spearman correlation with quality (all original rows)</text>
+<text x="22" y="53" class="small">A correlation is descriptive, not a cause or prediction score. Full precision and Pearson results are in eda.json.</text>
+<rect x="720" y="29" width="12" height="12" fill="#9b2c50"/><text x="738" y="40" class="small">Red</text>
+<rect x="789" y="29" width="12" height="12" fill="#a88a25"/><text x="807" y="40" class="small">White</text>
+<line x1="610" y1="75" x2="610" y2="510" stroke="#64748b"/>
+<text x="22" y="98" class="label">fixed acidity</text>
+<rect x="610.0000" y="85" width="53.6193" height="10" fill="#9b2c50" data-wine="red" data-indicator="fixed acidity" data-correlation="0.11408367358880324"/>
+<rect x="570.2918" y="98" width="39.7082" height="10" fill="#a88a25" data-wine="white" data-indicator="fixed acidity" data-correlation="-0.084485448532816948"/>
+<text x="22" y="137" class="label">volatile acidity</text>
+<rect x="431.0961" y="124" width="178.9039" height="10" fill="#9b2c50" data-wine="red" data-indicator="volatile acidity" data-correlation="-0.38064651042537551"/>
+<rect x="517.6160" y="137" width="92.3840" height="10" fill="#a88a25" data-wine="white" data-indicator="volatile acidity" data-correlation="-0.1965616829526432"/>
+<text x="22" y="176" class="label">citric acid</text>
+<rect x="610.0000" y="163" width="100.3360" height="10" fill="#9b2c50" data-wine="red" data-indicator="citric acid" data-correlation="0.21348091442213629"/>
+<rect x="610.0000" y="176" width="8.6164" height="10" fill="#a88a25" data-wine="white" data-indicator="citric acid" data-correlation="0.018332725649382695"/>
+<text x="22" y="215" class="label">residual sugar</text>
+<rect x="610.0000" y="202" width="15.0626" height="10" fill="#9b2c50" data-wine="red" data-indicator="residual sugar" data-correlation="0.032048167529057335"/>
+<rect x="571.4272" y="215" width="38.5728" height="10" fill="#a88a25" data-wine="white" data-indicator="residual sugar" data-correlation="-0.082069789911268856"/>
+<text x="22" y="254" class="label">chlorides</text>
+<rect x="520.7365" y="241" width="89.2635" height="10" fill="#9b2c50" data-wine="red" data-indicator="chlorides" data-correlation="-0.1899223356173072"/>
+<rect x="462.1904" y="254" width="147.8096" height="10" fill="#a88a25" data-wine="white" data-indicator="chlorides" data-correlation="-0.31448847828244203"/>
+<text x="22" y="293" class="label">free sulfur dioxide</text>
+<rect x="583.2567" y="280" width="26.7433" height="10" fill="#9b2c50" data-wine="red" data-indicator="free sulfur dioxide" data-correlation="-0.056900645501539303"/>
+<rect x="610.0000" y="293" width="11.1453" height="10" fill="#a88a25" data-wine="white" data-indicator="free sulfur dioxide" data-correlation="0.023713375736277593"/>
+<text x="22" y="332" class="label">total sulfur dioxide</text>
+<rect x="517.5345" y="319" width="92.4655" height="10" fill="#9b2c50" data-wine="red" data-indicator="total sulfur dioxide" data-correlation="-0.19673507544122079"/>
+<rect x="517.5603" y="332" width="92.4397" height="10" fill="#a88a25" data-wine="white" data-indicator="total sulfur dioxide" data-correlation="-0.19668028952372787"/>
+<text x="22" y="371" class="label">density</text>
+<rect x="526.7752" y="358" width="83.2248" height="10" fill="#9b2c50" data-wine="red" data-indicator="density" data-correlation="-0.17707406597199962"/>
+<rect x="446.2750" y="371" width="163.7250" height="10" fill="#a88a25" data-wine="white" data-indicator="density" data-correlation="-0.34835102264412215"/>
+<text x="22" y="410" class="label">pH</text>
+<rect x="589.4742" y="397" width="20.5258" height="10" fill="#9b2c50" data-wine="red" data-indicator="pH" data-correlation="-0.043671934788928383"/>
+<rect x="610.0000" y="410" width="51.4002" height="10" fill="#a88a25" data-wine="white" data-indicator="pH" data-correlation="0.10936207744663339"/>
+<text x="22" y="449" class="label">sulphates</text>
+<rect x="610.0000" y="436" width="177.2183" height="10" fill="#9b2c50" data-wine="red" data-indicator="sulphates" data-correlation="0.37706019910212196"/>
+<rect x="610.0000" y="449" width="15.6599" height="10" fill="#a88a25" data-wine="white" data-indicator="sulphates" data-correlation="0.033318969418074183"/>
+<text x="22" y="488" class="label">alcohol</text>
+<rect x="610.0000" y="475" width="224.9099" height="10" fill="#9b2c50" data-wine="red" data-indicator="alcohol" data-correlation="0.47853168747024349"/>
+<rect x="610.0000" y="488" width="206.9735" height="10" fill="#a88a25" data-wine="white" data-indicator="alcohol" data-correlation="0.44036918162468303"/>
+</svg>

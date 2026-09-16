@@ -1,0 +1,547 @@
+{
+ "method": {
+  "permutation": "验证行上打乱一列，20 次取平均的 MAE 增量",
+  "seed": 20260914,
+  "generator": "PCG64"
+ },
+ "inputs_before": {
+  "data/winequality-red.csv": {
+   "bytes": 84199,
+   "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e"
+  },
+  "data/winequality-white.csv": {
+   "bytes": 264426,
+   "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836"
+  },
+  "steps/02_EDA/2.1_理化指标与quality的探索分析/outputs/eda.json": {
+   "bytes": 45927,
+   "sha256": "92e80fd663100ae509af57b4d9d0c411b02a362d40933059dddeec53f129e157"
+  },
+  "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/split_assignments.csv": {
+   "bytes": 566494,
+   "sha256": "42e939976f221cf5ea3b0ebaa4469633cd2d6e2360199f261efbcab5331e596c"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_Ridge.joblib": {
+   "bytes": 1137,
+   "sha256": "ba27a8ea2677788b6c938ba82dd1953bb7f20bbc35e5c501581a7f06861ebd86"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_随机森林.joblib": {
+   "bytes": 3826289,
+   "sha256": "8314f626bc1974b4e3100e44cba4650ab788a0ed6c3c758444458e1e4654a8cc"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_Ridge.joblib": {
+   "bytes": 1137,
+   "sha256": "551b9437c2d661e1aa7e28b5cc26492bf88425b66027d0d70c0f2c42ae2f8094"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_随机森林.joblib": {
+   "bytes": 12026369,
+   "sha256": "32bfb8ca1cdebb606f0f97cdd21cf69074e795928528f9f98f9ba53125f47cff"
+  }
+ },
+ "inputs_after": {
+  "data/winequality-red.csv": {
+   "bytes": 84199,
+   "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e"
+  },
+  "data/winequality-white.csv": {
+   "bytes": 264426,
+   "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836"
+  },
+  "steps/02_EDA/2.1_理化指标与quality的探索分析/outputs/eda.json": {
+   "bytes": 45927,
+   "sha256": "92e80fd663100ae509af57b4d9d0c411b02a362d40933059dddeec53f129e157"
+  },
+  "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/split_assignments.csv": {
+   "bytes": 566494,
+   "sha256": "42e939976f221cf5ea3b0ebaa4469633cd2d6e2360199f261efbcab5331e596c"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_Ridge.joblib": {
+   "bytes": 1137,
+   "sha256": "ba27a8ea2677788b6c938ba82dd1953bb7f20bbc35e5c501581a7f06861ebd86"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_随机森林.joblib": {
+   "bytes": 3826289,
+   "sha256": "8314f626bc1974b4e3100e44cba4650ab788a0ed6c3c758444458e1e4654a8cc"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_Ridge.joblib": {
+   "bytes": 1137,
+   "sha256": "551b9437c2d661e1aa7e28b5cc26492bf88425b66027d0d70c0f2c42ae2f8094"
+  },
+  "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_随机森林.joblib": {
+   "bytes": 12026369,
+   "sha256": "32bfb8ca1cdebb606f0f97cdd21cf69074e795928528f9f98f9ba53125f47cff"
+  }
+ },
+ "density_alcohol_spearman_2_1": {
+  "red": -0.46244457892711605,
+  "white": -0.821855081526531
+ },
+ "top3": {
+  "红酒_Ridge": [
+   "alcohol",
+   "volatile acidity",
+   "total sulfur dioxide"
+  ],
+  "红酒_随机森林": [
+   "alcohol",
+   "sulphates",
+   "volatile acidity"
+  ],
+  "白酒_Ridge": [
+   "density",
+   "residual sugar",
+   "alcohol"
+  ],
+  "白酒_随机森林": [
+   "alcohol",
+   "volatile acidity",
+   "free sulfur dioxide"
+  ]
+ },
+ "flags": [
+  "白酒 Ridge：residual sugar 排第 2，但 2.1 里它和 quality 的 Spearman 只有 -0.082",
+  "白酒 随机森林：free sulfur dioxide 排第 3，但 2.1 里它和 quality 的 Spearman 只有 +0.024"
+ ],
+ "rows": [
+  {
+   "wine": "red",
+   "candidate": "Ridge",
+   "feature": "alcohol",
+   "validation_mae": 0.5193847341111762,
+   "mae_increase_when_shuffled": 0.10324242715755463,
+   "spearman_with_quality_2_1": 0.4785316874702435,
+   "ridge_standardized_coef": 0.28941367716711497,
+   "rank_within_model": 1
+  },
+  {
+   "wine": "red",
+   "candidate": "Ridge",
+   "feature": "volatile acidity",
+   "validation_mae": 0.5193847341111762,
+   "mae_increase_when_shuffled": 0.0406191920005249,
+   "spearman_with_quality_2_1": -0.3806465104253755,
+   "ridge_standardized_coef": -0.14358546988335633,
+   "rank_within_model": 2
+  },
+  {
+   "wine": "red",
+   "candidate": "Ridge",
+   "feature": "total sulfur dioxide",
+   "validation_mae": 0.5193847341111762,
+   "mae_increase_when_shuffled": 0.026167298470120653,
+   "spearman_with_quality_2_1": -0.1967350754412208,
+   "ridge_standardized_coef": -0.1384221523134926,
+   "rank_within_model": 3
+  },
+  {
+   "wine": "red",
+   "candidate": "Ridge",
+   "feature": "sulphates",
+   "validation_mae": 0.5193847341111762,
+   "mae_increase_when_shuffled": 0.024368108379730812,
+   "spearman_with_quality_2_1": 0.37706019910212196,
+   "ridge_standardized_coef": 0.15533758880899956,
+   "rank_within_model": 4
+  },
+  {
+   "wine": "red",
+   "candidate": "Ridge",
+   "feature": "chlorides",
+   "validation_mae": 0.5193847341111762,
+   "mae_increase_when_shuffled": 0.014166243225286212,
+   "spearman_with_quality_2_1": -0.1899223356173072,
+   "ridge_standardized_coef": -0.09025106892128275,
+   "rank_within_model": 5
+  },
+  {
+   "wine": "red",
+   "candidate": "Ridge",
+   "feature": "density",
+   "validation_mae": 0.5193847341111762,
+   "mae_increase_when_shuffled": 0.007415552350280824,
+   "spearman_with_quality_2_1": -0.17707406597199962,
+   "ridge_standardized_coef": -0.04268841915828904,
+   "rank_within_model": 6
+  },
+  {
+   "wine": "red",
+   "candidate": "Ridge",
+   "feature": "fixed acidity",
+   "validation_mae": 0.5193847341111762,
+   "mae_increase_when_shuffled": 0.0036040094092101627,
+   "spearman_with_quality_2_1": 0.11408367358880324,
+   "ridge_standardized_coef": 0.056953539797140414,
+   "rank_within_model": 7
+  },
+  {
+   "wine": "red",
+   "candidate": "Ridge",
+   "feature": "free sulfur dioxide",
+   "validation_mae": 0.5193847341111762,
+   "mae_increase_when_shuffled": 0.002055088581312864,
+   "spearman_with_quality_2_1": -0.0569006455015393,
+   "ridge_standardized_coef": 0.04657965474793041,
+   "rank_within_model": 8
+  },
+  {
+   "wine": "red",
+   "candidate": "Ridge",
+   "feature": "pH",
+   "validation_mae": 0.5193847341111762,
+   "mae_increase_when_shuffled": 0.001068347700805905,
+   "spearman_with_quality_2_1": -0.043671934788928383,
+   "ridge_standardized_coef": -0.047299107337511054,
+   "rank_within_model": 9
+  },
+  {
+   "wine": "red",
+   "candidate": "Ridge",
+   "feature": "citric acid",
+   "validation_mae": 0.5193847341111762,
+   "mae_increase_when_shuffled": -0.00026526622865111205,
+   "spearman_with_quality_2_1": 0.2134809144221363,
+   "ridge_standardized_coef": 0.014772841785713335,
+   "rank_within_model": 10
+  },
+  {
+   "wine": "red",
+   "candidate": "Ridge",
+   "feature": "residual sugar",
+   "validation_mae": 0.5193847341111762,
+   "mae_increase_when_shuffled": -0.0030500705816268623,
+   "spearman_with_quality_2_1": 0.032048167529057335,
+   "ridge_standardized_coef": 0.04549878625985592,
+   "rank_within_model": 11
+  },
+  {
+   "wine": "red",
+   "candidate": "随机森林",
+   "feature": "alcohol",
+   "validation_mae": 0.5051176403035529,
+   "mae_increase_when_shuffled": 0.11608833379167967,
+   "spearman_with_quality_2_1": 0.4785316874702435,
+   "ridge_standardized_coef": 0.28941367716711497,
+   "rank_within_model": 1
+  },
+  {
+   "wine": "red",
+   "candidate": "随机森林",
+   "feature": "sulphates",
+   "validation_mae": 0.5051176403035529,
+   "mae_increase_when_shuffled": 0.051324559202582255,
+   "spearman_with_quality_2_1": 0.37706019910212196,
+   "ridge_standardized_coef": 0.15533758880899956,
+   "rank_within_model": 2
+  },
+  {
+   "wine": "red",
+   "candidate": "随机森林",
+   "feature": "volatile acidity",
+   "validation_mae": 0.5051176403035529,
+   "mae_increase_when_shuffled": 0.02636846893715965,
+   "spearman_with_quality_2_1": -0.3806465104253755,
+   "ridge_standardized_coef": -0.14358546988335633,
+   "rank_within_model": 3
+  },
+  {
+   "wine": "red",
+   "candidate": "随机森林",
+   "feature": "total sulfur dioxide",
+   "validation_mae": 0.5051176403035529,
+   "mae_increase_when_shuffled": 0.02024775024701488,
+   "spearman_with_quality_2_1": -0.1967350754412208,
+   "ridge_standardized_coef": -0.1384221523134926,
+   "rank_within_model": 4
+  },
+  {
+   "wine": "red",
+   "candidate": "随机森林",
+   "feature": "density",
+   "validation_mae": 0.5051176403035529,
+   "mae_increase_when_shuffled": 0.008532138135482365,
+   "spearman_with_quality_2_1": -0.17707406597199962,
+   "ridge_standardized_coef": -0.04268841915828904,
+   "rank_within_model": 5
+  },
+  {
+   "wine": "red",
+   "candidate": "随机森林",
+   "feature": "free sulfur dioxide",
+   "validation_mae": 0.5051176403035529,
+   "mae_increase_when_shuffled": 0.006854213455765363,
+   "spearman_with_quality_2_1": -0.0569006455015393,
+   "ridge_standardized_coef": 0.04657965474793041,
+   "rank_within_model": 6
+  },
+  {
+   "wine": "red",
+   "candidate": "随机森林",
+   "feature": "chlorides",
+   "validation_mae": 0.5051176403035529,
+   "mae_increase_when_shuffled": 0.0034153230124147615,
+   "spearman_with_quality_2_1": -0.1899223356173072,
+   "ridge_standardized_coef": -0.09025106892128275,
+   "rank_within_model": 7
+  },
+  {
+   "wine": "red",
+   "candidate": "随机森林",
+   "feature": "fixed acidity",
+   "validation_mae": 0.5051176403035529,
+   "mae_increase_when_shuffled": 0.003200421913803142,
+   "spearman_with_quality_2_1": 0.11408367358880324,
+   "ridge_standardized_coef": 0.056953539797140414,
+   "rank_within_model": 8
+  },
+  {
+   "wine": "red",
+   "candidate": "随机森林",
+   "feature": "pH",
+   "validation_mae": 0.5051176403035529,
+   "mae_increase_when_shuffled": 0.0030643490734184762,
+   "spearman_with_quality_2_1": -0.043671934788928383,
+   "ridge_standardized_coef": -0.047299107337511054,
+   "rank_within_model": 9
+  },
+  {
+   "wine": "red",
+   "candidate": "随机森林",
+   "feature": "residual sugar",
+   "validation_mae": 0.5051176403035529,
+   "mae_increase_when_shuffled": 0.0011630198605943553,
+   "spearman_with_quality_2_1": 0.032048167529057335,
+   "ridge_standardized_coef": 0.04549878625985592,
+   "rank_within_model": 10
+  },
+  {
+   "wine": "red",
+   "candidate": "随机森林",
+   "feature": "citric acid",
+   "validation_mae": 0.5051176403035529,
+   "mae_increase_when_shuffled": 0.0008344222191793871,
+   "spearman_with_quality_2_1": 0.2134809144221363,
+   "ridge_standardized_coef": 0.014772841785713335,
+   "rank_within_model": 11
+  },
+  {
+   "wine": "white",
+   "candidate": "Ridge",
+   "feature": "density",
+   "validation_mae": 0.5813621222774177,
+   "mae_increase_when_shuffled": 0.15141126182878772,
+   "spearman_with_quality_2_1": -0.34835102264412215,
+   "ridge_standardized_coef": -0.3695769694179737,
+   "rank_within_model": 1
+  },
+  {
+   "wine": "white",
+   "candidate": "Ridge",
+   "feature": "residual sugar",
+   "validation_mae": 0.5813621222774177,
+   "mae_increase_when_shuffled": 0.1372451427838372,
+   "spearman_with_quality_2_1": -0.08206978991126886,
+   "ridge_standardized_coef": 0.3707275102743858,
+   "rank_within_model": 2
+  },
+  {
+   "wine": "white",
+   "candidate": "Ridge",
+   "feature": "alcohol",
+   "validation_mae": 0.5813621222774177,
+   "mae_increase_when_shuffled": 0.09187142168633898,
+   "spearman_with_quality_2_1": 0.440369181624683,
+   "ridge_standardized_coef": 0.2826327686289188,
+   "rank_within_model": 3
+  },
+  {
+   "wine": "white",
+   "candidate": "Ridge",
+   "feature": "volatile acidity",
+   "validation_mae": 0.5813621222774177,
+   "mae_increase_when_shuffled": 0.041859292243784256,
+   "spearman_with_quality_2_1": -0.1965616829526432,
+   "ridge_standardized_coef": -0.17838008225110344,
+   "rank_within_model": 4
+  },
+  {
+   "wine": "white",
+   "candidate": "Ridge",
+   "feature": "pH",
+   "validation_mae": 0.5813621222774177,
+   "mae_increase_when_shuffled": 0.009892787285335325,
+   "spearman_with_quality_2_1": 0.10936207744663339,
+   "ridge_standardized_coef": 0.09579045670500727,
+   "rank_within_model": 5
+  },
+  {
+   "wine": "white",
+   "candidate": "Ridge",
+   "feature": "free sulfur dioxide",
+   "validation_mae": 0.5813621222774177,
+   "mae_increase_when_shuffled": 0.0061532811991000195,
+   "spearman_with_quality_2_1": 0.023713375736277593,
+   "ridge_standardized_coef": 0.054916232819366716,
+   "rank_within_model": 6
+  },
+  {
+   "wine": "white",
+   "candidate": "Ridge",
+   "feature": "sulphates",
+   "validation_mae": 0.5813621222774177,
+   "mae_increase_when_shuffled": 0.004133624760272808,
+   "spearman_with_quality_2_1": 0.03331896941807418,
+   "ridge_standardized_coef": 0.061887232836837745,
+   "rank_within_model": 7
+  },
+  {
+   "wine": "white",
+   "candidate": "Ridge",
+   "feature": "chlorides",
+   "validation_mae": 0.5813621222774177,
+   "mae_increase_when_shuffled": 0.0004149395976284498,
+   "spearman_with_quality_2_1": -0.31448847828244203,
+   "ridge_standardized_coef": -0.006920864793615398,
+   "rank_within_model": 8
+  },
+  {
+   "wine": "white",
+   "candidate": "Ridge",
+   "feature": "citric acid",
+   "validation_mae": 0.5813621222774177,
+   "mae_increase_when_shuffled": -0.00010018168843606846,
+   "spearman_with_quality_2_1": 0.018332725649382695,
+   "ridge_standardized_coef": 0.012252219823399746,
+   "rank_within_model": 9
+  },
+  {
+   "wine": "white",
+   "candidate": "Ridge",
+   "feature": "fixed acidity",
+   "validation_mae": 0.5813621222774177,
+   "mae_increase_when_shuffled": -0.0003286104671389678,
+   "spearman_with_quality_2_1": -0.08448544853281695,
+   "ridge_standardized_coef": 0.028226494815240567,
+   "rank_within_model": 10
+  },
+  {
+   "wine": "white",
+   "candidate": "Ridge",
+   "feature": "total sulfur dioxide",
+   "validation_mae": 0.5813621222774177,
+   "mae_increase_when_shuffled": -0.0007576098367429562,
+   "spearman_with_quality_2_1": -0.19668028952372787,
+   "ridge_standardized_coef": -0.023967332993505085,
+   "rank_within_model": 11
+  },
+  {
+   "wine": "white",
+   "candidate": "随机森林",
+   "feature": "alcohol",
+   "validation_mae": 0.5473766949168377,
+   "mae_increase_when_shuffled": 0.18717054445552933,
+   "spearman_with_quality_2_1": 0.440369181624683,
+   "ridge_standardized_coef": 0.2826327686289188,
+   "rank_within_model": 1
+  },
+  {
+   "wine": "white",
+   "candidate": "随机森林",
+   "feature": "volatile acidity",
+   "validation_mae": 0.5473766949168377,
+   "mae_increase_when_shuffled": 0.05799466633782868,
+   "spearman_with_quality_2_1": -0.1965616829526432,
+   "ridge_standardized_coef": -0.17838008225110344,
+   "rank_within_model": 2
+  },
+  {
+   "wine": "white",
+   "candidate": "随机森林",
+   "feature": "free sulfur dioxide",
+   "validation_mae": 0.5473766949168377,
+   "mae_increase_when_shuffled": 0.04367207149179969,
+   "spearman_with_quality_2_1": 0.023713375736277593,
+   "ridge_standardized_coef": 0.054916232819366716,
+   "rank_within_model": 3
+  },
+  {
+   "wine": "white",
+   "candidate": "随机森林",
+   "feature": "residual sugar",
+   "validation_mae": 0.5473766949168377,
+   "mae_increase_when_shuffled": 0.011869131837850927,
+   "spearman_with_quality_2_1": -0.08206978991126886,
+   "ridge_standardized_coef": 0.3707275102743858,
+   "rank_within_model": 4
+  },
+  {
+   "wine": "white",
+   "candidate": "随机森林",
+   "feature": "pH",
+   "validation_mae": 0.5473766949168377,
+   "mae_increase_when_shuffled": 0.010566700582765532,
+   "spearman_with_quality_2_1": 0.10936207744663339,
+   "ridge_standardized_coef": 0.09579045670500727,
+   "rank_within_model": 5
+  },
+  {
+   "wine": "white",
+   "candidate": "随机森林",
+   "feature": "citric acid",
+   "validation_mae": 0.5473766949168377,
+   "mae_increase_when_shuffled": 0.008171086685348366,
+   "spearman_with_quality_2_1": 0.018332725649382695,
+   "ridge_standardized_coef": 0.012252219823399746,
+   "rank_within_model": 6
+  },
+  {
+   "wine": "white",
+   "candidate": "随机森林",
+   "feature": "chlorides",
+   "validation_mae": 0.5473766949168377,
+   "mae_increase_when_shuffled": 0.00800116212257444,
+   "spearman_with_quality_2_1": -0.31448847828244203,
+   "ridge_standardized_coef": -0.006920864793615398,
+   "rank_within_model": 7
+  },
+  {
+   "wine": "white",
+   "candidate": "随机森林",
+   "feature": "density",
+   "validation_mae": 0.5473766949168377,
+   "mae_increase_when_shuffled": 0.0073252681580051274,
+   "spearman_with_quality_2_1": -0.34835102264412215,
+   "ridge_standardized_coef": -0.3695769694179737,
+   "rank_within_model": 8
+  },
+  {
+   "wine": "white",
+   "candidate": "随机森林",
+   "feature": "total sulfur dioxide",
+   "validation_mae": 0.5473766949168377,
+   "mae_increase_when_shuffled": 0.006720907509041302,
+   "spearman_with_quality_2_1": -0.19668028952372787,
+   "ridge_standardized_coef": -0.023967332993505085,
+   "rank_within_model": 9
+  },
+  {
+   "wine": "white",
+   "candidate": "随机森林",
+   "feature": "sulphates",
+   "validation_mae": 0.5473766949168377,
+   "mae_increase_when_shuffled": 0.00656605681217155,
+   "spearman_with_quality_2_1": 0.03331896941807418,
+   "ridge_standardized_coef": 0.061887232836837745,
+   "rank_within_model": 10
+  },
+  {
+   "wine": "white",
+   "candidate": "随机森林",
+   "feature": "fixed acidity",
+   "validation_mae": 0.5473766949168377,
+   "mae_increase_when_shuffled": 0.005699081719167665,
+   "spearman_with_quality_2_1": -0.08448544853281695,
+   "ridge_standardized_coef": 0.028226494815240567,
+   "rank_within_model": 11
+  }
+ ]
+}

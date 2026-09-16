@@ -1,0 +1,51 @@
+step: "3.1"
+revision: r01
+headline: 划分已固定、基线已建立：红酒验证集 MAE 0.6435、白酒 0.6368（基线 = 训练集 quality 中位数 6.0）；候选模型要在同一验证集上比它更准才算有收益
+can_continue: true
+core_numbers:
+  - label: 红酒基线验证 MAE
+    after: 0.6435
+    scope: 红酒验证集 331 行；预测值固定为训练集中位数 6.0；单位为评分分数
+    source: "outputs/baseline_validation.json#/files/red/validation_mae"
+  - label: 白酒基线验证 MAE
+    after: 0.6368
+    scope: 白酒验证集 983 行；预测值固定为 6.0
+    source: "outputs/baseline_validation.json#/files/white/validation_mae"
+  - label: 红酒验证集行数
+    after: 331
+    scope: 训练 950、验证 331、最终评估 318，合计 1,599
+    source: "outputs/split_summary.json#/files/red/totals/rows/validation"
+  - label: 白酒验证集行数
+    after: 983
+    scope: 训练 2,921、验证 983、最终评估 994，合计 4,898
+    source: "outputs/split_summary.json#/files/white/totals/rows/validation"
+operation: 把任务定成研究性回归（预测时 11 个理化指标已测得、专家评分未知）；同类酒里 11 个指标完全相同的行归成一个特征组合，按 quality 分层、用固定种子排序，每层前 20% 组合给最终评估、再 20% 给验证、其余给训练；只用训练集中位数在验证集上算 MAE / RMSE。
+exceptions:
+  - 最终评估集不是完全未接触：2.1 的全量探索看过这些行；它只是还没被任何模型计分
+  - 按特征组合分组只能防止完全相同的输入跨集合，防不了其他隐藏依赖
+artifacts:
+  - {path: outputs/split_assignments.csv, purpose: 每条原始行属于训练 / 验证 / 最终评估哪一份，后面所有模型都沿用, kind: table}
+  - {path: outputs/split_summary.json, purpose: 划分规则、种子、各酒类各分值的组合数与行数、跨集合检查, kind: table}
+  - {path: outputs/baseline_validation.json, purpose: 训练集中位数与验证集 MAE / RMSE，候选模型的比较起点, kind: table}
+  - {path: report.md, purpose: 给用户看的报告, kind: report}
+  - {path: acceptance.md, purpose: 主 agent 的验收结论, kind: report}
+why: 划分和评价口径一旦定死，后面每个模型试验才有公平的比较对象；基线不用理化指标，回答的是「理化指标到底有没有带来收益」。
+invariants:
+  - 每条原始行恰好出现在划分表一次；相同特征组合零跨集合
+  - 最终评估集没有任何预测、MAE 或逐行误差
+evidence:
+  - {path: checks/verification.json, purpose: 独立复核 26,081/26,081 项通过：从原始 CSV 重建全部 6,497 行的划分并重算基线, kind: table}
+can_say:
+  - 划分可以由固定规则从原始 CSV 独立重现
+  - 基线 MAE 大约 0.64 分：不看任何指标、一律猜 6 分，平均差 0.64 分
+cannot_say:
+  - 不能说 11 个理化指标有预测收益，基线还没被任何候选比过
+  - 不能说验证集代表未来的酒
+next: 7.1 用同一验证集比较 Ridge 和随机森林两个预定候选。
+examples:
+  - title: 红酒第 1 条记录进了哪一份
+    input: 11 个指标规范化后为 7.4|0.7|0|1.9|0.076|11|34|0.9978|3.51|0.56|9.4
+    rule: 在红酒 quality=5 的 577 个特征组合里按固定排序列第 145；前 116 个给最终评估，第 117～232 个给验证
+    output: 验证集；基线预测 6.0，真值 5，绝对差 1.0
+    artifact: outputs/split_assignments.csv
+    real: true

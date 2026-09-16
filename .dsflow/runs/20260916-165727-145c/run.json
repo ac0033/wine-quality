@@ -1,0 +1,79 @@
+{
+ "run_id": "20260916-165727-145c",
+ "step": "3.1",
+ "revision": null,
+ "command": "python -X utf8 -m dsflow.tracking.notebook steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/nb_3.1.ipynb",
+ "argv": [
+  "python",
+  "-X",
+  "utf8",
+  "-m",
+  "dsflow.tracking.notebook",
+  "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/nb_3.1.ipynb"
+ ],
+ "cwd": ".",
+ "source": "cli",
+ "rerun_of": null,
+ "pid": 6708,
+ "started_at": "2026-09-16T16:57:27",
+ "ended_at": "2026-09-16T16:57:28",
+ "duration_s": 1.37,
+ "status": "succeeded",
+ "exit_code": 0,
+ "error": null,
+ "git_commit": "010c2f9342ffe1c671c67dfd9b3bdb66a1eba00b",
+ "git_dirty": false,
+ "env": {
+  "python": "3.14.5",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "executable": ".venv\\Scripts\\python.exe",
+  "uv_lock": "95b678c1adfa",
+  "pkg:pandas": "3.0.5",
+  "pkg:numpy": "2.5.3",
+  "pkg:scikit-learn": "1.9.1",
+  "pkg:duckdb": "1.5.5",
+  "pkg:pyarrow": "25.0.1"
+ },
+ "params": {},
+ "metrics": {
+  "红酒_基线_MAE_验证": 0.6435045317220544,
+  "红酒_基线_RMSE_验证": 0.8777201998613869,
+  "白酒_基线_MAE_验证": 0.6368260427263479,
+  "白酒_基线_RMSE_验证": 0.9032551059187324
+ },
+ "fold_metrics": {},
+ "hypothesis": "从划分表和原始 CSV 重算三份的行数、跨划分检查和训练集中位数基线，与 3.1 当时的产物一致",
+ "conclusion": "三份行数、组合数、跨划分检查和基线 MAE / RMSE 与 3.1 当时的产物一致",
+ "validity": "有效",
+ "inputs": [
+  {
+   "name": "红酒",
+   "version": "4a402cf041b0",
+   "path": "data/winequality-red.csv",
+   "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e",
+   "rows": null,
+   "columns": null
+  },
+  {
+   "name": "白酒",
+   "version": "76c3f809815c",
+   "path": "data/winequality-white.csv",
+   "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836",
+   "rows": null,
+   "columns": null
+  },
+  {
+   "name": "划分表",
+   "version": "42e939976f22",
+   "path": "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/split_assignments.csv",
+   "sha256": "42e939976f221cf5ea3b0ebaa4469633cd2d6e2360199f261efbcab5331e596c",
+   "rows": null,
+   "columns": null
+  }
+ ],
+ "outputs": [],
+ "artifacts": [],
+ "figures": [],
+ "deltas": [],
+ "models": []
+}

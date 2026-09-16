@@ -1,0 +1,35 @@
+{
+ "name": "红酒",
+ "description": "红酒原始记录，一行 = 一份红酒样本的 11 个理化指标 + quality；分号分隔",
+ "versions": [
+  {
+   "name": "红酒",
+   "version": "4a402cf041b0",
+   "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e",
+   "path": "data/winequality-red.csv",
+   "format": "csv",
+   "size_bytes": 84199,
+   "rows": null,
+   "columns": null,
+   "stage": "raw",
+   "produced_by": null,
+   "parents": [],
+   "replaces": [],
+   "registered_at": "2026-09-16T16:34:31"
+  }
+ ],
+ "used_by": [
+  {
+   "step": "1.1",
+   "role": "核对"
+  },
+  {
+   "step": "2.1",
+   "role": "核对"
+  },
+  {
+   "step": "3.1",
+   "role": "读取"
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+step: "10.1"
+revision: r01
+headline: 四个候选里三个最依赖 alcohol；白酒 Ridge 最依赖 density 和 residual sugar，因为它们和 alcohol 高度相关、信息互相分担。解释的是模型行为，不是酒好坏的原因
+can_continue: true
+core_numbers:
+  - label: 红酒随机森林打乱 alcohol 后 MAE 增加
+    after: 0.1161
+    scope: 红酒验证集 331 行，打乱 20 次取平均；原 MAE 0.5051
+    source: "outputs/importance.csv#sql:SELECT mae_increase_when_shuffled FROM data WHERE wine = 'red' AND candidate = '随机森林' AND feature = 'alcohol'"
+  - label: 白酒随机森林打乱 alcohol 后 MAE 增加
+    after: 0.1872
+    scope: 白酒验证集 983 行；原 MAE 0.5474
+    source: "outputs/importance.csv#sql:SELECT mae_increase_when_shuffled FROM data WHERE wine = 'white' AND candidate = '随机森林' AND feature = 'alcohol'"
+  - label: 白酒 Ridge 打乱 density 后 MAE 增加
+    after: 0.1514
+    scope: 白酒验证集 983 行；density 与 alcohol 的 Spearman 为 -0.8219（2.1）
+    source: "outputs/importance.csv#sql:SELECT mae_increase_when_shuffled FROM data WHERE wine = 'white' AND candidate = 'Ridge' AND feature = 'density'"
+operation: 在验证行上把一个理化指标的列随机打乱 20 次、其余不动，重新预测看 MAE 变差多少；11 个指标各算一遍；再读出 Ridge 的标准化系数，和 2.1 的 Spearman 并排。
+exceptions:
+  - 白酒 Ridge 的 residual sugar 排第 2，但 2.1 里它和 quality 的 Spearman 只有 -0.082：重要性来自和 density、alcohol 搭配，不是独立贡献
+  - 白酒随机森林的 free sulfur dioxide 排第 3，2.1 的 Spearman 只有 +0.024，同理
+artifacts:
+  - {path: outputs/importance.csv, purpose: 每类酒每候选每指标的置换重要性、Ridge 标准化系数、2.1 的 Spearman, kind: table}
+  - {path: outputs/importance.json, purpose: 同上，外加前三名、需要留意的指标, kind: table}
+  - {path: report.md, purpose: 给用户看的报告, kind: report}
+  - {path: acceptance.md, purpose: 验收报告, kind: report}
+why: 交付前要能用一句话说清模型在看什么；也要防止把「模型用了它」误读成「它决定酒的好坏」。
+invariants:
+  - 模型不重训；最终评估集没碰
+  - 输入指纹执行前后一致
+evidence:
+  - {path: checks/verification.json, purpose: 重新加载模型、同种子重算 44 个重要性与 Ridge 系数，全部一致, kind: table}
+can_say:
+  - 红酒模型主要看 alcohol、volatile acidity、sulphates，和 2.1 观察到的方向一致
+  - 白酒随机森林主要看 alcohol
+cannot_say:
+  - 不能说 alcohol 决定酒的好坏，或者提高 alcohol 会提高评分
+  - 不能把白酒 Ridge 的 density、residual sugar、alcohol 三者的排名当作各自独立的贡献
+next: 11.1 每类酒登记随机森林为候选模型，把这里的「主要靠 alcohol」写进交付清单的适用边界。
+examples:
+  - title: 打乱一列是怎么算的
+    input: 红酒验证集 331 行，随机森林原 MAE 0.5051
+    rule: 把 alcohol 这一列的值随机打乱、其余 10 列不动，重新预测算 MAE；重复 20 次取平均
+    output: 打乱后平均 MAE 比原来高 0.1161
+    artifact: outputs/importance.csv
+    real: true

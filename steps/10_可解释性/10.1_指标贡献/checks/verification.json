@@ -1,0 +1,128 @@
+{
+ "generated_at_utc": "2026-09-16T08:51:54.006018+00:00",
+ "passed": 24,
+ "total": 24,
+ "tolerance": 1e-10,
+ "checks": [
+  {
+   "name": "输入指纹当前一致：data/winequality-red.csv",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：data/winequality-white.csv",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/02_EDA/2.1_理化指标与quality的探索分析/outputs/eda.json",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/split_assignments.csv",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_Ridge.joblib",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_随机森林.joblib",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_Ridge.joblib",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_随机森林.joblib",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red: 只用了验证行",
+   "ok": true,
+   "detail": "331 行"
+  },
+  {
+   "name": "red/Ridge: 验证 MAE 一致",
+   "ok": true,
+   "detail": "0.519385"
+  },
+  {
+   "name": "red/Ridge: 11 个指标的置换重要性逐个一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/Ridge: 前三名一致",
+   "ok": true,
+   "detail": "alcohol、volatile acidity、total sulfur dioxide"
+  },
+  {
+   "name": "red: Ridge 标准化系数与模型文件一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/随机森林: 验证 MAE 一致",
+   "ok": true,
+   "detail": "0.505118"
+  },
+  {
+   "name": "red/随机森林: 11 个指标的置换重要性逐个一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/随机森林: 前三名一致",
+   "ok": true,
+   "detail": "alcohol、sulphates、volatile acidity"
+  },
+  {
+   "name": "white: 只用了验证行",
+   "ok": true,
+   "detail": "983 行"
+  },
+  {
+   "name": "white/Ridge: 验证 MAE 一致",
+   "ok": true,
+   "detail": "0.581362"
+  },
+  {
+   "name": "white/Ridge: 11 个指标的置换重要性逐个一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/Ridge: 前三名一致",
+   "ok": true,
+   "detail": "density、residual sugar、alcohol"
+  },
+  {
+   "name": "white: Ridge 标准化系数与模型文件一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/随机森林: 验证 MAE 一致",
+   "ok": true,
+   "detail": "0.547377"
+  },
+  {
+   "name": "white/随机森林: 11 个指标的置换重要性逐个一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/随机森林: 前三名一致",
+   "ok": true,
+   "detail": "alcohol、volatile acidity、free sulfur dioxide"
+  }
+ ]
+}

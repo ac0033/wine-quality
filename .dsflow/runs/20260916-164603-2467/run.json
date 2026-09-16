@@ -1,0 +1,130 @@
+{
+ "run_id": "20260916-164603-2467",
+ "step": "9.1",
+ "revision": null,
+ "command": "python -X utf8 -m dsflow.tracking.notebook steps/09_评估与诊断/9.1_最终评估/nb_9.1.ipynb",
+ "argv": [
+  "python",
+  "-X",
+  "utf8",
+  "-m",
+  "dsflow.tracking.notebook",
+  "steps/09_评估与诊断/9.1_最终评估/nb_9.1.ipynb"
+ ],
+ "cwd": ".",
+ "source": "cli",
+ "rerun_of": null,
+ "pid": 16028,
+ "started_at": "2026-09-16T16:46:03",
+ "ended_at": "2026-09-16T16:46:12",
+ "duration_s": 9.08,
+ "status": "succeeded",
+ "exit_code": 0,
+ "error": null,
+ "git_commit": "010c2f9342ffe1c671c67dfd9b3bdb66a1eba00b",
+ "git_dirty": false,
+ "env": {
+  "python": "3.14.5",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "executable": ".venv\\Scripts\\python.exe",
+  "uv_lock": "95b678c1adfa",
+  "pkg:pandas": "3.0.5",
+  "pkg:numpy": "2.5.3",
+  "pkg:scikit-learn": "1.9.1",
+  "pkg:duckdb": "1.5.5",
+  "pkg:pyarrow": "25.0.1"
+ },
+ "params": {
+  "模型": "7.1 的四个候选原样加载，不重训",
+  "评估次数": "每个候选一次",
+  "重抽样": {
+   "次数": 2000,
+   "种子": 20260914,
+   "生成器": "PCG64"
+  },
+  "模型文件哈希": {
+   "red_Ridge": "ba27a8ea2677",
+   "red_随机森林": "8314f626bc19",
+   "white_Ridge": "551b9437c2d6",
+   "white_随机森林": "32bfb8ca1cde"
+  }
+ },
+ "metrics": {
+  "红酒_Ridge_MAE_最终评估": 0.5089800694771089,
+  "红酒_Ridge_RMSE_最终评估": 0.6547724633956599,
+  "红酒_随机森林_MAE_最终评估": 0.4963438798140795,
+  "红酒_随机森林_RMSE_最终评估": 0.6549180278874187,
+  "红酒_基线_MAE_最终评估": 0.6855345911949685,
+  "红酒_基线_RMSE_最终评估": 0.9042179288717305,
+  "白酒_Ridge_MAE_最终评估": 0.6193830014264483,
+  "白酒_Ridge_RMSE_最终评估": 0.789924362792527,
+  "白酒_随机森林_MAE_最终评估": 0.575229986626415,
+  "白酒_随机森林_RMSE_最终评估": 0.7277877938290098,
+  "白酒_基线_MAE_最终评估": 0.6468812877263581,
+  "白酒_基线_RMSE_最终评估": 0.9121359283079806,
+  "红酒_Ridge_MAE差_最终评估_区间上界": -0.1007890609156439,
+  "红酒_随机森林_MAE差_最终评估_区间上界": -0.11452692279714709,
+  "白酒_Ridge_MAE差_最终评估_区间上界": 0.010720017542224639,
+  "白酒_随机森林_MAE差_最终评估_区间上界": -0.03132177267739763
+ },
+ "fold_metrics": {},
+ "hypothesis": "7.1 在验证集上筛出的四个候选，在封存的最终评估集上仍比基线的 MAE 低",
+ "conclusion": "红酒 Ridge 最终评估 MAE 0.5090（基线 0.6855，验证集 0.5194）；红酒 随机森林 最终评估 MAE 0.4963（基线 0.6855，验证集 0.5051）；白酒 Ridge 最终评估 MAE 0.6194（基线 0.6469，验证集 0.5814）；白酒 随机森林 最终评估 MAE 0.5752（基线 0.6469，验证集 0.5474）",
+ "validity": "有效",
+ "inputs": [
+  {
+   "name": "红酒",
+   "version": "4a402cf041b0",
+   "path": "data/winequality-red.csv",
+   "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e",
+   "rows": null,
+   "columns": null
+  },
+  {
+   "name": "白酒",
+   "version": "76c3f809815c",
+   "path": "data/winequality-white.csv",
+   "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836",
+   "rows": null,
+   "columns": null
+  },
+  {
+   "name": "划分表",
+   "version": "42e939976f22",
+   "path": "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/split_assignments.csv",
+   "sha256": "42e939976f221cf5ea3b0ebaa4469633cd2d6e2360199f261efbcab5331e596c",
+   "rows": null,
+   "columns": null
+  }
+ ],
+ "outputs": [],
+ "artifacts": [
+  {
+   "path": "steps/09_评估与诊断/9.1_最终评估/outputs/final_evaluation.json",
+   "purpose": "每类酒每候选在最终评估集上的 MAE / RMSE、相对基线的差、区间、按分值误差，并列 7.1 的验证集 MAE",
+   "kind": "table",
+   "sha256": "6d434f81c7d16a467cb66c595d718244209ccb101cd964fd19dc420782062ad4"
+  },
+  {
+   "path": "steps/09_评估与诊断/9.1_最终评估/outputs/final_predictions.csv",
+   "purpose": "每个候选对每条最终评估行的唯一一次预测",
+   "kind": "table",
+   "sha256": "a20d4ff95012b7c082cf8ef26c4dfa3c1b95703fbf263b8fd04c4feba14ef453"
+  },
+  {
+   "path": "steps/09_评估与诊断/9.1_最终评估/outputs/bootstrap_draws.json",
+   "purpose": "最终评估集重抽样的有序组合 ID 与全部抽样索引",
+   "kind": "other",
+   "sha256": "6f0dd6e953c87a317d4e032d3c16b289a7e2dfd8a3aae8a95cfc932f463a18fd"
+  },
+  {
+   "path": "steps/09_评估与诊断/9.1_最终评估/outputs/bootstrap_mae_differences.csv",
+   "purpose": "最终评估集重抽样每次每候选的 MAE 配对差",
+   "kind": "table",
+   "sha256": "018493a31661aed8f8fe6313f61f7d4dee212100a7a8e3219d44d4a571445989"
+  }
+ ],
+ "figures": [],
+ "deltas": [],
+ "models": []
+}

@@ -1,0 +1,42 @@
+红酒 1599 行、白酒 4898 行，全部原始行，不删同值行
+酒类                        白酒      红酒
+指标                                  
+fixed acidity        -0.0845  0.1141
+volatile acidity     -0.1966 -0.3806
+citric acid           0.0183  0.2135
+residual sugar       -0.0821  0.0320
+chlorides            -0.3145 -0.1899
+free sulfur dioxide   0.0237 -0.0569
+total sulfur dioxide -0.1967 -0.1967
+density              -0.3484 -0.1771
+pH                    0.1094 -0.0437
+sulphates             0.0333  0.3771
+alcohol               0.4404  0.4785
+22 个 Spearman 系数与 2.1 当时的产物一致（容差 1e-9）。
+红酒：各 quality 分组的 alcohol 中位数
+          行数  alcohol中位数
+quality                 
+3         10       9.925
+4         53      10.000
+5        681       9.700
+6        638      10.500
+7        199      11.500
+8         18      12.150
+白酒：各 quality 分组的 alcohol 中位数
+           行数  alcohol中位数
+quality                  
+3          20       10.45
+4         163       10.10
+5        1457        9.50
+6        2198       10.50
+7         880       11.40
+8         175       12.00
+9           5       12.50
+酒类               指标  全部行  只留首次的行  Spearman 全部行  Spearman 只留首次       差
+红酒          alcohol 1599    1359        0.4785         0.4880  0.0094
+红酒        chlorides 1599    1359       -0.1899        -0.2044 -0.0144
+红酒 volatile acidity 1599    1359       -0.3806        -0.3874 -0.0068
+白酒          alcohol 4898    3961        0.4404         0.4757  0.0353
+白酒        chlorides 4898    3961       -0.3145        -0.3331 -0.0186
+白酒 volatile acidity 4898    3961       -0.1966        -0.1854  0.0112
+notebook 执行完成：4 个代码单元格全部成功，已写回 steps\02_EDA\2.1_理化指标与quality的探索分析\nb_2.1.ipynb

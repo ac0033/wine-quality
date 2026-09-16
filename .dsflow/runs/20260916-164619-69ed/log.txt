@@ -1,0 +1,25 @@
+验证行：红酒 331、白酒 983；最终评估行不碰
+ wine candidate  rank_within_model              feature  mae_increase_when_shuffled  spearman_with_quality_2_1  ridge_standardized_coef
+  red     Ridge                  1              alcohol                      0.1032                     0.4785                   0.2894
+  red     Ridge                  2     volatile acidity                      0.0406                    -0.3806                  -0.1436
+  red     Ridge                  3 total sulfur dioxide                      0.0262                    -0.1967                  -0.1384
+  red      随机森林                  1              alcohol                      0.1161                     0.4785                   0.2894
+  red      随机森林                  2            sulphates                      0.0513                     0.3771                   0.1553
+  red      随机森林                  3     volatile acidity                      0.0264                    -0.3806                  -0.1436
+white     Ridge                  1              density                      0.1514                    -0.3484                  -0.3696
+white     Ridge                  2       residual sugar                      0.1372                    -0.0821                   0.3707
+white     Ridge                  3              alcohol                      0.0919                     0.4404                   0.2826
+white      随机森林                  1              alcohol                      0.1872                     0.4404                   0.2826
+white      随机森林                  2     volatile acidity                      0.0580                    -0.1966                  -0.1784
+white      随机森林                  3  free sulfur dioxide                      0.0437                     0.0237                   0.0549
+每个模型最依赖的三个指标：
+  红酒_Ridge：alcohol、volatile acidity、total sulfur dioxide
+  红酒_随机森林：alcohol、sulphates、volatile acidity
+  白酒_Ridge：density、residual sugar、alcohol
+  白酒_随机森林：alcohol、volatile acidity、free sulfur dioxide
+需要留意：
+  - 白酒 Ridge：residual sugar 排第 2，但 2.1 里它和 quality 的 Spearman 只有 -0.082
+  - 白酒 随机森林：free sulfur dioxide 排第 3，但 2.1 里它和 quality 的 Spearman 只有 +0.024
+2.1 里 density 与 alcohol 的 Spearman： {'红酒': -0.4624, '白酒': -0.8219}
+红酒_Ridge 最依赖 alcohol、volatile acidity、total sulfur dioxide；红酒_随机森林 最依赖 alcohol、sulphates、volatile acidity；白酒_Ridge 最依赖 density、residual sugar、alcohol；白酒_随机森林 最依赖 alcohol、volatile acidity、free sulfur dioxide
+notebook 执行完成：4 个代码单元格全部成功，已写回 steps\10_可解释性\10.1_指标贡献\nb_10.1.ipynb

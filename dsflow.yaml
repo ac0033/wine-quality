@@ -1,0 +1,18 @@
+# DSFlow 项目配置。平台只读取本文件；步骤、状态、依赖都在 lifecycle/steps.json。
+name: 葡萄酒 quality 预测（Vinho Verde 红酒与白酒）
+question: 葡萄牙 Vinho Verde 红酒、白酒的 11 个理化指标，能否比「训练集 quality 中位数」这个简单基线更准地估计专家评分 quality？
+registry: lifecycle/steps.json
+vocabulary: vocabulary.json
+datasets:
+  - name: 红酒
+    path: data/winequality-red.csv
+    stage: raw
+    description: 红酒原始记录，一行 = 一份红酒样本的 11 个理化指标 + quality；分号分隔
+  - name: 白酒
+    path: data/winequality-white.csv
+    stage: raw
+    description: 白酒原始记录，一行 = 一份白酒样本的 11 个理化指标 + quality；分号分隔
+metric_goals:
+  MAE_验证: min
+  RMSE_验证: min
+  MAE_最终评估: min

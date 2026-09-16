@@ -1,0 +1,169 @@
+{
+ "run_id": "20260916-163824-7df6",
+ "step": "7.1",
+ "revision": null,
+ "command": "python -X utf8 -m dsflow.tracking.notebook steps/07_模型选择与训练/7.1_候选模型比较/nb_7.1.ipynb",
+ "argv": [
+  "python",
+  "-X",
+  "utf8",
+  "-m",
+  "dsflow.tracking.notebook",
+  "steps/07_模型选择与训练/7.1_候选模型比较/nb_7.1.ipynb"
+ ],
+ "cwd": ".",
+ "source": "cli",
+ "rerun_of": null,
+ "pid": 27856,
+ "started_at": "2026-09-16T16:38:24",
+ "ended_at": "2026-09-16T16:38:58",
+ "duration_s": 34.95,
+ "status": "succeeded",
+ "exit_code": 0,
+ "error": null,
+ "git_commit": "010c2f9342ffe1c671c67dfd9b3bdb66a1eba00b",
+ "git_dirty": false,
+ "env": {
+  "python": "3.14.5",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "executable": ".venv\\Scripts\\python.exe",
+  "uv_lock": "95b678c1adfa",
+  "pkg:pandas": "3.0.5",
+  "pkg:numpy": "2.5.3",
+  "pkg:scikit-learn": "1.9.1",
+  "pkg:duckdb": "1.5.5",
+  "pkg:pyarrow": "25.0.1"
+ },
+ "params": {
+  "候选": [
+   "Ridge",
+   "随机森林"
+  ],
+  "Ridge": {
+   "alpha": 1.0,
+   "fit_intercept": true
+  },
+  "随机森林": {
+   "n_estimators": 300,
+   "min_samples_leaf": 5,
+   "max_features": 1.0,
+   "random_state": 20260914,
+   "n_jobs": 1
+  },
+  "标准化": "只用训练行的均值与标准差（ddof=0），只给 Ridge",
+  "预测": "原始连续输出，不取整、不截断",
+  "scikit-learn": "1.9.1",
+  "numpy": "2.5.3",
+  "重抽样": {
+   "次数": 2000,
+   "种子": 20260914,
+   "生成器": "PCG64"
+  }
+ },
+ "metrics": {
+  "红酒_Ridge_MAE_验证": 0.5193847341111762,
+  "红酒_Ridge_RMSE_验证": 0.6713299247540274,
+  "红酒_随机森林_MAE_验证": 0.5051176403035529,
+  "红酒_随机森林_RMSE_验证": 0.6414837037582408,
+  "红酒_基线_MAE_验证": 0.6435045317220544,
+  "红酒_基线_RMSE_验证": 0.8777201998613869,
+  "白酒_Ridge_MAE_验证": 0.5813621222774177,
+  "白酒_Ridge_RMSE_验证": 0.7585808069668608,
+  "白酒_随机森林_MAE_验证": 0.5473766949168377,
+  "白酒_随机森林_RMSE_验证": 0.7026045719598887,
+  "白酒_基线_MAE_验证": 0.6368260427263479,
+  "白酒_基线_RMSE_验证": 0.9032551059187324,
+  "红酒_Ridge_MAE差_区间上界": -0.05421769485405625,
+  "红酒_Ridge_MAE差_区间下界": -0.1972749778804955,
+  "红酒_随机森林_MAE差_区间上界": -0.06633604914046914,
+  "红酒_随机森林_MAE差_区间下界": -0.21303015063695996,
+  "白酒_Ridge_MAE差_区间上界": -0.019115936960282836,
+  "白酒_Ridge_MAE差_区间下界": -0.09370570411378744,
+  "白酒_随机森林_MAE差_区间上界": -0.04580520749075897,
+  "白酒_随机森林_MAE差_区间下界": -0.13349238568196795
+ },
+ "fold_metrics": {},
+ "hypothesis": "用 11 个理化指标的 Ridge 或随机森林，验证集 MAE 低于训练集中位数基线，且重抽样区间上界小于 0",
+ "conclusion": "满足登记门槛的候选：红酒 Ridge、红酒 随机森林、白酒 Ridge、白酒 随机森林。红酒 Ridge 验证 MAE 0.5194 对基线 0.6435；红酒 随机森林 验证 MAE 0.5051 对基线 0.6435；白酒 Ridge 验证 MAE 0.5814 对基线 0.6368；白酒 随机森林 验证 MAE 0.5474 对基线 0.6368",
+ "validity": "有效",
+ "inputs": [
+  {
+   "name": "红酒",
+   "version": "4a402cf041b0",
+   "path": "data/winequality-red.csv",
+   "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e",
+   "rows": null,
+   "columns": null
+  },
+  {
+   "name": "白酒",
+   "version": "76c3f809815c",
+   "path": "data/winequality-white.csv",
+   "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836",
+   "rows": null,
+   "columns": null
+  },
+  {
+   "name": "划分表",
+   "version": "42e939976f22",
+   "path": "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/split_assignments.csv",
+   "sha256": "42e939976f221cf5ea3b0ebaa4469633cd2d6e2360199f261efbcab5331e596c",
+   "rows": null,
+   "columns": null
+  }
+ ],
+ "outputs": [],
+ "artifacts": [
+  {
+   "path": "steps/07_模型选择与训练/7.1_候选模型比较/outputs/model_comparison.json",
+   "purpose": "每类酒的基线、两个候选的 MAE / RMSE、相对基线的差、重抽样区间、按 quality 分值的误差、登记判定",
+   "kind": "table",
+   "sha256": "cc8ad476b29d03a5d603c3e90a8ab2d663c073922f64dfffadde7321cf5ea185"
+  },
+  {
+   "path": "steps/07_模型选择与训练/7.1_候选模型比较/outputs/validation_predictions.csv",
+   "purpose": "每个候选对每条验证行的连续预测、真值、基线预测与双方误差",
+   "kind": "table",
+   "sha256": "966ca5ad9646c941dcc95b5ae2d39223329fe6a39b8789e688f0d8db282e8fcf"
+  },
+  {
+   "path": "steps/07_模型选择与训练/7.1_候选模型比较/outputs/bootstrap_draws.json",
+   "purpose": "重抽样的有序组合 ID 与全部抽样索引，供独立重算区间",
+   "kind": "other",
+   "sha256": "7b3e3ecf83d23618bfde6c7e89a61335cc1e6981400ada002cb869ca7d4de7e3"
+  },
+  {
+   "path": "steps/07_模型选择与训练/7.1_候选模型比较/outputs/bootstrap_mae_differences.csv",
+   "purpose": "2,000 次重抽样里每次每候选的 MAE 配对差",
+   "kind": "table",
+   "sha256": "75019094146dc3b371a357ae6bd4754054213b9a5e4154ab81787757ffa19d2a"
+  },
+  {
+   "path": "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_Ridge.joblib",
+   "purpose": "红酒的 Ridge 候选模型文件，只用训练行拟合，供 9.1 只评一次",
+   "kind": "model",
+   "sha256": "ba27a8ea2677788b6c938ba82dd1953bb7f20bbc35e5c501581a7f06861ebd86"
+  },
+  {
+   "path": "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_随机森林.joblib",
+   "purpose": "红酒的 随机森林 候选模型文件，只用训练行拟合，供 9.1 只评一次",
+   "kind": "model",
+   "sha256": "8314f626bc1974b4e3100e44cba4650ab788a0ed6c3c758444458e1e4654a8cc"
+  },
+  {
+   "path": "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_Ridge.joblib",
+   "purpose": "白酒的 Ridge 候选模型文件，只用训练行拟合，供 9.1 只评一次",
+   "kind": "model",
+   "sha256": "551b9437c2d661e1aa7e28b5cc26492bf88425b66027d0d70c0f2c42ae2f8094"
+  },
+  {
+   "path": "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_随机森林.joblib",
+   "purpose": "白酒的 随机森林 候选模型文件，只用训练行拟合，供 9.1 只评一次",
+   "kind": "model",
+   "sha256": "32bfb8ca1cdebb606f0f97cdd21cf69074e795928528f9f98f9ba53125f47cff"
+  }
+ ],
+ "figures": [],
+ "deltas": [],
+ "models": []
+}

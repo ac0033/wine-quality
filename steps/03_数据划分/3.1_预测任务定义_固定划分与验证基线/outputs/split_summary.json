@@ -1,0 +1,352 @@
+{
+  "generated_at_utc": "2026-09-14T15:24:38.331226+00:00",
+  "inputs_before": {
+    "data\\winequality-red.csv": {
+      "path": "data\\winequality-red.csv",
+      "bytes": 84199,
+      "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e"
+    },
+    "data\\winequality-white.csv": {
+      "path": "data\\winequality-white.csv",
+      "bytes": 264426,
+      "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836"
+    },
+    "data\\winequality.names": {
+      "path": "data\\winequality.names",
+      "bytes": 3305,
+      "sha256": "15d215e73b39105952380fd487e4ce1bf5a6b83a425abb285c2ec55193d3ca92"
+    },
+    "steps\\01_data_understanding\\outputs\\data_profile.json": {
+      "path": "steps\\01_data_understanding\\outputs\\data_profile.json",
+      "bytes": 9049,
+      "sha256": "e4d8add790888d0fcc13317d2dcf6de2559ad6bef9a053b10a2844ee7178c0ed"
+    },
+    "steps\\01_data_understanding\\acceptance.md": {
+      "path": "steps\\01_data_understanding\\acceptance.md",
+      "bytes": 1785,
+      "sha256": "5e6409ba25f62aebb263b4e2f2a61aeca3016e408fea456888d76ebfaef76cca"
+    },
+    "steps\\02_exploration\\outputs\\eda.json": {
+      "path": "steps\\02_exploration\\outputs\\eda.json",
+      "bytes": 45927,
+      "sha256": "92e80fd663100ae509af57b4d9d0c411b02a362d40933059dddeec53f129e157"
+    },
+    "steps\\02_exploration\\acceptance.md": {
+      "path": "steps\\02_exploration\\acceptance.md",
+      "bytes": 2348,
+      "sha256": "96c6a1270a3a4bbce47b16add5c09a6e40802b22350180df787dac310f88b739"
+    }
+  },
+  "inputs_after": {
+    "data\\winequality-red.csv": {
+      "path": "data\\winequality-red.csv",
+      "bytes": 84199,
+      "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e"
+    },
+    "data\\winequality-white.csv": {
+      "path": "data\\winequality-white.csv",
+      "bytes": 264426,
+      "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836"
+    },
+    "data\\winequality.names": {
+      "path": "data\\winequality.names",
+      "bytes": 3305,
+      "sha256": "15d215e73b39105952380fd487e4ce1bf5a6b83a425abb285c2ec55193d3ca92"
+    },
+    "steps\\01_data_understanding\\outputs\\data_profile.json": {
+      "path": "steps\\01_data_understanding\\outputs\\data_profile.json",
+      "bytes": 9049,
+      "sha256": "e4d8add790888d0fcc13317d2dcf6de2559ad6bef9a053b10a2844ee7178c0ed"
+    },
+    "steps\\01_data_understanding\\acceptance.md": {
+      "path": "steps\\01_data_understanding\\acceptance.md",
+      "bytes": 1785,
+      "sha256": "5e6409ba25f62aebb263b4e2f2a61aeca3016e408fea456888d76ebfaef76cca"
+    },
+    "steps\\02_exploration\\outputs\\eda.json": {
+      "path": "steps\\02_exploration\\outputs\\eda.json",
+      "bytes": 45927,
+      "sha256": "92e80fd663100ae509af57b4d9d0c411b02a362d40933059dddeec53f129e157"
+    },
+    "steps\\02_exploration\\acceptance.md": {
+      "path": "steps\\02_exploration\\acceptance.md",
+      "bytes": 2348,
+      "sha256": "96c6a1270a3a4bbce47b16add5c09a6e40802b22350180df787dac310f88b739"
+    }
+  },
+  "inputs_unchanged": true,
+  "definition": {
+    "seed": 20260914,
+    "wine_order": [
+      "red",
+      "white"
+    ],
+    "feature_fields": [
+      "fixed acidity",
+      "volatile acidity",
+      "citric acid",
+      "residual sugar",
+      "chlorides",
+      "free sulfur dioxide",
+      "total sulfur dioxide",
+      "density",
+      "pH",
+      "sulphates",
+      "alcohol"
+    ],
+    "canonical_numeric": "Decimal numeric equality; zero to 0, otherwise normalize then fixed-point string",
+    "feature_serialization": "11 canonical values joined by | in CSV column order",
+    "feature_group_id": "SHA256(wine|feature_serialization) in lowercase hex",
+    "strata": "within wine by unique feature-group quality; stop on conflicting quality or fewer than 5 groups",
+    "order": "SHA256(seed|wine|quality|feature_serialization), then feature_serialization",
+    "allocation": "sorted groups: first ceil(0.2*n) final_evaluation, next ceil(0.2*n) validation, remaining training",
+    "baseline": "median training quality, constant prediction on validation rows only"
+  },
+  "assignments_path": "steps\\03_prediction_design\\outputs\\split_assignments.csv",
+  "assignment_rows": 6497,
+  "files": {
+    "red": {
+      "all_rows": 1599,
+      "all_feature_groups": 1359,
+      "quality_counts": {
+        "3": 10,
+        "4": 53,
+        "5": 681,
+        "6": 638,
+        "7": 199,
+        "8": 18
+      },
+      "by_quality": {
+        "3": {
+          "feature_groups": {
+            "training": 6,
+            "validation": 2,
+            "final_evaluation": 2
+          },
+          "rows": {
+            "training": 6,
+            "validation": 2,
+            "final_evaluation": 2
+          }
+        },
+        "4": {
+          "feature_groups": {
+            "training": 31,
+            "validation": 11,
+            "final_evaluation": 11
+          },
+          "rows": {
+            "training": 31,
+            "validation": 11,
+            "final_evaluation": 11
+          }
+        },
+        "5": {
+          "feature_groups": {
+            "training": 345,
+            "validation": 116,
+            "final_evaluation": 116
+          },
+          "rows": {
+            "training": 405,
+            "validation": 135,
+            "final_evaluation": 141
+          }
+        },
+        "6": {
+          "feature_groups": {
+            "training": 321,
+            "validation": 107,
+            "final_evaluation": 107
+          },
+          "rows": {
+            "training": 382,
+            "validation": 137,
+            "final_evaluation": 119
+          }
+        },
+        "7": {
+          "feature_groups": {
+            "training": 99,
+            "validation": 34,
+            "final_evaluation": 34
+          },
+          "rows": {
+            "training": 116,
+            "validation": 42,
+            "final_evaluation": 41
+          }
+        },
+        "8": {
+          "feature_groups": {
+            "training": 9,
+            "validation": 4,
+            "final_evaluation": 4
+          },
+          "rows": {
+            "training": 10,
+            "validation": 4,
+            "final_evaluation": 4
+          }
+        }
+      },
+      "totals": {
+        "feature_groups": {
+          "training": 811,
+          "validation": 274,
+          "final_evaluation": 274
+        },
+        "rows": {
+          "training": 950,
+          "validation": 331,
+          "final_evaluation": 318
+        }
+      },
+      "cross_split_feature_groups": 0,
+      "conflicting_quality_feature_groups": 0,
+      "all_strata_have_three_splits": true,
+      "header": [
+        "fixed acidity",
+        "volatile acidity",
+        "citric acid",
+        "residual sugar",
+        "chlorides",
+        "free sulfur dioxide",
+        "total sulfur dioxide",
+        "density",
+        "pH",
+        "sulphates",
+        "alcohol",
+        "quality"
+      ]
+    },
+    "white": {
+      "all_rows": 4898,
+      "all_feature_groups": 3961,
+      "quality_counts": {
+        "3": 20,
+        "4": 163,
+        "5": 1457,
+        "6": 2198,
+        "7": 880,
+        "8": 175,
+        "9": 5
+      },
+      "by_quality": {
+        "3": {
+          "feature_groups": {
+            "training": 12,
+            "validation": 4,
+            "final_evaluation": 4
+          },
+          "rows": {
+            "training": 12,
+            "validation": 4,
+            "final_evaluation": 4
+          }
+        },
+        "4": {
+          "feature_groups": {
+            "training": 91,
+            "validation": 31,
+            "final_evaluation": 31
+          },
+          "rows": {
+            "training": 97,
+            "validation": 33,
+            "final_evaluation": 33
+          }
+        },
+        "5": {
+          "feature_groups": {
+            "training": 705,
+            "validation": 235,
+            "final_evaluation": 235
+          },
+          "rows": {
+            "training": 864,
+            "validation": 300,
+            "final_evaluation": 293
+          }
+        },
+        "6": {
+          "feature_groups": {
+            "training": 1072,
+            "validation": 358,
+            "final_evaluation": 358
+          },
+          "rows": {
+            "training": 1320,
+            "validation": 440,
+            "final_evaluation": 438
+          }
+        },
+        "7": {
+          "feature_groups": {
+            "training": 413,
+            "validation": 138,
+            "final_evaluation": 138
+          },
+          "rows": {
+            "training": 534,
+            "validation": 165,
+            "final_evaluation": 181
+          }
+        },
+        "8": {
+          "feature_groups": {
+            "training": 77,
+            "validation": 27,
+            "final_evaluation": 27
+          },
+          "rows": {
+            "training": 91,
+            "validation": 40,
+            "final_evaluation": 44
+          }
+        },
+        "9": {
+          "feature_groups": {
+            "training": 3,
+            "validation": 1,
+            "final_evaluation": 1
+          },
+          "rows": {
+            "training": 3,
+            "validation": 1,
+            "final_evaluation": 1
+          }
+        }
+      },
+      "totals": {
+        "feature_groups": {
+          "training": 2373,
+          "validation": 794,
+          "final_evaluation": 794
+        },
+        "rows": {
+          "training": 2921,
+          "validation": 983,
+          "final_evaluation": 994
+        }
+      },
+      "cross_split_feature_groups": 0,
+      "conflicting_quality_feature_groups": 0,
+      "all_strata_have_three_splits": true,
+      "header": [
+        "fixed acidity",
+        "volatile acidity",
+        "citric acid",
+        "residual sugar",
+        "chlorides",
+        "free sulfur dioxide",
+        "total sulfur dioxide",
+        "density",
+        "pH",
+        "sulphates",
+        "alcohol",
+        "quality"
+      ]
+    }
+  }
+}

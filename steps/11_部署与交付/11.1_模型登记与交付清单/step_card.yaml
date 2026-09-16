@@ -1,0 +1,40 @@
+step: "11.1"
+revision: r01
+headline: 每类酒登记了一个候选模型版本（红酒_quality_随机森林 8314f626bc19、白酒_quality_随机森林 32bfb8ca1cde），交付清单齐全，打分入口跑通；是否验收、交付由你决定
+can_continue: true
+core_numbers:
+  - label: 示例打分行数
+    after: 20
+    scope: 打分入口对每类酒最终评估集前 10 行的输出，只证明入口能用，不是评估
+    source: "outputs/scoring_example.csv#rows"
+operation: 从 9.1 的结果取每类酒最终评估 MAE 最低的候选（都是随机森林），用 SDK 登记为模型版本；用子进程真的调用打分入口跑 20 条示例；生成交付清单草稿并填完说明、使用入口、适用边界、监控方案。
+exceptions:
+  - 部署方式待定：没有生产场景，交付的是研究结论和可复现的打分入口
+  - 两类酒的指标登记在同一次运行里，两份清单都列了四个最终评估指标，scope 里写明哪个属于本清单的模型
+artifacts:
+  - {path: src/predict.py, purpose: 打分入口：给一份 11 个理化指标的 CSV 输出 quality_估计, kind: other}
+  - {path: outputs/scoring_example.csv, purpose: 打分入口对 20 条示例记录的输出，附真值只供对照, kind: table}
+  - {path: ../../../delivery/红酒_quality_随机森林/checklist.yaml, purpose: 红酒模型的交付清单, kind: report}
+  - {path: ../../../delivery/白酒_quality_随机森林/checklist.yaml, purpose: 白酒模型的交付清单, kind: report}
+  - {path: report.md, purpose: 给用户看的报告, kind: report}
+  - {path: acceptance.md, purpose: 验收报告, kind: report}
+why: 模型只有登记了版本、写清了怎么用和不能用在哪，别人才接得住；平台的验收、交付状态也要挂在登记的版本上。
+invariants:
+  - 登记的模型文件哈希与 7.1 产物一致，没有重训
+  - 最终评估集不再被评估
+evidence:
+  - {path: outputs/scoring_example.csv, purpose: 入口输出行数等于输入行数，估计值无空, kind: table}
+can_say:
+  - 两个模型都能通过 predict.py 给新的理化指标记录打分
+  - 交付清单通过平台 13 项核对
+cannot_say:
+  - 不能说模型已验收或可交付：状态是候选，由你在平台上决定
+  - 不能说估计值等于专家评分：两端分值误差大，6 分的酒上不如一律猜 6 分
+next: 你在「模型与交付」页看两份清单，决定验收或打回；若要上线，先定部署方式再补清单。
+examples:
+  - title: 红酒第 3 行怎么打分
+    input: 最终评估集里的红酒第 3 行，alcohol 9.8，真值 quality 5
+    rule: 11 个指标喂给 red_随机森林.joblib，300 棵树取平均
+    output: quality_估计 5.146
+    artifact: outputs/scoring_example.csv
+    real: true

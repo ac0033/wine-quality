@@ -1,0 +1,532 @@
+{
+ "generated_at_utc": "2026-09-16T08:47:38.619073+00:00",
+ "passed": 102,
+ "total": 102,
+ "tolerance": 1e-10,
+ "fault_injection": [
+  {
+   "case": "删掉红酒 Ridge 的一条预测",
+   "rejected": true
+  },
+  {
+   "case": "把白酒随机森林一条真值加 1",
+   "rejected": true
+  },
+  {
+   "case": "混入一条红酒验证行的预测",
+   "rejected": true
+  }
+ ],
+ "checks": [
+  {
+   "name": "red/Ridge: 每条最终评估行恰好一条预测、无遗漏",
+   "ok": true,
+   "detail": "318 行"
+  },
+  {
+   "name": "red/Ridge: 没有训练行或验证行混入",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/Ridge: 预测表真值与原始 CSV 一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/Ridge: 特征组合 ID 与原始 CSV 重建一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/Ridge: 预测全部有限",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/Ridge: 基线预测等于训练集中位数",
+   "ok": true,
+   "detail": "中位数 6.0"
+  },
+  {
+   "name": "red/随机森林: 每条最终评估行恰好一条预测、无遗漏",
+   "ok": true,
+   "detail": "318 行"
+  },
+  {
+   "name": "red/随机森林: 没有训练行或验证行混入",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/随机森林: 预测表真值与原始 CSV 一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/随机森林: 特征组合 ID 与原始 CSV 重建一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/随机森林: 预测全部有限",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/随机森林: 基线预测等于训练集中位数",
+   "ok": true,
+   "detail": "中位数 6.0"
+  },
+  {
+   "name": "white/Ridge: 每条最终评估行恰好一条预测、无遗漏",
+   "ok": true,
+   "detail": "994 行"
+  },
+  {
+   "name": "white/Ridge: 没有训练行或验证行混入",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/Ridge: 预测表真值与原始 CSV 一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/Ridge: 特征组合 ID 与原始 CSV 重建一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/Ridge: 预测全部有限",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/Ridge: 基线预测等于训练集中位数",
+   "ok": true,
+   "detail": "中位数 6.0"
+  },
+  {
+   "name": "white/随机森林: 每条最终评估行恰好一条预测、无遗漏",
+   "ok": true,
+   "detail": "994 行"
+  },
+  {
+   "name": "white/随机森林: 没有训练行或验证行混入",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/随机森林: 预测表真值与原始 CSV 一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/随机森林: 特征组合 ID 与原始 CSV 重建一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/随机森林: 预测全部有限",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/随机森林: 基线预测等于训练集中位数",
+   "ok": true,
+   "detail": "中位数 6.0"
+  },
+  {
+   "name": "red: 基线 MAE 重算一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red: 基线 RMSE 重算一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/Ridge: MAE 重算一致",
+   "ok": true,
+   "detail": "0.5089800695"
+  },
+  {
+   "name": "red/Ridge: RMSE 重算一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/Ridge: MAE 差值一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/Ridge: 逐行误差与真值 − 预测一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/Ridge: quality=5 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "141 行"
+  },
+  {
+   "name": "red/Ridge: quality=7 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "41 行"
+  },
+  {
+   "name": "red/Ridge: quality=6 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "119 行"
+  },
+  {
+   "name": "red/Ridge: quality=4 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "11 行"
+  },
+  {
+   "name": "red/Ridge: quality=8 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "4 行"
+  },
+  {
+   "name": "red/Ridge: quality=3 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "2 行"
+  },
+  {
+   "name": "red/Ridge: 「仍优于基线」判定一致",
+   "ok": true,
+   "detail": "是"
+  },
+  {
+   "name": "red/随机森林: MAE 重算一致",
+   "ok": true,
+   "detail": "0.4963438798"
+  },
+  {
+   "name": "red/随机森林: RMSE 重算一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/随机森林: MAE 差值一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/随机森林: 逐行误差与真值 − 预测一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/随机森林: quality=5 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "141 行"
+  },
+  {
+   "name": "red/随机森林: quality=7 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "41 行"
+  },
+  {
+   "name": "red/随机森林: quality=6 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "119 行"
+  },
+  {
+   "name": "red/随机森林: quality=4 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "11 行"
+  },
+  {
+   "name": "red/随机森林: quality=8 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "4 行"
+  },
+  {
+   "name": "red/随机森林: quality=3 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "2 行"
+  },
+  {
+   "name": "red/随机森林: 「仍优于基线」判定一致",
+   "ok": true,
+   "detail": "是"
+  },
+  {
+   "name": "red: 各分值行数合计等于最终评估行数",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white: 基线 MAE 重算一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white: 基线 RMSE 重算一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/Ridge: MAE 重算一致",
+   "ok": true,
+   "detail": "0.6193830014"
+  },
+  {
+   "name": "white/Ridge: RMSE 重算一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/Ridge: MAE 差值一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/Ridge: 逐行误差与真值 − 预测一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/Ridge: quality=6 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "438 行"
+  },
+  {
+   "name": "white/Ridge: quality=5 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "293 行"
+  },
+  {
+   "name": "white/Ridge: quality=7 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "181 行"
+  },
+  {
+   "name": "white/Ridge: quality=8 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "44 行"
+  },
+  {
+   "name": "white/Ridge: quality=4 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "33 行"
+  },
+  {
+   "name": "white/Ridge: quality=3 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "4 行"
+  },
+  {
+   "name": "white/Ridge: quality=9 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "1 行"
+  },
+  {
+   "name": "white/Ridge: 「仍优于基线」判定一致",
+   "ok": true,
+   "detail": "否"
+  },
+  {
+   "name": "white/随机森林: MAE 重算一致",
+   "ok": true,
+   "detail": "0.5752299866"
+  },
+  {
+   "name": "white/随机森林: RMSE 重算一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/随机森林: MAE 差值一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/随机森林: 逐行误差与真值 − 预测一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/随机森林: quality=6 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "438 行"
+  },
+  {
+   "name": "white/随机森林: quality=5 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "293 行"
+  },
+  {
+   "name": "white/随机森林: quality=7 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "181 行"
+  },
+  {
+   "name": "white/随机森林: quality=8 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "44 行"
+  },
+  {
+   "name": "white/随机森林: quality=4 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "33 行"
+  },
+  {
+   "name": "white/随机森林: quality=3 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "4 行"
+  },
+  {
+   "name": "white/随机森林: quality=9 的行数与 MAE 一致",
+   "ok": true,
+   "detail": "1 行"
+  },
+  {
+   "name": "white/随机森林: 「仍优于基线」判定一致",
+   "ok": true,
+   "detail": "是"
+  },
+  {
+   "name": "white: 各分值行数合计等于最终评估行数",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red: 有序组合 ID 就是最终评估集的全部特征组合按字典序",
+   "ok": true,
+   "detail": "274 个"
+  },
+  {
+   "name": "red: 每次恰好抽 G 个、索引都在范围内",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/Ridge: 2000 次配对差逐次一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/Ridge: 区间 [-0.248951, -0.100789] 一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/随机森林: 2000 次配对差逐次一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "red/随机森林: 区间 [-0.264195, -0.114527] 一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white: 有序组合 ID 就是最终评估集的全部特征组合按字典序",
+   "ok": true,
+   "detail": "794 个"
+  },
+  {
+   "name": "white: 每次恰好抽 G 个、索引都在范围内",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/Ridge: 2000 次配对差逐次一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/Ridge: 区间 [-0.063738, 0.010720] 一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/随机森林: 2000 次配对差逐次一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "white/随机森林: 区间 [-0.112006, -0.031322] 一致",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：data/winequality-red.csv",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：data/winequality-white.csv",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/split_assignments.csv",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/baseline_validation.json",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/07_模型选择与训练/7.1_候选模型比较/outputs/model_comparison.json",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_Ridge.joblib",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_随机森林.joblib",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_Ridge.joblib",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_随机森林.joblib",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/07_模型选择与训练/7.1_候选模型比较/outputs/scaler_red.json",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "输入指纹当前一致：steps/07_模型选择与训练/7.1_候选模型比较/outputs/scaler_white.json",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "故障注入：删掉红酒 Ridge 的一条预测 → 检查器拒绝",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "故障注入：把白酒随机森林一条真值加 1 → 检查器拒绝",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "故障注入：混入一条红酒验证行的预测 → 检查器拒绝",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

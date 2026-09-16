@@ -1,0 +1,67 @@
+step: "7.1"
+revision: r01
+headline: 四个候选都比基线准且差距稳定：红酒随机森林验证 MAE 0.5051（基线 0.6435）、白酒随机森林 0.5474（基线 0.6368）；四个都登记为进入最终评估的候选
+can_continue: true
+core_numbers:
+  - label: 红酒随机森林验证 MAE
+    before: 0.6435
+    change: -0.1384
+    after: 0.5051
+    scope: 红酒验证集 331 行；处理前是训练集中位数基线；差的重抽样区间 [-0.2130, -0.0663]
+    source: "outputs/model_comparison.json#/files/red/candidates/随机森林/mae"
+  - label: 红酒 Ridge 验证 MAE
+    before: 0.6435
+    change: -0.1241
+    after: 0.5194
+    scope: 红酒验证集 331 行；区间 [-0.1973, -0.0542]
+    source: "outputs/model_comparison.json#/files/red/candidates/Ridge/mae"
+  - label: 白酒随机森林验证 MAE
+    before: 0.6368
+    change: -0.0894
+    after: 0.5474
+    scope: 白酒验证集 983 行；区间 [-0.1335, -0.0458]
+    source: "outputs/model_comparison.json#/files/white/candidates/随机森林/mae"
+  - label: 白酒 Ridge 验证 MAE
+    before: 0.6368
+    change: -0.0555
+    after: 0.5814
+    scope: 白酒验证集 983 行；区间 [-0.0937, -0.0191]
+    source: "outputs/model_comparison.json#/files/white/candidates/Ridge/mae"
+operation: 只用训练行拟合 Ridge（训练集内标准化，alpha=1.0）和随机森林（300 棵树、叶子至少 5 行、固定种子），对验证行输出连续预测；和基线比 MAE、RMSE；把验证集的特征组合有放回重抽 2,000 次算「候选 MAE − 基线 MAE」的区间。
+exceptions:
+  - quality 恰好是 6 的行上模型一定输给基线（基线猜 6 分误差为 0）：红酒 6 分 137 行 Ridge 平均差 0.4124、随机森林 0.4495
+  - 两端分值行数太少（红酒 3 分 2 行、8 分 4 行，白酒 9 分 1 行），模型误差仍在 2 分上下，只描述不下结论
+  - 同一类酒里随机森林略好于 Ridge，但区间大幅重叠，本步不在两者之间取舍
+artifacts:
+  - {path: outputs/model_comparison.json, purpose: 每类酒的基线、两个候选的 MAE / RMSE、差值、重抽样区间、按分值误差、登记判定, kind: table}
+  - {path: outputs/validation_predictions.csv, purpose: 每个候选对每条验证行的连续预测、真值、基线预测与双方误差, kind: table}
+  - {path: outputs/bootstrap_mae_differences.csv, purpose: "2,000 次重抽样每次每候选的 MAE 配对差", kind: table}
+  - {path: outputs/models/red_随机森林.joblib, purpose: 红酒随机森林候选模型，只用训练行拟合，供 9.1 只评一次, kind: model}
+  - {path: outputs/models/white_随机森林.joblib, purpose: 白酒随机森林候选模型, kind: model}
+  - {path: outputs/models/red_Ridge.joblib, purpose: 红酒 Ridge 候选模型（含标准化参数）, kind: model}
+  - {path: outputs/models/white_Ridge.joblib, purpose: 白酒 Ridge 候选模型（含标准化参数）, kind: model}
+  - {path: report.md, purpose: 给用户看的报告, kind: report}
+  - {path: acceptance.md, purpose: 验收报告：输入保全、拟合范围、预测覆盖、指标与区间的核对, kind: report}
+why: 3.1 的基线不看理化指标；只有让指标上场并在同一验证集上比，才知道它们有没有带来收益、收益是不是偶然。
+invariants:
+  - 八份输入执行前后 SHA256 一致
+  - 最终评估行没有进入任何拟合、预测或误差计算
+  - 每个候选对每条验证行恰好一条预测
+evidence:
+  - {path: checks/verification.json, purpose: 独立复核：从原始 CSV 与逐行预测重算全部指标与 2,000 次区间，三处故障注入均被拒绝, kind: table}
+  - {path: outputs/bootstrap_draws.json, purpose: 有序组合 ID 与全部抽样索引，区间可独立重做, kind: other}
+can_say:
+  - 在当前验证集上，11 个理化指标让平均误差从约 0.64 分降到约 0.5 分
+  - 改善不是这批验证行的偶然波动：四个区间上界都小于 0
+cannot_say:
+  - 不能说这是生产可用的收益：没有业务成本依据，门槛只是研究筛选
+  - 不能说对未来的酒有效：候选是在验证集上筛出来的，最终数值看 9.1
+  - 不能说随机森林一定比 Ridge 好：区间重叠
+next: 9.1 把四个候选在封存的最终评估集上各评一次；10.1 看模型主要靠哪些指标。
+examples:
+  - title: 红酒第 1 行在验证集里怎么计入 MAE
+    input: "7.4;0.7;0;1.9;0.076;11;34;0.9978;3.51;0.56;9.4;5，真值 quality=5"
+    rule: 基线猜 6，绝对差 1.0；候选的预测与 abs_error 在验证预测表 wine=red、source_row=1 的两行
+    output: 每个候选对它的 abs_error 是该候选红酒 MAE（331 行平均）的一个分子
+    artifact: outputs/validation_predictions.csv
+    real: true

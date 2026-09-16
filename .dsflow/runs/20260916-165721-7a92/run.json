@@ -1,0 +1,71 @@
+{
+ "run_id": "20260916-165721-7a92",
+ "step": "1.1",
+ "revision": null,
+ "command": "python -X utf8 -m dsflow.tracking.notebook steps/01_数据预处理/1.1_原始数据理解与质量核验/nb_1.1.ipynb",
+ "argv": [
+  "python",
+  "-X",
+  "utf8",
+  "-m",
+  "dsflow.tracking.notebook",
+  "steps/01_数据预处理/1.1_原始数据理解与质量核验/nb_1.1.ipynb"
+ ],
+ "cwd": ".",
+ "source": "cli",
+ "rerun_of": null,
+ "pid": 12680,
+ "started_at": "2026-09-16T16:57:21",
+ "ended_at": "2026-09-16T16:57:22",
+ "duration_s": 1.49,
+ "status": "succeeded",
+ "exit_code": 0,
+ "error": null,
+ "git_commit": "010c2f9342ffe1c671c67dfd9b3bdb66a1eba00b",
+ "git_dirty": false,
+ "env": {
+  "python": "3.14.5",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "executable": ".venv\\Scripts\\python.exe",
+  "uv_lock": "95b678c1adfa",
+  "pkg:pandas": "3.0.5",
+  "pkg:numpy": "2.5.3",
+  "pkg:scikit-learn": "1.9.1",
+  "pkg:duckdb": "1.5.5",
+  "pkg:pyarrow": "25.0.1"
+ },
+ "params": {},
+ "metrics": {
+  "红酒行数": 1599.0,
+  "白酒行数": 4898.0,
+  "红酒同值行": 240.0,
+  "白酒同值行": 937.0
+ },
+ "fold_metrics": {},
+ "hypothesis": "从原始 CSV 重算行数、字段、空值、同值行和 quality 分布，与 1.1 当时的产物一致",
+ "conclusion": "重算的行数、空值、同值行、quality 分布与 1.1 当时的 data_profile.json 逐项一致",
+ "validity": "有效",
+ "inputs": [
+  {
+   "name": "红酒",
+   "version": "4a402cf041b0",
+   "path": "data/winequality-red.csv",
+   "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e",
+   "rows": null,
+   "columns": null
+  },
+  {
+   "name": "白酒",
+   "version": "76c3f809815c",
+   "path": "data/winequality-white.csv",
+   "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836",
+   "rows": null,
+   "columns": null
+  }
+ ],
+ "outputs": [],
+ "artifacts": [],
+ "figures": [],
+ "deltas": [],
+ "models": []
+}

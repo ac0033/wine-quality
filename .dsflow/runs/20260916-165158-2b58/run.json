@@ -1,0 +1,114 @@
+{
+ "run_id": "20260916-165158-2b58",
+ "step": "11.1",
+ "revision": null,
+ "command": "python -X utf8 -m dsflow.tracking.notebook steps/11_部署与交付/11.1_模型登记与交付清单/nb_11.1.ipynb",
+ "argv": [
+  "python",
+  "-X",
+  "utf8",
+  "-m",
+  "dsflow.tracking.notebook",
+  "steps/11_部署与交付/11.1_模型登记与交付清单/nb_11.1.ipynb"
+ ],
+ "cwd": ".",
+ "source": "cli",
+ "rerun_of": null,
+ "pid": 13320,
+ "started_at": "2026-09-16T16:51:58",
+ "ended_at": "2026-09-16T16:52:04",
+ "duration_s": 6.36,
+ "status": "succeeded",
+ "exit_code": 0,
+ "error": null,
+ "git_commit": "010c2f9342ffe1c671c67dfd9b3bdb66a1eba00b",
+ "git_dirty": false,
+ "env": {
+  "python": "3.14.5",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "executable": ".venv\\Scripts\\python.exe",
+  "uv_lock": "95b678c1adfa",
+  "pkg:pandas": "3.0.5",
+  "pkg:numpy": "2.5.3",
+  "pkg:scikit-learn": "1.9.1",
+  "pkg:duckdb": "1.5.5",
+  "pkg:pyarrow": "25.0.1"
+ },
+ "params": {
+  "登记的候选": {
+   "红酒": "随机森林",
+   "白酒": "随机森林"
+  },
+  "模型文件哈希": {
+   "红酒": "8314f626bc19",
+   "白酒": "32bfb8ca1cde"
+  },
+  "最终评估 MAE": {
+   "红酒": 0.4963438798140795,
+   "白酒": 0.575229986626415
+  },
+  "打分入口": "steps/11_部署与交付/11.1_模型登记与交付清单/src/predict.py <red|white> <输入 CSV> <输出 CSV>"
+ },
+ "metrics": {
+  "示例打分行数": 20.0
+ },
+ "fold_metrics": {},
+ "hypothesis": "9.1 最终评估 MAE 最低的候选可以原样登记为候选模型，并通过打分入口给新记录估计 quality",
+ "conclusion": "红酒_quality_随机森林 8314f626bc19 登记为候选（最终评估 MAE 0.4963）；白酒_quality_随机森林 32bfb8ca1cde 登记为候选（最终评估 MAE 0.5752）",
+ "validity": "有效",
+ "inputs": [
+  {
+   "name": "红酒",
+   "version": "4a402cf041b0",
+   "path": "data/winequality-red.csv",
+   "sha256": "4a402cf041b025d4566d954c3b9ba8635a3a8a01e039005d97d6a710278cf05e",
+   "rows": null,
+   "columns": null
+  },
+  {
+   "name": "白酒",
+   "version": "76c3f809815c",
+   "path": "data/winequality-white.csv",
+   "sha256": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836",
+   "rows": null,
+   "columns": null
+  },
+  {
+   "name": "划分表",
+   "version": "42e939976f22",
+   "path": "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/split_assignments.csv",
+   "sha256": "42e939976f221cf5ea3b0ebaa4469633cd2d6e2360199f261efbcab5331e596c",
+   "rows": null,
+   "columns": null
+  }
+ ],
+ "outputs": [],
+ "artifacts": [
+  {
+   "path": "steps/11_部署与交付/11.1_模型登记与交付清单/outputs/scoring_example.csv",
+   "purpose": "打分入口对 20 条示例记录（每类酒最终评估集前 10 行）的输出，附真值 quality 仅供对照，不是新的评估",
+   "kind": "table",
+   "sha256": "65ec6196d5bc25cb5f3990d8ee6c984bb879aa57ce8cc51d2cfd178b4c539be5"
+  },
+  {
+   "path": "steps/11_部署与交付/11.1_模型登记与交付清单/src/predict.py",
+   "purpose": "打分入口：给一份 11 个理化指标的 CSV 输出 quality_估计",
+   "kind": "other",
+   "sha256": "ea72a2e5e981a820b2f4dbd5edcbae411bc968d592e469704da2a40d0ed1092d"
+  }
+ ],
+ "figures": [],
+ "deltas": [],
+ "models": [
+  {
+   "name": "红酒_quality_随机森林",
+   "version": "8314f626bc19",
+   "path": "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_随机森林.joblib"
+  },
+  {
+   "name": "白酒_quality_随机森林",
+   "version": "32bfb8ca1cde",
+   "path": "steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_随机森林.joblib"
+  }
+ ]
+}

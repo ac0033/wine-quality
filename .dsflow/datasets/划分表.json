@@ -1,0 +1,24 @@
+{
+ "name": "划分表",
+ "description": "每条原始行（酒类 + 源文件行号 + 特征组合 ID）属于训练 / 验证 / 最终评估哪一份",
+ "versions": [
+  {
+   "name": "划分表",
+   "version": "42e939976f22",
+   "sha256": "42e939976f221cf5ea3b0ebaa4469633cd2d6e2360199f261efbcab5331e596c",
+   "path": "steps/03_数据划分/3.1_预测任务定义_固定划分与验证基线/outputs/split_assignments.csv",
+   "format": "csv",
+   "size_bytes": 566494,
+   "rows": null,
+   "columns": null,
+   "stage": "splits",
+   "produced_by": "3.1",
+   "parents": [
+    "红酒",
+    "白酒"
+   ],
+   "replaces": [],
+   "registered_at": "2026-09-16T16:35:17"
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="460" viewBox="0 0 940 460">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,sans-serif;fill:#1f2937}.title{font-size:20px;font-weight:bold}.label{font-size:13px}.small{font-size:11px}</style>
+<text x="28" y="32" class="title">quality distribution within each wine file</text>
+<text x="28" y="52" class="small">Bars show percent of all rows in that file; exact rows are in eda.json.</text>
+<text x="30" y="90" class="label">Red wine (n=1599)</text>
+<text x="30" y="136" class="label">3</text>
+<rect x="58" y="120" width="4.5654" height="20" fill="#9b2c50" data-wine="red" data-score="3" data-rows="10" data-share="0.0062539086929330832"/>
+<text x="70.57" y="136" class="small">0.6% (10)</text>
+<text x="30" y="181" class="label">4</text>
+<rect x="58" y="165" width="24.1964" height="20" fill="#9b2c50" data-wine="red" data-score="4" data-rows="53" data-share="0.033145716072545343"/>
+<text x="90.20" y="181" class="small">3.3% (53)</text>
+<text x="30" y="226" class="label">5</text>
+<rect x="58" y="210" width="310.9006" height="20" fill="#9b2c50" data-wine="red" data-score="5" data-rows="681" data-share="0.42589118198874298"/>
+<text x="376.90" y="226" class="small">42.6% (681)</text>
+<text x="30" y="271" class="label">6</text>
+<rect x="58" y="255" width="291.2695" height="20" fill="#9b2c50" data-wine="red" data-score="6" data-rows="638" data-share="0.39899937460913071"/>
+<text x="357.27" y="271" class="small">39.9% (638)</text>
+<text x="30" y="316" class="label">7</text>
+<rect x="58" y="300" width="90.8505" height="20" fill="#9b2c50" data-wine="red" data-score="7" data-rows="199" data-share="0.12445278298936835"/>
+<text x="156.85" y="316" class="small">12.4% (199)</text>
+<text x="30" y="361" class="label">8</text>
+<rect x="58" y="345" width="8.2176" height="20" fill="#9b2c50" data-wine="red" data-score="8" data-rows="18" data-share="0.01125703564727955"/>
+<text x="74.22" y="361" class="small">1.1% (18)</text>
+<text x="30" y="406" class="label">9</text>
+<rect x="58" y="390" width="0.0000" height="20" fill="#9b2c50" data-wine="red" data-score="9" data-rows="0" data-share="0"/>
+<text x="66.00" y="406" class="small">0.0% (0)</text>
+<text x="495" y="90" class="label">White wine (n=4898)</text>
+<text x="495" y="136" class="label">3</text>
+<rect x="523" y="120" width="2.9808" height="20" fill="#a88a25" data-wine="white" data-score="3" data-rows="20" data-share="0.0040832993058391182"/>
+<text x="533.98" y="136" class="small">0.4% (20)</text>
+<text x="495" y="181" class="label">4</text>
+<rect x="523" y="165" width="24.2936" height="20" fill="#a88a25" data-wine="white" data-score="4" data-rows="163" data-share="0.03327888934258881"/>
+<text x="555.29" y="181" class="small">3.3% (163)</text>
+<text x="495" y="226" class="label">5</text>
+<rect x="523" y="210" width="217.1519" height="20" fill="#a88a25" data-wine="white" data-score="5" data-rows="1457" data-share="0.29746835443037972"/>
+<text x="748.15" y="226" class="small">29.7% (1457)</text>
+<text x="495" y="271" class="label">6</text>
+<rect x="523" y="255" width="327.5909" height="20" fill="#a88a25" data-wine="white" data-score="6" data-rows="2198" data-share="0.44875459371171905"/>
+<text x="858.59" y="271" class="small">44.9% (2198)</text>
+<text x="495" y="316" class="label">7</text>
+<rect x="523" y="300" width="131.1556" height="20" fill="#a88a25" data-wine="white" data-score="7" data-rows="880" data-share="0.17966516945692118"/>
+<text x="662.16" y="316" class="small">18.0% (880)</text>
+<text x="495" y="361" class="label">8</text>
+<rect x="523" y="345" width="26.0821" height="20" fill="#a88a25" data-wine="white" data-score="8" data-rows="175" data-share="0.035728868926092283"/>
+<text x="557.08" y="361" class="small">3.6% (175)</text>
+<text x="495" y="406" class="label">9</text>
+<rect x="523" y="390" width="0.7452" height="20" fill="#a88a25" data-wine="white" data-score="9" data-rows="5" data-share="0.0010208248264597796"/>
+<text x="531.75" y="406" class="small">0.1% (5)</text>
+</svg>

@@ -1,0 +1,14 @@
+每类酒登记的候选： {'红酒': '随机森林', '白酒': '随机森林'}
+red：10 行已打分 → steps\11_部署与交付\11.1_模型登记与交付清单\outputs\scoring_output_red.csv
+white：10 行已打分 → steps\11_部署与交付\11.1_模型登记与交付清单\outputs\scoring_output_white.csv
+wine  source_row  alcohol  quality_估计  quality
+ red           3      9.8       5.146        5
+ red           6      9.4       5.271        5
+ red           8     10.0       4.980        7
+ red          11      9.2       5.266        5
+ red          15      9.2       4.938        5
+ red          21      9.4       5.185        6
+登记 红酒_quality_随机森林 版本 8314f626bc19（候选）：steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/red_随机森林.joblib
+登记 白酒_quality_随机森林 版本 32bfb8ca1cde（候选）：steps/07_模型选择与训练/7.1_候选模型比较/outputs/models/white_随机森林.joblib
+红酒_quality_随机森林 8314f626bc19 登记为候选（最终评估 MAE 0.4963）；白酒_quality_随机森林 32bfb8ca1cde 登记为候选（最终评估 MAE 0.5752）
+notebook 执行完成：3 个代码单元格全部成功，已写回 steps\11_部署与交付\11.1_模型登记与交付清单\nb_11.1.ipynb

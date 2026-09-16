@@ -1,0 +1,19 @@
+{
+  "terms": [
+    {"term": "quality", "meaning": "专家评分：至少 3 位专家对一份酒打 0～10 分后取中位数；数据里只出现 3～9 分", "source": "两份 CSV 的 quality 列；winequality.names 第 7 节", "aliases": ["评分"]},
+    {"term": "理化指标", "meaning": "每份酒的 11 个化验值：fixed acidity、volatile acidity、citric acid、residual sugar、chlorides、free sulfur dioxide、total sulfur dioxide、density、pH、sulphates、alcohol", "source": "两份 CSV 的前 11 列", "avoid": ["特征变量", "自变量", "输入变量"]},
+    {"term": "红酒", "meaning": "winequality-red.csv 里的 1,599 行", "source": "data/winequality-red.csv"},
+    {"term": "白酒", "meaning": "winequality-white.csv 里的 4,898 行", "source": "data/winequality-white.csv"},
+    {"term": "同值行", "meaning": "同一份 CSV 里 12 个字段的原始文本完全相同的行；没有样本 ID，不能断定是同一份酒，所以只计数不删", "source": "1.1 产物 data_profile.json 的 exact_duplicate_rows_beyond_first", "avoid": ["重复样本", "重复记录"]},
+    {"term": "特征组合", "meaning": "同一类酒里 11 个理化指标数值完全相同的行归为一组；划分时整组进同一个集合，防止相同输入跨集合", "source": "3.1 产物 split_assignments.csv 的 feature_group_id", "avoid": ["特征指纹", "分组键"]},
+    {"term": "训练集", "meaning": "只用来拟合模型和基线的行；红酒 950 行、白酒 2,921 行", "source": "3.1 产物 split_assignments.csv 的 split = training"},
+    {"term": "验证集", "meaning": "用来比较候选模型和基线的行；红酒 331 行、白酒 983 行", "source": "3.1 产物 split_assignments.csv 的 split = validation"},
+    {"term": "最终评估集", "meaning": "留到最后只评估一次的行；红酒 318 行、白酒 994 行。2.1 的全量探索看过这些行，所以不是完全未接触", "source": "3.1 产物 split_assignments.csv 的 split = final_evaluation", "avoid": ["测试集", "test set", "留出集"]},
+    {"term": "基线", "meaning": "不看理化指标的预测：把训练集 quality 的中位数（红酒、白酒都是 6.0）当成每一行的预测", "source": "3.1 产物 baseline_validation.json", "avoid": ["朴素预测", "基准模型"]},
+    {"term": "MAE", "meaning": "平均绝对误差：每行 |quality − 预测| 的平均，单位是评分分数；主要指标", "source": "3.1 计划", "avoid": ["平均绝对偏差"]},
+    {"term": "RMSE", "meaning": "均方根误差：每行误差平方的平均再开方，对大误差更敏感；辅助指标", "source": "3.1 计划"},
+    {"term": "Ridge", "meaning": "带 L2 惩罚的线性回归：先把训练集 11 个指标标准化，再拟合一条直线；本项目 alpha=1.0", "source": "7.1 计划", "avoid": ["岭回归", "线性候选"]},
+    {"term": "随机森林", "meaning": "300 棵回归树取平均；每片叶子至少 5 行；本项目参数固定，不调参", "source": "7.1 计划", "avoid": ["RF 模型", "树模型"]},
+    {"term": "重抽样区间", "meaning": "把验证集的特征组合有放回地抽 2,000 次，每次算一遍「候选 MAE − 基线 MAE」，取 2.5% 和 97.5% 分位数；只描述当前验证集的波动", "source": "7.1 计划检查第 2 条", "avoid": ["置信区间", "bootstrap CI"]}
+  ]
+}

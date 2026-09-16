@@ -1,0 +1,72 @@
+# 1.1 原始数据理解与质量核验 · notebook 导读
+# 这一步当时用脚本执行并已验收；nb_1.1.ipynb 是从原始 CSV 重算关键数字、和当时产物对账的复核 notebook，讲解围绕它讲。
+step: "1.1"
+revision: r01
+notebook: nb_1.1.ipynb
+
+brief:
+  background: 项目从两份原始 CSV 起步：红酒一份、白酒一份，每行是一份酒的 11 个化验值加专家评分 quality。分析前先弄清每行每列是什么、干不干净。
+  question: 这两份 CSV 能不能直接拿来分析？每行每列到底是什么？
+  answer: 能直接用。红酒 1,599 行，字段和说明一一对应，没有空值和无效值。
+  can_continue: true
+  did: 按分号读入两份文件，核对表头、空值、同值行，数每个分值的行数。
+  next: 2.1 分红酒、白酒看理化指标的分布和它们与 quality 的关系。
+
+parts:
+  - question: 数据干不干净？
+    answer: 红酒 1,599 行、白酒 4,898 行都是 12 列，空值 0、quality 超范围 0；同值行红酒 240、白酒 937，只计数不删。
+    meaning: 不需要清洗，后面的每一步都直接用全部原始行；同值行留着，因为没有样本 ID，删了可能删掉真实的不同样本。
+    cells:
+      - cell: 2
+        title: 按分号读入，核对表头
+        what: 两份 CSV 都用分号分隔；读入后核对列名是不是字段说明里的 11 个理化指标加 quality。
+        why: 分隔符读错整张表就是一列；表头对不上说明文件版本不对。
+        read: 红酒 1,599 行 × 12 列、白酒 4,898 行 × 12 列，表头核对都是 True。
+        lines:
+          - line: 22
+            note: 按数值读一份，用来算行数、空值和分布。
+          - line: 23
+            note: 再按原始文本读一份，专门用来数同值行——同值行是按 12 个字段的原文完全相同来算的。
+        data:
+          title: 红酒原始 CSV 的前几行
+          note: 原始文件，平台现取前 5 行、6 列。
+          frames:
+            - label: 红酒
+              file: data/winequality-red.csv
+              columns: [fixed acidity, volatile acidity, alcohol, quality]
+              limit: 5
+              mark:
+                columns: [quality]
+              caption: 一行一份酒；quality 是至少 3 位专家打分的中位数，前面的列是化验值。第 1 行 alcohol 9.4、quality 5。
+      - cell: 3
+        title: 逐项和当时的产物对账
+        what: 数每类酒的行数、空值、quality 超出 0～10 的行、同值行，和 1.1 当时的 data_profile.json 逐项断言相等。
+        why: 复核不是重跑一遍脚本，而是换一条路（pandas）算同样的数；对不上就说明当时的产物或现在的文件有一个变了。
+        read: 表里「行数」「同值行」两列和「当时记的」两列完全一样：红酒 1599 / 240，白酒 4898 / 937；空值都是 0。
+        lines:
+          - line: 4
+            note: duplicated() 按文本列算，每组同值行不计首次出现的那一行。
+          - line: 7
+            note: 行数和同值行对不上就直接报错停下。
+  - question: 专家评分是怎么分布的？
+    answer: 两类酒都集中在 5、6 分：红酒 5 分 42.59%、6 分 39.90%；两端很少，白酒 9 分只有 5 行。
+    meaning: 后面无论是看关系还是建模，两端分值样本太少，结论主要说的是中间分值的酒。
+    cells:
+      - cell: 4
+        title: 每个分值多少行
+        what: 按 quality 数行数和占比，并断言各分值行数加起来等于该文件的行数。
+        why: 分布决定后面「一律猜 6 分」这种基线好不好用，也提醒两端分值不能下结论。
+        read: 红酒 3 分 10 行、8 分 18 行；白酒 9 分 5 行。红酒 5 分 681 行占 42.59%，白酒 6 分 2198 行占 44.88%。
+        lines:
+          - line: 6
+            note: 各分值行数之和必须等于总行数，少一行都不行。
+
+terms:
+  - term: 字段说明
+    plain: data/winequality.names 这份文本，写了每一列是什么、quality 怎么来的。
+  - term: 表头
+    plain: CSV 第一行的列名。
+
+cannot_say:
+  - 不能说同值行是重复采集：没有样本 ID，判断不了是不是同一份酒。
+  - 结论只对这两份 CSV 成立，不推广到所有葡萄酒。

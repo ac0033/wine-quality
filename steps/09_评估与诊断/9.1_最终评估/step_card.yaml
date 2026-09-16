@@ -1,0 +1,61 @@
+step: "9.1"
+revision: r01
+headline: 最终评估集上红酒两个候选和白酒随机森林仍优于基线，白酒 Ridge 的改善没站住；每类酒最准的都是随机森林：红酒 MAE 0.4963（基线 0.6855）、白酒 0.5752（基线 0.6469）
+can_continue: true
+core_numbers:
+  - label: 红酒随机森林最终评估 MAE
+    before: 0.6855
+    change: -0.1892
+    after: 0.4963
+    scope: 红酒最终评估集 318 行，只评一次；处理前是同一批行上的基线；区间 [-0.2642, -0.1145]；7.1 验证集上是 0.5051
+    source: "outputs/final_evaluation.json#/files/red/candidates/随机森林/mae"
+  - label: 白酒随机森林最终评估 MAE
+    before: 0.6469
+    change: -0.0717
+    after: 0.5752
+    scope: 白酒最终评估集 994 行；区间 [-0.1120, -0.0313]；7.1 验证集上是 0.5474
+    source: "outputs/final_evaluation.json#/files/white/candidates/随机森林/mae"
+  - label: 白酒 Ridge 最终评估 MAE
+    before: 0.6469
+    change: -0.0275
+    after: 0.6194
+    scope: 白酒最终评估集 994 行；区间 [-0.0637, 0.0107] 跨过 0，不能说稳定优于基线
+    source: "outputs/final_evaluation.json#/files/white/candidates/Ridge/mae"
+  - label: 红酒基线最终评估 MAE
+    before: 0.6435
+    change: 0.042
+    after: 0.6855
+    scope: 处理前是 3.1 验证集上的基线；最终评估集里 quality=6 的行占比更低（119/318），一律猜 6 分差得更多
+    source: "outputs/final_evaluation.json#/files/red/baseline/mae"
+operation: 从划分表取每类酒的最终评估行，原样加载 7.1 的四个模型文件各预测一次；和同一批行上的训练集中位数基线比 MAE / RMSE；重抽样区间算法与 7.1 相同；不重训、不回头改 7.1。
+exceptions:
+  - 白酒 Ridge 的差值区间上界 +0.0107 跨过 0：验证集上的改善没有在最终评估集上复现
+  - 白酒两个候选在最终评估集上都比验证集差 0.03～0.04；红酒反而略好，主要是这批行 quality=6 占比低、基线更差
+  - 两端分值行数只有个位数（红酒 3 分 2 行、8 分 4 行，白酒 9 分 1 行），误差在 1.2～2.9 分，只描述
+artifacts:
+  - {path: outputs/final_evaluation.json, purpose: 每类酒每候选的最终评估 MAE / RMSE、差值、区间、按分值误差，并列 7.1 的验证集 MAE, kind: table}
+  - {path: outputs/final_predictions.csv, purpose: 每个候选对每条最终评估行的唯一一次预测, kind: table}
+  - {path: outputs/bootstrap_mae_differences.csv, purpose: 最终评估集重抽样每次每候选的 MAE 配对差, kind: table}
+  - {path: report.md, purpose: 给用户看的报告, kind: report}
+  - {path: acceptance.md, purpose: 验收报告, kind: report}
+why: 候选是在验证集上挑出来的，验证集上的数字偏乐观；只有换一批没参与过拟合和筛选的行，才知道改善是不是真的。
+invariants:
+  - 11 份输入执行前后 SHA256 一致；模型文件哈希与 7.1 产物一致
+  - 每个候选对每条最终评估行恰好一条预测；训练行、验证行一行没用
+  - 每个候选只评这一次
+evidence:
+  - {path: checks/verification.json, purpose: 独立复核：从原始 CSV 与逐行预测重算全部指标与区间，三处故障注入均被拒绝, kind: table}
+can_say:
+  - 红酒上理化指标的收益站得住：两个候选的区间都远离 0
+  - 白酒上随机森林的收益站得住，Ridge 站不住
+cannot_say:
+  - 不能说对未来的酒有效：最终评估行在 2.1 被全量探索看过，不是外部数据
+  - 不能说值得部署：没有业务成本依据
+next: 10.1 看模型主要靠哪些指标；11.1 每类酒登记随机森林为候选模型并写交付清单，是否验收由你决定。
+examples:
+  - title: 白酒 Ridge 为什么判为「没站住」
+    input: 白酒最终评估集 994 行，Ridge MAE 0.6194，基线 0.6469，差 -0.0275
+    rule: 把 794 个特征组合有放回重抽 2,000 次，差值的 2.5%～97.5% 区间是 [-0.0637, 0.0107]
+    output: 上界大于 0，说明换一批组合差值可能变成正的，按 7.1 的口径不算稳定改善
+    artifact: outputs/final_evaluation.json
+    real: true
