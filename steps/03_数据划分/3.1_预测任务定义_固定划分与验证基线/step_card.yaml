@@ -29,7 +29,7 @@ artifacts:
   - {path: outputs/baseline_validation.json, purpose: 训练集中位数与验证集 MAE / RMSE，候选模型的比较起点, kind: table}
   - {path: report.md, purpose: 给用户看的报告, kind: report}
   - {path: acceptance.md, purpose: 主 agent 的验收结论, kind: report}
-why: 划分和评价口径一旦定死，后面每个模型试验才有公平的比较对象；基线不用理化指标，回答的是「理化指标到底有没有带来收益」。
+why: 划分和评价口径一旦固定，后面每个模型试验才有公平的比较对象；基线不用理化指标，回答的是「理化指标到底有没有带来收益」。
 invariants:
   - 每条原始行恰好出现在划分表一次；相同特征组合零跨集合
   - 最终评估集没有任何预测、MAE 或逐行误差

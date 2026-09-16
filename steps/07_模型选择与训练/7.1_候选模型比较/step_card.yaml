@@ -42,7 +42,7 @@ artifacts:
   - {path: outputs/models/white_Ridge.joblib, purpose: 白酒 Ridge 候选模型（含标准化参数）, kind: model}
   - {path: report.md, purpose: 给用户看的报告, kind: report}
   - {path: acceptance.md, purpose: 验收报告：输入保全、拟合范围、预测覆盖、指标与区间的核对, kind: report}
-why: 3.1 的基线不看理化指标；只有让指标上场并在同一验证集上比，才知道它们有没有带来收益、收益是不是偶然。
+why: 3.1 的基线不看理化指标；只有让理化指标参与预测并在同一验证集上比，才知道它们有没有带来收益、收益是不是偶然。
 invariants:
   - 八份输入执行前后 SHA256 一致
   - 最终评估行没有进入任何拟合、预测或误差计算

@@ -62,7 +62,7 @@
       "dir": "steps/09_评估与诊断/9.1_最终评估",
       "status": "awaiting_acceptance",
       "op": "对 7.1 登记的候选，在封存的最终评估集上只评估一次，和同集合上的基线比；按 quality 分值看误差",
-      "finding": "红酒两个候选和白酒随机森林仍优于基线：红酒随机森林最终评估 MAE 0.4963（基线 0.6855）、白酒随机森林 0.5752（基线 0.6469）；白酒 Ridge 的区间跨过 0，没站住",
+      "finding": "红酒两个候选和白酒随机森林仍优于基线：红酒随机森林最终评估 MAE 0.4963（基线 0.6855）、白酒随机森林 0.5752（基线 0.6469）；白酒 Ridge 的区间跨过 0，改善没有成立",
       "decision": "每类酒以随机森林进入登记与交付；不回头改 7.1",
       "execution_notebooks": ["steps/09_评估与诊断/9.1_最终评估/nb_9.1.ipynb"],
       "current_revision": "r01", "revisions": []
@@ -82,7 +82,7 @@
       "dir": "steps/11_部署与交付/11.1_模型登记与交付清单",
       "status": "awaiting_acceptance",
       "op": "把通过最终评估的模型文件登记为候选版本，写交付清单（复现入口、适用边界、监控方案），给出一个给新记录打分的入口",
-      "finding": "登记 红酒_quality_随机森林 8314f626bc19、白酒_quality_随机森林 32bfb8ca1cde 为候选；两份交付清单通过核对；打分入口对 20 条示例跑通",
+      "finding": "登记 红酒_quality_随机森林 8314f626bc19、白酒_quality_随机森林 32bfb8ca1cde 为候选；两份交付清单通过核对；打分脚本对 20 条示例成功输出",
       "decision": "模型状态停在候选，验收与交付由用户在平台上决定；部署方式待定",
       "execution_notebooks": ["steps/11_部署与交付/11.1_模型登记与交付清单/nb_11.1.ipynb"],
       "current_revision": "r01", "revisions": []

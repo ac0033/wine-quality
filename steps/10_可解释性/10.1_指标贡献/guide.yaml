@@ -4,61 +4,50 @@ revision: r01
 notebook: nb_10.1.ipynb
 
 brief:
-  background: 9.1 定了每类酒最准的是随机森林。交付前得说清模型在看什么，别把「模型用了它」讲成「它决定酒的好坏」。
-  question: 候选模型主要靠哪几个理化指标？和 2.1 看到的关系对得上吗？
-  answer: 三个模型最靠 alcohol；白酒 Ridge 靠的 density 和它说的是同一件事。
+  background: 9.1 确定了每类酒最准的模型是随机森林。交付之前要说清楚模型在使用哪些指标，不能把「模型用了它」讲成「它决定酒的好坏」。
+  question: 候选模型主要依赖哪几个理化指标？和 2.1 观察到的相关关系一致吗？
+  answer: 四个模型里有三个最依赖 alcohol；白酒 Ridge 最依赖 density，它和 alcohol 在白酒里是同一份信息。
   can_continue: true
-  did: 在验证行上逐个打乱指标看误差变差多少，再对照上一步的相关系数。
-  next: 11.1 登记随机森林为候选模型，把「主要靠 alcohol」写进交付清单的适用边界。
+  did: 在验证行上逐个打乱指标观察误差变差多少，再把结果和上一步的相关系数放在一起对照。
+  next: 11.1 把随机森林登记为候选模型，把「主要依赖 alcohol」写进交付清单的适用边界。
 
 parts:
-  - question: 打乱哪个指标，模型错得最多？
-    answer: 红酒随机森林打乱 alcohol 后 MAE 增加 0.1161，白酒随机森林增加 0.1872，都是第一名。
-    meaning: 模型的判断主要押在 alcohol 上；这和 2.1 的观察一致，也意味着 alcohol 测不准时模型最容易错。
+  - question: 打乱哪个指标，模型的误差变差最多？
+    answer: 红酒随机森林打乱 alcohol 后 MAE 增加 0.1161，白酒随机森林增加 0.1872，alcohol 在这两个模型里都排第一。
+    meaning: 模型的判断主要依赖 alcohol；这和 2.1 的观察一致，也意味着 alcohol 测量不准时模型最容易出错。
     cells:
       - cell: 3
-        title: 逐个打乱，看误差变差多少
-        what: 每类酒每个候选，在验证行上先算原 MAE；再把某一列随机打乱二十次，其余列不动，看 MAE 平均高了多少。
-        why: 打乱一列等于把这条信息抹掉；误差变差越多，模型越依赖它。模型本身不动。
-        read: 表里每个模型三行：红酒随机森林 alcohol 0.1161、sulphates 0.0513；白酒 Ridge 却是 density 0.1514、residual sugar 0.1372 领先，alcohol 0.0919 第三。
+        title: 逐个打乱指标，观察误差变差多少
+        what: 每类酒的每个候选，先在验证行上计算原始 MAE；再把某一列随机打乱二十次、其余列不动，计算 MAE 平均升高了多少。
+        why: 打乱一列等于抹去这条信息；误差升高越多，说明模型越依赖这个指标。模型本身不重新训练。
+        read: 表里每个模型三行，是它最依赖的三个指标。红酒随机森林：alcohol 0.1161、sulphates 0.0513；白酒 Ridge 却是 density 0.1514、residual sugar 0.1372 领先，alcohol 0.0919 只排第三。表里同时列出 2.1 的 Spearman 和 Ridge 系数，方便对照方向。
         lines:
           - line: 11
-            note: 每类酒每个候选各起一个固定种子的生成器，重算时顺序一样。
+            note: 每类酒的每个候选各使用一个固定种子的随机数生成器，重算时打乱的顺序相同。
           - line: 16
-            note: 只把第 j 列按随机顺序重排，其余列原样。
+            note: 只把第 j 列按随机顺序重排，其余列保持原样。
           - line: 23
-            note: Ridge 的系数是对标准化后指标的，可以按绝对值比大小。
-        data:
-          title: 指标贡献表
-          note: 本步产物，平台现取前 6 行。
-          frames:
-            - label: 指标贡献表
-              file: steps/10_可解释性/10.1_指标贡献/outputs/importance.csv
-              columns: [wine, candidate, rank_within_model, feature, mae_increase_when_shuffled, spearman_with_quality_2_1, ridge_standardized_coef]
-              limit: 6
-              mark:
-                columns: [mae_increase_when_shuffled]
-              caption: 每行一个模型的一个指标；mae_increase_when_shuffled 越大越依赖。
-  - question: 白酒 Ridge 为什么不看 alcohol？
-    answer: 白酒里 density 与 alcohol 的 Spearman 是 -0.8219，residual sugar 也和它们高度相关；同一份信息换了个列承载。
-    meaning: 排名不是各自独立的贡献。给业务讲时只说「白酒模型主要靠 alcohol 一类的指标」，别把三个名字分开当三个原因。
+            note: Ridge 的系数是对标准化后指标的系数，可以按绝对值比较大小。
+  - question: 白酒 Ridge 为什么不依赖 alcohol？
+    answer: 白酒里 density 与 alcohol 的 Spearman 是 -0.8219，residual sugar 也和它们高度相关；同一份信息换了一列来承载。
+    meaning: 排名不是各个指标独立的贡献。向业务讲解时只说「白酒模型主要依赖 alcohol 一类的指标」，不要把三个名字分开当成三个原因。
     cells:
       - cell: 4
-        title: 和 2.1 的相关系数并排，标出要留意的
-        what: 把每个指标的重要性、Ridge 系数符号和 2.1 的 Spearman 放一起；符号相反或相关接近零却排前三的单独列出来。
-        why: 让人一眼看到「模型用得多」和「单看它和 quality 有关系」不是一回事。
-        read: 两处要留意：白酒 Ridge 的 residual sugar 排第 2 但 Spearman 只有 -0.082；白酒随机森林的 free sulfur dioxide 排第 3 但 Spearman 只有 +0.024。density 与 alcohol 的 Spearman 红酒 -0.4624、白酒 -0.8219。
+        title: 和 2.1 的相关系数对照，标出需要留意的指标
+        what: 把每个指标的重要性、Ridge 系数的符号和 2.1 的 Spearman 放在一起；符号相反的，或者相关接近零却排进前三的指标，单独列出来。
+        why: 让读者一眼看到「模型使用得多」和「单看它和 quality 有关系」不是一回事。
+        read: 两处需要留意：白酒 Ridge 的 residual sugar 排第 2，但它和 quality 的 Spearman 只有 -0.082；白酒随机森林的 free sulfur dioxide 排第 3，Spearman 只有 +0.024。最后一行给出 density 与 alcohol 的 Spearman：红酒 -0.4624、白酒 -0.8219，白酒里两者几乎是同一个信息。
         lines:
           - line: 6
-            note: 排前三但和 quality 的 Spearman 绝对值不到 0.1 的，标出来。
+            note: 排进前三、但和 quality 的 Spearman 绝对值不到 0.1 的指标，标记出来。
 
 terms:
   - term: 置换重要性
-    plain: 把一列的值随机打乱、其余不动，看模型误差变差多少；变差得多说明模型依赖它。
+    plain: 把一列的值随机打乱、其余列不动，观察模型误差变差多少；变差得越多，说明模型越依赖这个指标。
   - term: 标准化系数
-    plain: Ridge 在标准化后的指标上拟合出的系数，各列量纲一样了，可以按绝对值大小比。
+    plain: Ridge 在标准化后的指标上拟合出的系数；各列的量纲已经统一，可以按绝对值比较大小。
 
 cannot_say:
-  - 不能说 alcohol 决定酒的好坏，或提高 alcohol 会提高评分：这里解释的是模型行为。
+  - 不能说 alcohol 决定酒的好坏，也不能说提高 alcohol 会提高评分：这里解释的是模型的行为。
   - 不能把白酒 Ridge 里 density、residual sugar、alcohol 三者的排名当作各自独立的贡献。
-  - 重要性是在验证集上算的，和 7.1 挑候选用的是同一批行，不是新的证据。
+  - 重要性是在验证集上计算的，和 7.1 选候选用的是同一批行，不是新的证据。

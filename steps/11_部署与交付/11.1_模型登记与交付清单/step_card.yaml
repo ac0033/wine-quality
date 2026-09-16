@@ -1,6 +1,6 @@
 step: "11.1"
 revision: r01
-headline: 每类酒登记了一个候选模型版本（红酒_quality_随机森林 8314f626bc19、白酒_quality_随机森林 32bfb8ca1cde），交付清单齐全，打分入口跑通；是否验收、交付由你决定
+headline: 每类酒登记了一个候选模型版本（红酒_quality_随机森林 8314f626bc19、白酒_quality_随机森林 32bfb8ca1cde），交付清单齐全，打分脚本对 20 条示例成功输出；是否验收、交付由你决定
 can_continue: true
 core_numbers:
   - label: 示例打分行数

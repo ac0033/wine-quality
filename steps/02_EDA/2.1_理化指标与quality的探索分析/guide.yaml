@@ -1,70 +1,59 @@
 # 2.1 理化指标与 quality 的探索分析 · notebook 导读
-# 这一步当时用脚本执行并已验收；nb_2.1.ipynb 是从原始 CSV 重算关键数字、和当时产物对账的复核 notebook。
+# 这一步当时用脚本执行并已验收；nb_2.1.ipynb 是从原始 CSV 重算关键数字、和当时产物核对的复核 notebook。
 step: "2.1"
 revision: r01
 notebook: nb_2.1.ipynb
 
 brief:
-  background: 1.1 确认两份 CSV 干净、可以直接用。在决定要不要建模之前，先看 11 个理化指标里哪些和 quality 有关系、红白酒是否一样。
+  background: 1.1 确认两份 CSV 干净、可以直接用。在决定要不要建模之前，先看 11 个理化指标里哪些和 quality 有关系、红酒和白酒是否一样。
   question: 哪些理化指标和 quality 有关系？红酒和白酒一样吗？
-  answer: alcohol 在两类酒里都和 quality 正相关（红酒 0.4785）；其余各不同。
+  answer: alcohol 在两类酒里都和 quality 正相关（红酒的 Spearman 是 0.4785）；其余指标在两类酒里的关系各不相同。
   can_continue: true
-  did: 分酒类算每个指标与 quality 的相关和分组中位数，再去掉同值行重算一遍。
-  next: 3.1 定义预测任务、固定划分、建基线；11 个指标全部保留，不按相关系数挑。
+  did: 分酒类计算每个指标与 quality 的相关系数和分组中位数，再去掉同值行重算一遍看结论有没有变化。
+  next: 3.1 定义预测任务、固定数据划分、建立基线；11 个指标全部保留，不按相关系数挑选。
 
 parts:
   - question: 哪些指标和 quality 有关系？
-    answer: alcohol 最明显：红酒 0.4785、白酒 0.4404；volatile acidity 两类酒都为负；sulphates 只在红酒里明显。
-    meaning: 理化指标里确实有信息，值得建模试一试；但红白酒的规律不同，后面要分开处理。
+    answer: alcohol 的关系最明显：红酒 0.4785、白酒 0.4404；volatile acidity 在两类酒里都是负相关；sulphates 只在红酒里明显。
+    meaning: 理化指标里确实有和评分有关的信息，值得建模试一试；但红酒和白酒的规律不同，后面要分开处理。
     cells:
       - cell: 3
         title: 重算 22 个 Spearman
-        what: 每类酒的全部指标各算一次与 quality 的 Spearman，逐个和当时的 eda.json 断言相等。
-        why: Spearman 看的是「指标越高评分是不是越高」这种单调关系，不要求直线；并列的分值取平均秩。
-        read: 表里两列是白酒、红酒：alcohol 0.4404 与 0.4785。22 个系数与当时产物一致（容差 1e-9）。
+        what: 每类酒的每个指标各计算一次与 quality 的 Spearman 相关系数，逐个断言它等于 2.1 当时保存的 eda.json 里的值。
+        why: Spearman 衡量「指标越高评分是不是越高」这种单调关系，不要求是直线；并列的评分按平均秩处理。
+        read: 表里两列分别是白酒、红酒：alcohol 一行是 0.4404 和 0.4785，是全部指标里最大的正值；volatile acidity 在两类酒里都是负值。最后一行说 22 个系数与当时产物一致（容差 1e-9），也就是当时脚本的结果能被独立重算出来。
         lines:
           - line: 5
-            note: pandas 的 spearman 对并列值取平均秩，和当时脚本的口径一样。
+            note: pandas 的 spearman 方法对并列值取平均秩，和当时脚本的计算方式一样。
           - line: 7
-            note: 差过十亿分之一就报错。
-        data:
-          title: 红酒原始 CSV 里 alcohol 和 quality
-          note: 原始文件，平台现取前 5 行。
-          frames:
-            - label: 红酒
-              file: data/winequality-red.csv
-              columns: [volatile acidity, sulphates, alcohol, quality]
-              limit: 5
-              mark:
-                columns: [alcohol, quality]
-              caption: 相关系数就是从这两列的几千行里算出来的；单看 5 行看不出规律。
+            note: 重算值和当时的值相差超过十亿分之一就报错。
       - cell: 4
         title: 按分值看 alcohol 的中位数
-        what: 每类酒按 quality 分组，数行数、取 alcohol 中位数，和当时的分组结果断言一致。
-        why: 相关系数是一个数；分组中位数能看到「分越高 alcohol 越高」是不是一路成立。
-        read: 红酒 5 分组 681 行中位数 9.700，7 分组 199 行 11.500；白酒 5 分 9.50、7 分 11.40。两类酒都是分越高 alcohol 越高，3 分和 4 分那几组行数太少，别当规律。
+        what: 每类酒按 quality 分组，统计每组的行数和 alcohol 的中位数，断言它们与当时保存的分组结果一致。
+        why: 相关系数只是一个数；分组中位数能看出「评分越高 alcohol 越高」在每个分值上是否都成立。
+        read: 红酒 5 分组 681 行的 alcohol 中位数是 9.700，7 分组 199 行是 11.500；白酒 5 分组 9.50、7 分组 11.40。两类酒从 5 分到 8 分，alcohol 的中位数一路上升；3 分和 4 分那几组行数很少，它们的中位数不能当作规律。
         lines:
           - line: 3
-            note: 每组两个数：行数和中位数。
+            note: 每个分组算两个数：行数和 alcohol 的中位数。
   - question: 同值行留不留，结论会变吗？
-    answer: 不变。去掉同值行后 Spearman 都不变号，最大差白酒 alcohol 0.0353。
-    meaning: 同值行的去留不影响判断，所以主口径用全部行，不做「清洗」。
+    answer: 不会变。去掉同值行之后每个指标的 Spearman 都不变号，变化最大的是白酒 alcohol 的 0.0353。
+    meaning: 同值行的去留不影响判断，所以主要结果用全部原始行，不做「清洗」。
     cells:
       - cell: 5
-        title: 同值行只留首次，再算一遍
-        what: 按原始文本去重、每组只留首次出现的行，对三个指标重算 Spearman，和当时的敏感性差值断言一致。
-        why: 如果去掉同值行系数就变号或变很多，说明结论被几组重复的数字撑着；现在没有。
-        read: 红酒全部 1599 行对只留首次的 1359 行，白酒 4898 对 3961；差最大的是白酒 alcohol 0.0353，红酒 chlorides 0.0144。
+        title: 同值行只留首次出现的，再算一遍
+        what: 按原始文本去重，每组同值行只保留首次出现的那一行，对 alcohol、chlorides、volatile acidity 三个指标重算 Spearman，断言差值与当时的敏感性结果一致。
+        why: 如果去掉同值行后系数变号或变化很大，说明结论依赖几组重复的数字；现在没有这种情况。
+        read: 红酒从全部 1599 行减到只留首次的 1359 行，白酒从 4898 行减到 3961 行。三个指标的系数变化都很小：白酒 alcohol 的差是 0.0353，红酒 chlorides 的差是 0.0144，其余更小，没有一个变号。
         lines:
           - line: 5
-            note: 用文本版去重，和 1.1 数同值行的口径一样。
+            note: 用文本版本的数据去重，和 1.1 统计同值行的判断标准一样。
 
 terms:
   - term: Spearman
-    plain: 一种相关系数，看两列的排名是不是一起升一起降；+1 完全同向，−1 完全反向，0 没关系。
+    plain: 一种相关系数，衡量两列的排名是不是一起升一起降；+1 表示完全同向，−1 表示完全反向，0 表示没有单调关系。
   - term: 分组中位数
-    plain: 把行按 quality 分组，每组取某个指标排在正中间的那个值。
+    plain: 把行按 quality 分组之后，每组里某个指标排在正中间的那个值。
 
 cannot_say:
-  - 不能说改变某份酒的 alcohol 会改变评分：相关不是因果。
-  - 相关系数没有控制其他指标，也没做显著性检验，只是探索。
+  - 不能说改变某份酒的 alcohol 会改变它的评分：相关不是因果。
+  - 相关系数没有控制其他指标，也没有做显著性检验，只是探索性的描述。

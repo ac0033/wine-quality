@@ -27,7 +27,7 @@ artifacts:
   - {path: outputs/data_profile.json, purpose: 逐文件的输入指纹、表结构、质量检查和 quality 分布，2.1 的起点, kind: table}
   - {path: report.md, purpose: 给用户看的报告, kind: report}
   - {path: acceptance.md, purpose: 主 agent 的验收结论, kind: report}
-why: 后面所有分析都建立在「每行是一份酒、每列是什么」这个理解上；先把行数、字段和质量问题钉死，后面出了数才有地方对账。
+why: 后面所有分析都建立在「每行是一份酒、每列是什么」这个理解上；先把行数、字段和质量问题固定下来，后面出了数才有地方对账。
 invariants:
   - 三份原始文件执行前后字节数与 SHA256 一致
   - 每个分值的行数加起来等于该文件的行数
