@@ -70,7 +70,7 @@ wheels = [
 
 [[package]]
 name = "dsflow"
-version = "0.13.0"
+version = "0.17.0"
 source = { editable = "../../datascience_workflow" }
 dependencies = [
     { name = "duckdb" },

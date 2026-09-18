@@ -12,7 +12,7 @@
    "run_id": "20260916-165326-66d5",
    "step": "11.1",
    "description": "红酒的 quality 估计模型：11 个理化指标 → 连续 quality；随机森林，只用训练行拟合；最终评估 MAE 0.4963（基线 0.6855）",
-   "status": "candidate",
+   "status": "delivered",
    "history": [
     {
      "status": "candidate",
@@ -23,6 +23,16 @@
      "status": "candidate",
      "at": "2026-09-16T16:53:32",
      "note": "运行 20260916-165326-66d5 重新产出了同样内容的文件，关联改为这次运行"
+    },
+    {
+     "status": "accepted",
+     "at": "2026-09-17T15:24:16",
+     "note": "同意验收"
+    },
+    {
+     "status": "delivered",
+     "at": "2026-09-17T15:24:23",
+     "note": "同意交付"
     }
    ],
    "registered_at": "2026-09-16T16:52:04"
