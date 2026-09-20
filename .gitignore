@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 # DSFlow 的转换缓存可以重建；运行记录、数据登记、模型登记要进仓库
 .dsflow/cache/
+
+# 本机 agent 配置（含绝对路径，不公开分发）
+.claude/settings.json
